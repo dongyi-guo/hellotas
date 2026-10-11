@@ -442,7 +442,7 @@ img { max-width: 100%; display: block; }
 }
 
 .event-detail-photo {
-  height: 360px;
+  height: 580px;
   background: var(--brand-light);
   border-radius: 20px;
   display: flex;
