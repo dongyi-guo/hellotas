@@ -1,1 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ICT on Tasmania Welcome</title><link>https://weiluoyan.github.io/hellotas/tags/ict/</link><description>Recent content in ICT on Tasmania Welcome</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://weiluoyan.github.io/hellotas/tags/ict/index.xml" rel="self" type="application/rss+xml"/><item><title>ICT Showcase 2026</title><link>https://weiluoyan.github.io/hellotas/events/ict-showcase-2026/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://weiluoyan.github.io/hellotas/events/ict-showcase-2026/</guid><description>The 2026 ICT Showcase.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>ICT on Tasmania Welcome</title>
+		<link>//:1313/tags/ict/</link>
+		<description>Recent content in ICT on Tasmania Welcome</description>
+		<generator>Hugo</generator>
+		<language>en-us</language>
+		
+		
+		
+		
+			<atom:link href="//:1313/tags/ict/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>ICT Showcase 2026</title>
+				<link>//:1313/events/ict-showcase-2026/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>//:1313/events/ict-showcase-2026/</guid>
+				<description>The 2026 ICT Showcase.</description>
+			</item>
+	</channel>
+</rss>
