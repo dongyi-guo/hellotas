@@ -1294,6 +1294,79 @@ img { max-width: 100%; display: block; }
   color: var(--text-mid);
 }
 
+/* Homepage — sources & acknowledgements (issue #20) */
+.home-sources {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border);
+  padding: 48px 0 56px;
+}
+
+.home-sources-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.home-sources-text {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.home-sources-text a,
+.home-sources-list a {
+  color: var(--brand);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.home-sources-text a:hover,
+.home-sources-list a:hover {
+  text-decoration: underline;
+}
+
+.home-sources-subtitle {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+}
+
+.home-sources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 32px;
+}
+
+.home-sources-list li {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-dark);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.home-sources-publisher {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-mid);
+  background: var(--brand-light);
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+
+@media (max-width: 768px) {
+  .home-sources-list {
+    columns: 1;
+  }
+}
+
 .page-simple {
   padding: 56px 0 96px;
 }
