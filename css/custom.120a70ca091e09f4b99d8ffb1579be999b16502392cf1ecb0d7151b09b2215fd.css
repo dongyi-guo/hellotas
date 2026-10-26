@@ -238,6 +238,25 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 6px 16px rgba(200, 16, 46, 0.25);
 }
 
+/* Wide screens: one red pill behind the menu words, placed and slid by the script in header.html.
+   Until it's ready (or without JavaScript) the current item keeps its own red fill above. */
+.nav-links { position: relative; }
+.nav-links a { position: relative; z-index: 1; }
+
+.nav-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 12px;
+  background: linear-gradient(120deg, var(--brand) 0%, var(--brand-dark) 100%);
+  box-shadow: 0 6px 16px rgba(200, 16, 46, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+.nav-pill[hidden] { display: none; }
+.nav-pill-ready a[aria-current="page"] { background: none; box-shadow: none; }
+
 /* Live icon turns white on the red pill */
 [aria-current="page"] .live-dot { fill: #FFFFFF; }
 [aria-current="page"] .live-ring { stroke: #FFFFFF; }
@@ -1977,58 +1996,36 @@ img.author-avatar {
   list-style: none;
   position: relative;
   padding-left: 0;
-}
-
-.home-timeline::before {
-  content: "";
-  position: absolute;
-  left: 23px;
-  top: 8px;
-  bottom: 8px;
-  width: 4px;
-  background: #F8D7DA;
-  border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .home-step {
   position: relative;
-  padding-left: 64px;
-  margin-bottom: 48px;
-}
-
-.home-step-marker {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--brand);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.home-step--final .home-step-marker {
-  background: var(--green);
-}
-
-.home-step-num {
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 18px;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 
 .home-step-body {
   display: grid;
-  grid-template-columns: minmax(200px, 280px) 1fr;
-  gap: 28px;
+  grid-template-columns: minmax(140px, 180px) 1fr;
+  gap: 20px;
   align-items: start;
   background: var(--card);
   border-radius: 20px;
-  padding: 24px;
+  padding: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  height: 100%;
+}
+
+.home-step-eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 6px;
 }
 
 .home-step-image {
@@ -2039,14 +2036,14 @@ img.author-avatar {
 
 .home-step-image img {
   width: 100%;
-  height: 200px;
+  height: 160px;
   object-fit: cover;
 }
 
 .home-step-content h3 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--text-dark);
 }
 
@@ -2289,8 +2286,11 @@ img.author-avatar {
   .home-hero-media {
     order: -1;
   }
-  .home-step-body {
+  .home-timeline {
     grid-template-columns: 1fr;
+  }
+  .home-step-body {
+    grid-template-columns: minmax(120px, 160px) 1fr;
   }
   .home-habits-grid,
   .home-stories-grid {
@@ -2305,15 +2305,8 @@ img.author-avatar {
   .home-section-title {
     font-size: 28px;
   }
-  .home-timeline::before {
-    left: 19px;
-  }
-  .home-step {
-    padding-left: 56px;
-  }
-  .home-step-marker {
-    width: 40px;
-    height: 40px;
+  .home-step-body {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3921,4 +3914,143 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .place-card { padding: 20px; }
   .place-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .life-gallery { grid-template-columns: 1fr; }
+}
+
+/* ===== Placeholder pages (layouts/_default/placeholder.html) ===== */
+.soon-card {
+  max-width: 720px;
+  margin-bottom: 80px;
+  padding: 36px 40px;
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+  background: #FFFFFF;
+}
+
+.soon-badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  background: var(--brand-light);
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.soon-card p { font-size: 16px; color: var(--text-mid); margin-bottom: 20px; }
+.soon-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.soon-actions .hp-btn-outline { padding: 10px 22px; }
+
+@media (max-width: 768px) {
+  .soon-card { padding: 24px; margin-bottom: 56px; }
+}
+
+/* ===== Motion =====
+   Short (150–300 ms), only position and opacity, and switched off for visitors who prefer reduced motion.
+   Pages: the browser cross-fades the page content (View Transitions; browsers without it simply switch pages as
+   before). The header stays live through it, so the menu pill visibly slides to the new item (header.html).
+   In-page changes use the same API from assets/js/carousel.js. */
+@view-transition { navigation: auto; }
+
+.site-header { view-transition-name: site-header; }
+
+::view-transition-group(*) {
+  animation-duration: 0.28s;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.2s; }
+
+/* The header is shown live, not cross-faded, so the pill's slide in it is what you see */
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
+
+/* Clicks go straight through to the page while something animates, so nothing waits on an animation */
+::view-transition { pointer-events: none; }
+
+/* Events filter: the controls stay live (their pill slides) instead of cross-fading */
+::view-transition-old(ev-controls) { display: none; }
+::view-transition-new(ev-controls) { animation: none; }
+
+/* Calendar: the month or week slides in the direction you moved */
+::view-transition-group(cal-board) { overflow: clip; animation: none; }
+:root[data-cal-slide="next"]::view-transition-old(cal-board) { animation: cal-out-left 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) both; }
+:root[data-cal-slide="next"]::view-transition-new(cal-board) { animation: cal-in-right 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) both; }
+:root[data-cal-slide="prev"]::view-transition-old(cal-board) { animation: cal-out-right 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) both; }
+:root[data-cal-slide="prev"]::view-transition-new(cal-board) { animation: cal-in-left 0.28s cubic-bezier(0.22, 0.8, 0.24, 1) both; }
+
+@keyframes cal-out-left { to { transform: translateX(-12%); opacity: 0; } }
+@keyframes cal-in-right { from { transform: translateX(12%); opacity: 0; } }
+@keyframes cal-out-right { to { transform: translateX(12%); opacity: 0; } }
+@keyframes cal-in-left { from { transform: translateX(-12%); opacity: 0; } }
+@keyframes hp-fade-up { from { opacity: 0; transform: translateY(6px); } }
+@keyframes hp-pop { 50% { transform: scale(1.06); } }
+
+/* Toggle groups ([data-segmented]): one red pill slides to the pressed button (set up in carousel.js) */
+[data-segmented] { position: relative; }
+
+.seg-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--brand);
+  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+
+.seg-ready > button { position: relative; z-index: 1; }
+.seg-ready > button[aria-pressed="true"] { background: transparent; }
+.year-tabs.seg-ready .year-tab { background: transparent; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  /* Menu and toggle pills: slide with a small overshoot, stretching and thinning on the way */
+  .nav-pill-animate .nav-pill {
+    transition: transform 0.42s cubic-bezier(0.3, 1.25, 0.45, 1), width 0.42s cubic-bezier(0.3, 1.25, 0.45, 1);
+  }
+  .nav-pill.is-moving { animation: seg-flow 0.42s cubic-bezier(0.3, 0.7, 0.3, 1); }
+
+  .seg-animate .seg-pill {
+    transition: transform 0.38s cubic-bezier(0.3, 1.25, 0.45, 1), width 0.38s cubic-bezier(0.3, 1.25, 0.45, 1), height 0.28s ease;
+  }
+  .seg-pill.seg-moving { animation: seg-flow 0.38s cubic-bezier(0.3, 0.7, 0.3, 1); }
+  @keyframes seg-flow { 45% { scale: 1.06 0.84; } }
+
+  /* ☰ panel slides down; language menu grows from its button */
+  .mobile-menu { transition: opacity 0.2s ease, transform 0.2s ease, display 0.2s allow-discrete; }
+  .mobile-menu[hidden] { opacity: 0; transform: translateY(-8px); }
+  @starting-style { .mobile-menu:not([hidden]) { opacity: 0; transform: translateY(-8px); } }
+
+  .lang-menu { transform-origin: top right; transition: opacity 0.16s ease, transform 0.16s ease; }
+  @starting-style { .lang-picker[open] .lang-menu { opacity: 0; transform: translateY(-4px) scale(0.97); } }
+
+  /* Photo viewer fades in, the photo settles from slightly smaller */
+  .lightbox { opacity: 0; transition: opacity 0.22s ease, display 0.22s allow-discrete, overlay 0.22s allow-discrete; }
+  .lightbox[open] { opacity: 1; }
+  @starting-style { .lightbox[open] { opacity: 0; } }
+  .lightbox-figure img { transition: transform 0.26s cubic-bezier(0.22, 0.8, 0.24, 1); }
+  @starting-style { .lightbox[open] .lightbox-figure img { transform: scale(0.96); } }
+
+  /* Events search: cards that come back while typing fade in */
+  .events-typing .event-card:not([hidden]) { animation: hp-fade-up 0.22s ease-out both; }
+
+  /* Calendar: the day's list fades in; the selected day's outline eases */
+  .cal-panel-list > * { animation: hp-fade-up 0.2s ease-out both; }
+  .cal-day { transition: background 0.15s, box-shadow 0.15s; }
+
+  .passon-btn.is-copied { animation: hp-pop 0.3s ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
 }
