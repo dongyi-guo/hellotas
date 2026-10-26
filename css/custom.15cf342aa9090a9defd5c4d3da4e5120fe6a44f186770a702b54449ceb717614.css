@@ -3424,6 +3424,18 @@ html:has(.lightbox[open]) { overflow: hidden; }
 
 .hp-tz-note { margin: -12px 0 20px; font-size: 13px; color: var(--text-light); }
 
+/* Search box to the left of the Cards / List switch */
+.hp-tools { display: flex; align-items: center; gap: 12px; flex: none; }
+.hp-tools .hp-search { flex: 0 0 280px; }
+.hp-search-status { margin: -8px 0 20px; }
+.hp-search-status[hidden] { display: none; }
+#upcoming .events-empty { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+  .hp-tools { width: 100%; flex-wrap: wrap; }
+  .hp-tools .hp-search { flex: 1 1 100%; }
+}
+
 /* Buttons */
 .hp-btn { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 
@@ -4177,8 +4189,10 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .lightbox-figure img { transition: transform 0.26s cubic-bezier(0.22, 0.8, 0.24, 1); }
   @starting-style { .lightbox[open] .lightbox-figure img { transform: scale(0.96); } }
 
-  /* Events search: cards that come back while typing fade in */
-  .events-typing .event-card:not([hidden]) { animation: hp-fade-up 0.22s ease-out both; }
+  /* Events and Happening search: cards that come back while typing fade in */
+  .events-typing .event-card:not([hidden]),
+  .hp-typing .hp-cards .hp-card:not([hidden]),
+  .hp-typing .hp-row:not([hidden]) { animation: hp-fade-up 0.22s ease-out both; }
 
   /* Calendar: the day's list fades in; the selected day's outline eases */
   .cal-panel-list > * { animation: hp-fade-up 0.2s ease-out both; }
