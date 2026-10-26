@@ -2184,8 +2184,148 @@ img.author-avatar {
   margin: 0;
 }
 
-.home-story-card--placeholder blockquote {
+.home-story-more {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.home-story-more:hover {
+  text-decoration: underline;
+}
+
+/* Stories page (issue #36) */
+.stories-motto {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.stories-section {
+  padding-bottom: 80px;
+}
+
+.stories-filter {
+  margin-bottom: 32px;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.story-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.story-card[hidden] {
+  display: none;
+}
+
+.story-image {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: var(--brand-light);
+}
+
+.story-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 20px;
+}
+
+.story-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.story-body h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.story-role {
+  font-size: 13px;
   color: var(--text-mid);
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.story-quote {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-dark);
+}
+
+.story-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-link {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.story-link:hover {
+  text-decoration: underline;
+}
+
+.story-source {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.stories-credit {
+  margin-top: 32px;
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Homepage — sources & acknowledgements (issue #20) */
