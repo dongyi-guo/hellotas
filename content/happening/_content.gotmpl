@@ -1,0 +1,7 @@
+{{- /* One calendar feed per topic, at /happening/calendar/<topic>/index.ics, with no HTML page and no sitemap entry.
+     The feed is layouts/happening/single.calendar.ics; the topics are the ones listed in layouts/happening/list.html.
+     (`outputs` must be a top-level key here, and `build` options stop content-adapter pages rendering.) */ -}}
+{{- range slice "cyber" "ai" "careers" "data" "development" "community" "ux" -}}
+  {{- $.AddPage (dict "path" (printf "calendar/%s" .) "title" . "kind" "page" "outputs" (slice "calendar")
+      "sitemap" (dict "disable" true) "params" (dict "topic" .)) -}}
+{{- end -}}

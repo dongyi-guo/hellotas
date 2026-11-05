@@ -16,6 +16,66 @@
     </div>
   </section>
 
+  {{- /* New and pinned events (upstream issue #61): pinned ones first in pin order, then the most recently added
+       (the `added` date the event collector writes). The script below hides events that are over and keeps four,
+       so the panel stays right between rebuilds; the section disappears when nothing is left. */ -}}
+  {{- $items := slice -}}
+  {{- range partial "happening-feed-events.html" (dict) -}}
+    {{- if and (not .date_tbc) (ge (time .end).Unix now.Unix) -}}
+      {{- $rank := printf "2-%012d" .ts -}}
+      {{- if gt .pinned 0 }}{{ $rank = printf "0-%04d" .pinned }}
+      {{- else if .added }}{{ $rank = printf "1-%08d-%012d" (sub 99999999 (int (replace .added "-" ""))) .ts }}{{ end -}}
+      {{- $items = $items | append (merge . (dict "rank" $rank)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $recent := (now.AddDate 0 0 -14).Unix -}}
+  {{- with first 8 (sort $items "rank") }}
+  <section class="home-new" aria-labelledby="home-new-title" data-home-new>
+    <div class="container">
+      <div class="home-new-head">
+        <div>
+          <h2 class="home-section-title" id="home-new-title">{{ i18n "homeNewTitle" }}</h2>
+          <p class="home-section-lead">{{ i18n "homeNewLead" }}</p>
+        </div>
+        <a class="hp-btn-outline" href="{{ "happening/" | relLangURL }}">{{ i18n "homeNewSeeAll" }} <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="home-new-list">
+        {{- range . }}
+        <li class="home-new-item" data-end="{{ .end }}">
+          <a class="home-new-card" href="{{ .page }}">
+            <span class="hp-date" aria-hidden="true">
+              <span class="hp-date-month">{{ time.Format "Jan" .start }}</span>
+              <span class="hp-date-day">{{ time.Format "2" .start }}</span>
+            </span>
+            <span class="home-new-body">
+              {{- if gt .pinned 0 }}
+              <span class="home-new-tag">{{ partial "pin-icon.html" 12 }}{{ i18n "happeningPinned" }}</span>
+              {{- else if and .added (ge (time .added).Unix $recent) }}
+              <span class="home-new-tag">{{ i18n "homeNewBadge" }}</span>
+              {{- end }}
+              <span class="home-new-title">{{ .title }}</span>
+              <span class="home-new-meta"><time datetime="{{ .start }}">{{ if eq site.Language.Lang "en" }}{{ time.Format "Mon 2 Jan 2006" .start }}{{ else }}{{ time.Format ":date_medium" .start }}{{ end }}</time>{{ with .host }} · {{ . }}{{ end }}{{ if eq .format "online" }} · {{ i18n "happeningFormatOnline" }}{{ end }}</span>
+            </span>
+          </a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    <script>
+      (function () {
+        var section = document.currentScript.closest('[data-home-new]');
+        var shown = 0;
+        section.querySelectorAll('[data-end]').forEach(function (item) {
+          var over = Date.parse(item.getAttribute('data-end')) < Date.now();
+          item.hidden = over || shown >= 4;
+          if (!item.hidden) shown++;
+        });
+        if (!shown) section.hidden = true;
+      })();
+    </script>
+  </section>
+  {{- end }}
+
   <div class="container">
     <aside class="home-trust-strip">
       <p>{{ i18n "homeTrustStrip" | safeHTML }}</p>

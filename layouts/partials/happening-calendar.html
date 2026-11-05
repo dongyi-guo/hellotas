@@ -1,0 +1,36 @@
+{{- /*
+  The iCalendar feed: every Happening event (one topic when .topic is set), for subscribing in Google, Apple or
+  Outlook calendars. Events whose date is still to be confirmed are left out. Returns the whole file as a string.
+*/ -}}
+{{- $topic := .topic | default "" -}}
+{{- $name := i18n "calendarFeedName" -}}
+{{- if $topic }}{{ $name = printf "%s · %s" $name (i18n (printf "happeningTopic%s" (strings.FirstUpper $topic))) }}{{ end -}}
+{{- $lines := slice "BEGIN:VCALENDAR" "VERSION:2.0" (printf "PRODID:-//Tasmania Welcome//Happening %s//EN" site.Language.Lang)
+    "CALSCALE:GREGORIAN" "METHOD:PUBLISH"
+    (printf "X-WR-CALNAME:%s" (partial "ics-escape.html" $name))
+    (printf "X-WR-CALDESC:%s" (partial "ics-escape.html" (i18n "calendarFeedDescription")))
+    "X-WR-TIMEZONE:Australia/Hobart" "REFRESH-INTERVAL;VALUE=DURATION:PT12H" "X-PUBLISHED-TTL:PT12H" -}}
+{{- $stamp := now.UTC.Format "20060102T150405Z" -}}
+{{- range partial "happening-feed-events.html" (dict "topic" $topic) -}}
+  {{- if not .date_tbc -}}
+    {{- $where := cond (eq .format "online") (i18n "happeningFormatOnline") .location -}}
+    {{- $desc := .summary -}}
+    {{- with .cost }}{{ $desc = printf "%s\n\n%s" $desc . }}{{ end -}}
+    {{- with .url }}{{ $desc = printf "%s\n\n%s" $desc . }}{{ end -}}
+    {{- $lines = $lines | append "BEGIN:VEVENT" (printf "UID:%s@hellotas" .id) (printf "DTSTAMP:%s" $stamp) -}}
+    {{- if .all_day -}}
+      {{- $lines = $lines | append (printf "DTSTART;VALUE=DATE:%s" .start_day) (printf "DTEND;VALUE=DATE:%s" .end_day_after) -}}
+    {{- else -}}
+      {{- $lines = $lines | append (printf "DTSTART:%s" .start_utc) (printf "DTEND:%s" .end_utc) -}}
+    {{- end -}}
+    {{- $lines = $lines | append (printf "SUMMARY:%s" (partial "ics-escape.html" .title)) (printf "DESCRIPTION:%s" (partial "ics-escape.html" $desc)) -}}
+    {{- with $where }}{{ $lines = $lines | append (printf "LOCATION:%s" (partial "ics-escape.html" .)) }}{{ end -}}
+    {{- with .url }}{{ $lines = $lines | append (printf "URL:%s" .) }}{{ end -}}
+    {{- with .topics }}{{ $lines = $lines | append (printf "CATEGORIES:%s" (delimit . ",")) }}{{ end -}}
+    {{- $lines = $lines | append "STATUS:CONFIRMED" "TRANSP:OPAQUE" "END:VEVENT" -}}
+  {{- end -}}
+{{- end -}}
+{{- $lines = $lines | append "END:VCALENDAR" -}}
+{{- $out := "" -}}
+{{- range $lines }}{{ $out = printf "%s%s" $out (partial "ics-fold.html" .) }}{{ end -}}
+{{- return $out -}}
