@@ -3,7 +3,7 @@ name: Deploy Hugo to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  workflow_dispatch: # also started by collect-events.yml after it publishes directly
 
 permissions:
   contents: write
@@ -11,6 +11,10 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      # Optional: a Discord channel webhook (Server settings > Integrations > Webhooks). When set, events that are
+      # new since the last deploy are announced there (upstream issue #63).
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,7 +29,14 @@ jobs:
           extended: true
 
       - name: Build
+        env:
+          # The community API's address (server/), e.g. https://api.example.org. Unset: those features stay hidden.
+          HUGO_PARAMS_COMMUNITYAPI: ${{ vars.COMMUNITY_API_URL }}
         run: hugo --minify --baseURL "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      - name: Keep the events list from the last deploy
+        if: env.DISCORD_WEBHOOK_URL != ''
+        run: git show origin/gh-pages:happening/index.json > "$RUNNER_TEMP/old-events.json" 2>/dev/null || echo "No earlier events list."
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -33,3 +44,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+
+      - name: Announce new events on Discord
+        if: env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          pip install ./collector
+          hellotas-collect discord --old "$RUNNER_TEMP/old-events.json" --new public/happening/index.json

@@ -1,0 +1,5 @@
+{{- /* One text field in the page's language: a plain string, or a map with en / zh / ne (falls back to en).
+     Takes (dict "v" <value> "lang" <language code>). Used by the Happening page, its feeds and the homepage. */ -}}
+{{- $v := .v -}}
+{{- if reflect.IsMap $v -}}{{- $v = or (index $v .lang) (index $v "en") "" -}}{{- end -}}
+{{- return ($v | default "") -}}

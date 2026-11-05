@@ -1,0 +1,14 @@
+{{- /* One iCalendar content line, folded at 75 octets (RFC 5545 §3.1) and ended with CRLF.
+     Folds between characters, never inside one, so Chinese and Nepali text stays valid UTF-8. */ -}}
+{{- $out := "" -}}
+{{- $width := 0 -}}
+{{- range split . "" -}}
+  {{- $n := len . -}}
+  {{- if gt (add $width $n) 75 -}}
+    {{- $out = printf "%s\r\n " $out -}}
+    {{- $width = 1 -}}
+  {{- end -}}
+  {{- $out = printf "%s%s" $out . -}}
+  {{- $width = add $width $n -}}
+{{- end -}}
+{{- return (printf "%s\r\n" $out) -}}

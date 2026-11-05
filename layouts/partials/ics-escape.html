@@ -1,0 +1,9 @@
+{{- /* Text for an iCalendar property value (RFC 5545 section 3.3.11): backslash, semicolon, comma and new lines
+     escaped. Raw strings (backticks) hold the literal backslashes. */ -}}
+{{- $s := . | default "" | plainify | htmlUnescape -}}
+{{- $s = replace $s `\` `\\` -}}
+{{- $s = replace $s ";" `\;` -}}
+{{- $s = replace $s "," `\,` -}}
+{{- $s = replace $s "\r\n" `\n` -}}
+{{- $s = replace $s "\n" `\n` -}}
+{{- return $s -}}

@@ -1,0 +1,9 @@
+{{- /* Machine-readable list of Happening events (used by the Discord announcer and the community API). */ -}}
+{{- $events := slice -}}
+{{- range partial "happening-feed-events.html" (dict) -}}
+  {{- $events = $events | append (dict "id" .id "title" .title "start" .start "end" .end "all_day" .all_day
+      "date_tbc" .date_tbc "type" .type "format" .format "topics" .topics "host" .host "location" .location
+      "cost" .cost "summary" .summary "url" .url "page" .page "image" .image "pinned" .pinned "added" .added) -}}
+{{- end -}}
+{{- dict "site" site.Title "language" site.Language.Lang "generated" (now.UTC.Format "2006-01-02T15:04:05Z")
+    "calendar" (.OutputFormats.Get "calendar").Permalink "events" $events | jsonify (dict "indent" "  ") -}}

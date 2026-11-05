@@ -1,0 +1,27 @@
+{{- /*
+  The community pages (content/account.md, noticeboard.md, suggest.md, moderate.md and their translations). The page
+  is a shell: assets/js/community.js renders it for the cmPage in the front matter, using the community API
+  (params.communityAPI). Without the API, it says the features aren't switched on.
+*/ -}}
+{{ define "main" }}
+<section class="hero-section">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.cmPage }}
+    {{- $lead := index (dict "noticeboard" "cmBoardWishLead" "suggest" "cmSuggestLead" "account" "cmSignInLead") . }}
+    {{- with $lead }}<p class="hero-sub">{{ i18n . }}</p>{{ end }}
+    {{- end }}
+  </div>
+</section>
+<section class="container cm-page" data-cm-page="{{ .Params.cmPage }}">
+  {{- if site.Params.communityAPI }}
+  <div data-cm-root aria-live="polite"><p class="cm-note">{{ i18n "cmLoading" }}</p></div>
+  <noscript><p class="cm-note">{{ i18n "cmNeedsScript" }}</p></noscript>
+  {{- else }}
+  <p class="cm-note">{{ i18n "cmNotConfigured" }}</p>
+  {{- if eq .Params.cmPage "suggest" }}
+  <p><a class="btn-primary" href="{{ site.Params.repoURL }}/issues/new?template=suggest-event.yml" target="_blank" rel="noopener">{{ i18n "cmSuggestGitHub" }} ↗</a></p>
+  {{- end }}
+  {{- end }}
+</section>
+{{ end }}

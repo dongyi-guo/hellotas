@@ -12,6 +12,15 @@
       {{- /* Current when this page is that page or below it (an event's own page highlights Industry Events) */ -}}
       {{- $links = $links | append (dict "key" $key "url" $url "current" (strings.HasPrefix $.RelPermalink $url)) -}}
     {{- end }}
+    {{- /* The community pages (Noticeboard, account) need the community API. They go in the ☰ menu only: the inline
+         desktop menu has no width to spare (it measures exactly as wide as its space), so one more item would fold
+         the whole menu into ☰ on every desktop. The homepage and the footer link to them too. */ -}}
+    {{- $menuLinks := $links -}}
+    {{- if site.Params.communityAPI -}}
+      {{- $url := relLangURL "noticeboard/" -}}
+      {{- with site.GetPage "/noticeboard" }}{{ $url = .RelPermalink }}{{ end -}}
+      {{- $menuLinks = $menuLinks | append (dict "key" "noticeboard" "url" $url "current" (strings.HasPrefix $.RelPermalink $url)) -}}
+    {{- end }}
     {{- define "partials/nav-link-items" -}}
       {{- range . -}}
       <a href="{{ .url }}"{{ if eq .key "happening" }} class="nav-live"{{ end }}{{ if .current }} aria-current="page"{{ end }}>
@@ -120,7 +129,10 @@
     </script>
   </nav>
   <div class="mobile-menu" id="mobile-menu" hidden>
-    {{- partial "nav-link-items" $links -}}
+    {{- partial "nav-link-items" $menuLinks -}}
+    {{- if site.Params.communityAPI }}
+    <a href="{{ "account/" | relLangURL }}" class="nav-account-link" data-cm-account-label{{ if strings.HasPrefix .RelPermalink ("account/" | relLangURL) }} aria-current="page"{{ end }}>{{ i18n "cmSignIn" }}</a>
+    {{- end }}
   </div>
     </div>
   </div>

@@ -1,0 +1,28 @@
+name: Weekly digest
+
+# Every Monday morning, asks the community API (server/) to send the weekly events email to its subscribers.
+# Needs the repository variable COMMUNITY_API_URL and the secret COMMUNITY_CRON_SECRET (the API's CRON_SECRET).
+# Does nothing until both are set.
+
+on:
+  schedule:
+    - cron: "43 20 * * 0" # Monday 7:43 am in Hobart during daylight saving (6:43 am in winter)
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    env:
+      API: ${{ vars.COMMUNITY_API_URL }}
+      CRON_SECRET: ${{ secrets.COMMUNITY_CRON_SECRET }}
+    steps:
+      - name: Send the digest
+        run: |
+          if [ -z "$API" ] || [ -z "$CRON_SECRET" ]; then
+            echo "COMMUNITY_API_URL or COMMUNITY_CRON_SECRET isn't set; nothing to do."
+            exit 0
+          fi
+          curl --fail-with-body --silent --show-error --max-time 300 -X POST \
+            -H "Authorization: Bearer $CRON_SECRET" "${API%/}/v1/admin/digest/send"

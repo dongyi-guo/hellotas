@@ -19,8 +19,27 @@ This project puts it all in one place, so that:
 ## What's here now
 
 - **ICT Events page** for 2025 and 2026, with photos and details for each event.
+- **Happening**: upcoming events, found automatically every morning by the [event collector](collector/README.md)
+  from GDG Hobart, ACS, AISA, SecTalks Hobart, TasICT and Careerify, plus events people suggest.
+- **Calendar subscription**: `happening/index.ics` (all events, or one feed per topic), so new events appear in
+  students' own calendars, and `happening/index.json` for other tools.
+- **New and pinned events** on the homepage.
+- **Community features**, switched on once the [community API](server/README.md) is running: sign in with a UTAS
+  email, mark events Interested or Going, find someone to go with, the Noticeboard (Wish Wall, achievements,
+  opportunities with who-can-apply labels), a saved arrival checklist and a weekly email digest.
 
 This is an early version. Some events are examples, and the full list is still being checked, so details may change.
+
+## How it fits together
+
+| Part | Folder | Guide |
+|---|---|---|
+| The site (Hugo, GitHub Pages) | `content/`, `layouts/`, `data/` | this file |
+| Event collector (GitHub Actions) | `collector/` | [collector/README.md](collector/README.md) |
+| Community API (a small server) | `server/` | [server/README.md](server/README.md) |
+| Deploying all of it | | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
+| What is left to do | | [docs/NEXT-STEPS.md](docs/NEXT-STEPS.md) |
+| Why these features, and not a social network | | [docs/research/platform-v2.md](docs/research/platform-v2.md) |
 
 ## Coming next
 
@@ -52,7 +71,14 @@ This is an early version. Some events are examples, and the full list is still b
 
 ## Adding or changing an event
 
-Event pages live in the `content/` folder. To add one, create a new Markdown file there, using an existing event as your template, and add its photos to `static/`. When you push to `main`, the site is rebuilt and deployed automatically.
+Most upcoming events now arrive by themselves: the collector opens a pull request with new events each morning.
+To add one it missed, use the **Suggest an event** issue form (or the site's Suggest page): it reads the link and
+proposes the entry for you.
+
+To write one by hand, add a YAML file to `data/happening/` (upcoming) or `data/events/<year>/` (past), using an
+existing one as your template; the fields are explained at the top of `layouts/happening/list.html` and
+`layouts/partials/events-adapter.html`. Photos go in `static/images/`. When you push to `main`, the site is rebuilt
+and deployed automatically.
 
 ## Photos and content
 
