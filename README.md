@@ -38,6 +38,7 @@ This is an early version. Some events are examples, and the full list is still b
 | Event collector (GitHub Actions) | `collector/` | [collector/README.md](collector/README.md) |
 | Community API (a small server) | `server/` | [server/README.md](server/README.md) |
 | Deploying all of it | | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
+| What is left to do | | [docs/NEXT-STEPS.md](docs/NEXT-STEPS.md) |
 | Why these features, and not a social network | | [docs/research/platform-v2.md](docs/research/platform-v2.md) |
 
 ## Coming next
