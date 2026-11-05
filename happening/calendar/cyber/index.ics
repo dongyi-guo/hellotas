@@ -1,0 +1,59 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening en//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tasmania Welcome: ICT events · Cyber security
+X-WR-CALDESC:Upcoming ICT events for students in Tasmania and online\, from
+  Tasmania Welcome.
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:aisa-webinar-post-quantum-pki@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261028T010000Z
+DTEND:20261028T020000Z
+SUMMARY:AISA Webinar: The Good\, the Broken and the Hybrid
+DESCRIPTION:Keyfactor's Tomas Gustavsson and Sven Rajala walk through the r
+ eal decisions behind deploying post-quantum cryptography in PKI: which alg
+ orithms to choose\, and whether to go hybrid.\n\nFree for AISA members\n\n
+ https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+LOCATION:Online
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+CATEGORIES:cyber
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart: Just spoof the government?
+DESCRIPTION:Hobart's security meetup: Ben talks through a recent engagement
+ \, with social engineering and email spoofing on the menu.\n\nSee the offi
+ cial page\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458/
+LOCATION:Downstairs at Mathers House\, 108 Bathurst St\, Hobart
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:aisa-webinar-attackers-use-ai@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261125T010000Z
+DTEND:20261125T020000Z
+SUMMARY:AISA Webinar: When Attackers Use AI — How Defenders Can Respond
+DESCRIPTION:SentinelOne's Brett Williams maps how criminal groups use AI ac
+ ross the attack lifecycle\, and practical ways to govern AI use without sl
+ owing innovation.\n\nFree for AISA members\n\nhttps://www.aisa.org.au/Even
+ t.aspx?EventKey=OB281026
+LOCATION:Online
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
+CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

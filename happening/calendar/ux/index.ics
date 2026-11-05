@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening en//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tasmania Welcome: ICT events · UX
+X-WR-CALDESC:Upcoming ICT events for students in Tasmania and online\, from
+  Tasmania Welcome.
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:acs-get-a-job-in-gaming-ux@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20270504T073000Z
+DTEND:20270504T083000Z
+SUMMARY:How to Get a Job in Gaming & UX: From Passion to Career
+DESCRIPTION:Explore the range of careers in games and UX design and hear fi
+ rst-hand how people turned an interest into a job.\n\nFree for ACS members
+  · $20 for non-members\n\nhttps://www.acs.org.au/cpd-education/event-deta
+ il.html?eventId=701Om00000oQOnAIAW
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQOnAIAW
+CATEGORIES:careers,ux
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

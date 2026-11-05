@@ -1,0 +1,82 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening ne//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:तस्मानियामा स्वागत: ICT क
+ ार्यक्रमहरू · डेटा
+X-WR-CALDESC:तस्मानिया र अनलाइनमा व
+ िद्यार्थीका लागि आगामी ICT का
+ र्यक्रमहरू\, तस्मानियामा स्
+ वागतबाट।
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:telstra-iot-fest-2026@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261204
+SUMMARY:Telstra IoT Fest 2026 ह्याकाथन
+DESCRIPTION:Telstra र Cisco को IoT ह्याकाथन: बढ
+ ीमा पाँच जनाका टोलीले नेटवर
+ ्क संकेतलाई वास्तविक समाधा
+ नमा बदल्छन्\, र छनोट भएका टोल
+ ीले $6\,000 पुरस्कार कोषका लागि 
+ मेलबर्नमा प्रस्तुति दिन्छन
+ ्। UTAS ले पनि टोली पठाउँदैछ।\n\n
+ सहभागिता निःशुल्क\n\nhttps://telstra.brigh
+ tidea.com/TIF2026
+LOCATION:अनलाइन निर्माण · फाइनल मे
+ लबर्नमा Telstra\, 242 Exhibition Street
+URL:https://telstra.brightidea.com/TIF2026
+CATEGORIES:development,data,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:gdg-hobart-devfest-2026@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261119T061500Z
+DTEND:20261119T074500Z
+SUMMARY:GDG Hobart DevFest 2026: AI-संचालित विकास 
+ र डिजिटल एनालिटिक्स
+DESCRIPTION:Android Studio मा Gemini सँग प्रत्यक्
+ ष अभ्यास (Bilue का Kartik Arora)\, त्यसपछि
+  Google Analytics र Play Console को डेटालाई Looker Stu
+ dio ड्यासबोर्डमा बदल्ने (MyState क
+ ी Cynthia Wilanda)।\n\nनिःशुल्क · सीमित स
+ िट\, RSVP आवश्यक\n\nhttps://gdg.community.dev/events/detai
+ ls/google-gdg-hobart-presents-devfest-2026-explore-ai-powered-development-
+ amp-digital-analytics/
+LOCATION:कोठा 132\, Centenary Building\, UTAS स्यान्ड
+ ी बे
+URL:https://gdg.community.dev/events/details/google-gdg-hobart-presents-dev
+ fest-2026-explore-ai-powered-development-amp-digital-analytics/
+CATEGORIES:ai,development,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-data@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20270223T063000Z
+DTEND:20270223T073000Z
+SUMMARY:डेटामा जागिर कसरी पाउने: 
+ रोजगारदाताले के खोज्छन्
+DESCRIPTION:डेटा क्षेत्रका विभिन्न 
+ करियरहरू बुझ्नुहोस्\, मानिस
+ हरू यो क्षेत्रमा कसरी आए र र
+ ोजगारदाताले के खोज्छन् भन्
+ ने प्रत्यक्ष सुन्नुहोस्।\n\nAC
+ S सदस्यलाई निःशुल्क · गैरसदस
+ ्यलाई $20\n\nhttps://www.acs.org.au/cpd-education/event-detail.h
+ tml?eventId=701Om00000oQCOyIAO
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQCOyIAO
+CATEGORIES:careers,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,225 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening ne//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:तस्मानियामा स्वागत: ICT क
+ ार्यक्रमहरू · करियर
+X-WR-CALDESC:तस्मानिया र अनलाइनमा व
+ िद्यार्थीका लागि आगामी ICT का
+ र्यक्रमहरू\, तस्मानियामा स्
+ वागतबाट।
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:ai-in-your-job-search-webinar@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261029T010000Z
+DTEND:20261029T020000Z
+SUMMARY:जागिर खोजीमा AI को नैतिक र 
+ प्रभावकारी प्रयोग
+DESCRIPTION:आफ्नै शैली नगुमाई बायोड
+ ाटा\, कभर लेटर र अन्तर्वार्त
+ ा तयारीमा जेनेरेटिभ AI कसरी प
+ ्रयोग गर्ने\, र कहाँ सावधान र
+ हने भन्ने व्यावहारिक सत्र। 
+ प्रत्यक्ष प्रश्नोत्तर पनि 
+ हुन्छ।\n\nनिःशुल्क\n\nhttps://www.jobsandskill
+ smonth.gov.au/events/ethical-and-effective-ai-use-your-job-search-practica
+ l-session-job-search-career-change
+LOCATION:अनलाइन
+URL:https://www.jobsandskillsmonth.gov.au/events/ethical-and-effective-ai-u
+ se-your-job-search-practical-session-job-search-career-change
+CATEGORIES:careers,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-career-toolkit-public-speaking@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261103T073000Z
+DTEND:20261103T090000Z
+SUMMARY:करियर टुलकिट: आफ्नो आवाज 
+ पत्ता लगाउनुहोस् — उदीयमान 
+ पेसाकर्मीका लागि सार्वजनिक
+  वक्तृत्व
+DESCRIPTION:सार्वजनिक वक्तृत्व प्र
+ स्तुतीकरणको मात्र होइन\, करि
+ यरको सीप हो। डर कम गर्ने\, आत्
+ म-शंका हटाउने र आत्मविश्वास
+ का साथ बोल्ने व्यावहारिक तर
+ िकाहरू सिक्नुहोस्।\n\nACS सदस्
+ यलाई निःशुल्क · गैरसदस्यलाई
+  $20\n\nhttps://www.acs.org.au/cpd-education/event-detail.html?eventId=701
+ Om00000oHJMQIA4
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oHJMQIA4
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:ict-awards-night-2026@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261109T063000Z
+DTEND:20261109T090000Z
+SUMMARY:ICT Awards Night 2026 (ICT पुरस्कार रात्र
+ ि)
+DESCRIPTION:School of ICT को पहिलो Awards Night ले यस
+  वर्षका ICT विद्यार्थीका उपलब
+ ्धि मनाउँछ: शैक्षिक\, अनुसन्
+ धान र सामुदायिक उत्कृष्टता 
+ पुरस्कार\, साथै ICT Student's Choice विद्
+ यार्थी र कर्मचारी पुरस्कार
+ । साँझमा 2026 का स्नातकहरू र उन
+ ीहरूको अर्को कदम पनि मनाइन्
+ छ\, र कर्मचारी तथा उद्योग साझ
+ ेदारसँग भेट्ने मौका हुन्छ।\n
+ \nविद्यार्थीका लागि निःशुल्
+ क · Humanitix मा दर्ता (Hobart वा Launceston टि
+ कट)\n\nhttps://events.humanitix.com/ict-awards-night?accesscode=STUDEN
+ T
+LOCATION:Hobart: Stanley Burbury Theatre\, Sandy Bay क्याम्प
+ स · Launceston: Rory Spence Theatre\, Inveresk क्याम्पस
+URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
+CATEGORIES:community,careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-professional-year-webinar@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261119T010000Z
+DTEND:20261119T020000Z
+SUMMARY:ACS प्रोफेसनल इयर: विज्ञ मे
+ न्टरसिपसँग आफ्नो IT करियर अघ
+ ि बढाउनुहोस्
+DESCRIPTION:ACS प्रोफेसनल इयर कार्यक्
+ रमको करियर मेन्टरिङले स्ना
+ तकहरूलाई अस्ट्रेलियाको IT रो
+ जगार बजारका लागि कसरी तयार प
+ ार्छ थाहा पाउनुहोस् — धेरै अ
+ न्तर्राष्ट्रिय ICT स्नातकहरू
+ को सामान्य अर्को कदम।\n\nनिःश
+ ुल्क\n\nhttps://www.acs.org.au/cpd-education/event-detail.html?eve
+ ntId=701Om00000p8IvFIAU
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00p8IvFIAU
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-career-toolkit-before-graduating@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261124T073000Z
+DTEND:20261124T090000Z
+SUMMARY:करियर टुलकिट: स्नातक हुनु
+ अघि मैले थाहा पाउन चाहेका कु
+ राहरू
+DESCRIPTION:स्नातक र उद्योगका पेसाक
+ र्मीहरूले विश्वविद्यालयबा
+ ट कामसम्मको यात्रा र गर्मी ब
+ िदाको सदुपयोगबारे इमानदार 
+ सल्लाह दिनुहुन्छ।\n\nACS सदस्य
+ लाई निःशुल्क · गैरसदस्यलाई $1
+ 5\n\nhttps://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om0
+ 0000nhM7ZIAU
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00nhM7ZIAU
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-it-support@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261201T063000Z
+DTEND:20261201T073000Z
+SUMMARY:IT सपोर्टमा जागिर कसरी पाउ
+ ने
+DESCRIPTION:IT सपोर्टका विभिन्न करिय
+ रहरू बुझ्नुहोस् र मानिसहरू 
+ यो क्षेत्रमा कसरी आए भन्ने प
+ ्रत्यक्ष अनुभव सुन्नुहोस्।
+ \n\nACS सदस्यलाई निःशुल्क · गैरस
+ दस्यलाई $20\n\nhttps://www.acs.org.au/cpd-education/event-de
+ tail.html?eventId=701Om00000oQkAUIA0
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQkAUIA0
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-beyond-graduation@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261210T070000Z
+DTEND:20261210T080000Z
+SUMMARY:स्नातकपछि: करियर सफलताका 
+ लागि ACS सदस्यताको सदुपयोग
+DESCRIPTION:ACS की विद्यार्थी तथा स्न
+ ातक सफलता प्रबन्धक Alannah Grech ले 
+ विद्यार्थीबाट पेसाकर्मी बन
+ ्ने क्रममा सदस्यता प्रयोग ग
+ रेर सीप बढाउने\, सम्पर्क विस
+ ्तार गर्ने र अवसर खोज्ने तरि
+ का देखाउनुहुन्छ।\n\nनिःशुल्क
+ \n\nhttps://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om00
+ 000nhlVhIAI
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00nhlVhIAI
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-data@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20270223T063000Z
+DTEND:20270223T073000Z
+SUMMARY:डेटामा जागिर कसरी पाउने: 
+ रोजगारदाताले के खोज्छन्
+DESCRIPTION:डेटा क्षेत्रका विभिन्न 
+ करियरहरू बुझ्नुहोस्\, मानिस
+ हरू यो क्षेत्रमा कसरी आए र र
+ ोजगारदाताले के खोज्छन् भन्
+ ने प्रत्यक्ष सुन्नुहोस्।\n\nAC
+ S सदस्यलाई निःशुल्क · गैरसदस
+ ्यलाई $20\n\nhttps://www.acs.org.au/cpd-education/event-detail.h
+ tml?eventId=701Om00000oQCOyIAO
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQCOyIAO
+CATEGORIES:careers,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-gaming-ux@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20270504T073000Z
+DTEND:20270504T083000Z
+SUMMARY:गेमिङ र UX मा जागिर कसरी पा
+ उने: रुचिदेखि करियरसम्म
+DESCRIPTION:गेम र UX डिजाइनका विभिन्न
+  करियरहरू बुझ्नुहोस् र मानि
+ सहरूले रुचिलाई कसरी जागिरम
+ ा बदले भन्ने प्रत्यक्ष सुन्
+ नुहोस्।\n\nACS सदस्यलाई निःशुल
+ ्क · गैरसदस्यलाई $20\n\nhttps://www.acs.org.au/
+ cpd-education/event-detail.html?eventId=701Om00000oQOnAIAW
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQOnAIAW
+CATEGORIES:careers,ux
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

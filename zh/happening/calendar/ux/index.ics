@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening zh//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:塔斯马尼亚欢迎：ICT活动 · 用户体验
+X-WR-CALDESC:塔斯马尼亚及线上面向学生的ICT近期活动，来
+ 自塔斯马尼亚欢迎网站。
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:acs-get-a-job-in-gaming-ux@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20270504T073000Z
+DTEND:20270504T083000Z
+SUMMARY:如何进入游戏与用户体验行业：从热爱到职业
+DESCRIPTION:了解游戏与用户体验设计领域的各类职业方向，
+ 听业内人士亲述如何把兴趣变成工作。\n\nACS会员免费 · 
+ 非会员$20\n\nhttps://www.acs.org.au/cpd-education/event-detail.html?eve
+ ntId=701Om00000oQOnAIAW
+LOCATION:线上
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQOnAIAW
+CATEGORIES:careers,ux
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

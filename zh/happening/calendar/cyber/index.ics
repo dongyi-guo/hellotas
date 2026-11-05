@@ -1,0 +1,61 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening zh//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:塔斯马尼亚欢迎：ICT活动 · 网络安全
+X-WR-CALDESC:塔斯马尼亚及线上面向学生的ICT近期活动，来
+ 自塔斯马尼亚欢迎网站。
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:aisa-webinar-post-quantum-pki@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261028T010000Z
+DTEND:20261028T020000Z
+SUMMARY:AISA网络研讨会：后量子密码PKI的实战抉择
+DESCRIPTION:Keyfactor的Tomas Gustavsson和Sven Rajala讲解在PKI中部署
+ 后量子密码时的实际抉择：选用哪些算法，以及是否采
+ 用混合方案。\n\nAISA会员免费\n\nhttps://www.aisa.org.au/Event.as
+ px?EventKey=OB260826
+LOCATION:线上
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+CATEGORIES:cyber
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart：直接冒充政府？
+DESCRIPTION:霍巴特的网络安全聚会：Ben 分享最近的一次安
+ 全测试项目，主题是社会工程学和电子邮件伪造。\n\n详
+ 见官方页面\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458
+ /
+LOCATION:霍巴特Bathurst Street 108号Mathers House地下层
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:aisa-webinar-attackers-use-ai@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261125T010000Z
+DTEND:20261125T020000Z
+SUMMARY:AISA网络研讨会：当攻击者使用AI——防御者如何应
+ 对
+DESCRIPTION:SentinelOne的Brett Williams剖析犯罪团伙如何在攻击
+ 全过程中利用AI，并介绍在不拖慢创新的前提下管控AI使
+ 用的实用方法。\n\nAISA会员免费\n\nhttps://www.aisa.org.au/Event
+ .aspx?EventKey=OB281026
+LOCATION:线上
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
+CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

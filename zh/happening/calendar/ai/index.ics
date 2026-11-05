@@ -1,0 +1,82 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening zh//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:塔斯马尼亚欢迎：ICT活动 · AI
+X-WR-CALDESC:塔斯马尼亚及线上面向学生的ICT近期活动，来
+ 自塔斯马尼亚欢迎网站。
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:ai-in-your-job-search-webinar@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261029T010000Z
+DTEND:20261029T020000Z
+SUMMARY:求职中如何合乎道德、高效地使用AI
+DESCRIPTION:实用讲座：如何用生成式AI撰写简历和求职信、
+ 准备面试，同时保留你自己的风格，以及需要注意的地
+ 方。含现场问答。\n\n免费\n\nhttps://www.jobsandskillsmonth.gov.a
+ u/events/ethical-and-effective-ai-use-your-job-search-practical-session-jo
+ b-search-career-change
+LOCATION:线上
+URL:https://www.jobsandskillsmonth.gov.au/events/ethical-and-effective-ai-u
+ se-your-job-search-practical-session-job-search-career-change
+CATEGORIES:careers,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:telstra-iot-fest-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261204
+SUMMARY:Telstra IoT Fest 2026 黑客松
+DESCRIPTION:Telstra 与 Cisco 联合举办的物联网黑客松：最多五
+ 人一队，把网络信号变成解决实际问题的方案，入围队
+ 伍在墨尔本路演，角逐 6\,000 澳元奖金池。UTAS 也将派队
+ 参赛。\n\n免费参赛\n\nhttps://telstra.brightidea.com/TIF2026
+LOCATION:线上开发 · 决赛在墨尔本 Telstra（242 Exhibition Street
+ ）
+URL:https://telstra.brightidea.com/TIF2026
+CATEGORIES:development,data,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:gdg-hobart-devfest-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261119T061500Z
+DTEND:20261119T074500Z
+SUMMARY:GDG Hobart DevFest 2026：AI驱动开发与数字分析
+DESCRIPTION:动手体验Android Studio中的Gemini（Bilue的Kartik Arora
+ ），再学习把Google Analytics和Play Console数据做成Looker Studio
+ 仪表板（MyState的Cynthia Wilanda）。\n\n免费 · 名额有限，
+ 需报名\n\nhttps://gdg.community.dev/events/details/google-gdg-hobart-pr
+ esents-devfest-2026-explore-ai-powered-development-amp-digital-analytics/
+LOCATION:UTAS Sandy Bay校区Centenary Building 132室
+URL:https://gdg.community.dev/events/details/google-gdg-hobart-presents-dev
+ fest-2026-explore-ai-powered-development-amp-digital-analytics/
+CATEGORIES:ai,development,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:aisa-webinar-attackers-use-ai@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261125T010000Z
+DTEND:20261125T020000Z
+SUMMARY:AISA网络研讨会：当攻击者使用AI——防御者如何应
+ 对
+DESCRIPTION:SentinelOne的Brett Williams剖析犯罪团伙如何在攻击
+ 全过程中利用AI，并介绍在不拖慢创新的前提下管控AI使
+ 用的实用方法。\n\nAISA会员免费\n\nhttps://www.aisa.org.au/Event
+ .aspx?EventKey=OB281026
+LOCATION:线上
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
+CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

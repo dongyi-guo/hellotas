@@ -1,0 +1,274 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening en//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tasmania Welcome: ICT events
+X-WR-CALDESC:Upcoming ICT events for students in Tasmania and online\, from
+  Tasmania Welcome.
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:aisa-webinar-post-quantum-pki@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261028T010000Z
+DTEND:20261028T020000Z
+SUMMARY:AISA Webinar: The Good\, the Broken and the Hybrid
+DESCRIPTION:Keyfactor's Tomas Gustavsson and Sven Rajala walk through the r
+ eal decisions behind deploying post-quantum cryptography in PKI: which alg
+ orithms to choose\, and whether to go hybrid.\n\nFree for AISA members\n\n
+ https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+LOCATION:Online
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+CATEGORIES:cyber
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:ai-in-your-job-search-webinar@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261029T010000Z
+DTEND:20261029T020000Z
+SUMMARY:Ethical and Effective AI Use in Your Job Search
+DESCRIPTION:A practical session on using generative AI for your resume\, co
+ ver letters and interview prep without losing your own voice\, and where t
+ o be careful. Live Q&A included.\n\nFree\n\nhttps://www.jobsandskillsmonth
+ .gov.au/events/ethical-and-effective-ai-use-your-job-search-practical-sess
+ ion-job-search-career-change
+LOCATION:Online
+URL:https://www.jobsandskillsmonth.gov.au/events/ethical-and-effective-ai-u
+ se-your-job-search-practical-session-job-search-career-change
+CATEGORIES:careers,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-career-toolkit-public-speaking@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261103T073000Z
+DTEND:20261103T090000Z
+SUMMARY:Career Toolkit: Finding Your Voice — Public Speaking for Emerging
+  Professionals
+DESCRIPTION:Public speaking is a career skill\, not just a presentation ski
+ ll. Learn practical ways to manage nerves\, overcome self-doubt and commun
+ icate with confidence.\n\nFree for ACS members · $20 for non-members\n\nh
+ ttps://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om00000oH
+ JMQIA4
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oHJMQIA4
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:digital-child-in-tasmania@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261104T060000Z
+DTEND:20261104T083000Z
+SUMMARY:The Digital Child in Tasmania
+DESCRIPTION:A conversation on digital inclusion\, literacy\, safety and wel
+ lbeing for young Tasmanians\, with educators\, researchers\, policymakers 
+ and young people. Refreshments provided.\n\nFree · registration essential
+ \n\nhttps://www.utas.edu.au/events/2026/november/the-digital-child-in-tasm
+ ania
+LOCATION:The Forest\, Melville Street\, Hobart
+URL:https://www.utas.edu.au/events/2026/november/the-digital-child-in-tasma
+ nia
+CATEGORIES:community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:telstra-iot-fest-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261204
+SUMMARY:Telstra IoT Fest 2026 Hackathon
+DESCRIPTION:A Telstra and Cisco IoT hackathon: teams of up to five turn net
+ work signals into real-world solutions\, and finalists pitch in Melbourne 
+ for a $6\,000 prize pool with UTAS involved.\n\nFree to enter\n\nhttps://t
+ elstra.brightidea.com/TIF2026
+LOCATION:Build online · finale at Telstra\, 242 Exhibition Street\, Melbou
+ rne
+URL:https://telstra.brightidea.com/TIF2026
+CATEGORIES:development,data,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:ict-awards-night-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261109T063000Z
+DTEND:20261109T090000Z
+SUMMARY:ICT Awards Night 2026
+DESCRIPTION:The School of ICT's first Awards Night celebrates this year's I
+ CT students\, with awards for academic\, research and community excellence
+  and the ICT Student's Choice student and staff awards. It also marks the 
+ 2026 graduates and their next steps\, with a chance to meet staff and indu
+ stry partners.\n\nFree for students · register on Humanitix (Hobart or La
+ unceston ticket)\n\nhttps://events.humanitix.com/ict-awards-night?accessco
+ de=STUDENT
+LOCATION:Hobart: Stanley Burbury Theatre\, Sandy Bay campus · Launceston: 
+ Rory Spence Theatre\, Inveresk campus
+URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
+CATEGORIES:community,careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart: Just spoof the government?
+DESCRIPTION:Hobart's security meetup: Ben talks through a recent engagement
+ \, with social engineering and email spoofing on the menu.\n\nSee the offi
+ cial page\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458/
+LOCATION:Downstairs at Mathers House\, 108 Bathurst St\, Hobart
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-professional-year-webinar@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261119T010000Z
+DTEND:20261119T020000Z
+SUMMARY:ACS Professional Year: Accelerate Your IT Career with Expert Mentor
+ ship
+DESCRIPTION:Find out how the ACS Professional Year program's career mentori
+ ng prepares graduates for the Australian IT job market\, a common next ste
+ p for international ICT graduates.\n\nFree\n\nhttps://www.acs.org.au/cpd-e
+ ducation/event-detail.html?eventId=701Om00000p8IvFIAU
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00p8IvFIAU
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:gdg-hobart-devfest-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261119T061500Z
+DTEND:20261119T074500Z
+SUMMARY:GDG Hobart DevFest 2026: AI-Powered Development & Digital Analytics
+DESCRIPTION:Get hands-on with Gemini in Android Studio (Kartik Arora\, Bilu
+ e)\, then turn Google Analytics and Play Console data into Looker Studio d
+ ashboards (Cynthia Wilanda\, MyState).\n\nFree · RSVP required\, limited 
+ seats\n\nhttps://gdg.community.dev/events/details/google-gdg-hobart-presen
+ ts-devfest-2026-explore-ai-powered-development-amp-digital-analytics/
+LOCATION:Room 132\, Centenary Building\, UTAS Sandy Bay
+URL:https://gdg.community.dev/events/details/google-gdg-hobart-presents-dev
+ fest-2026-explore-ai-powered-development-amp-digital-analytics/
+CATEGORIES:ai,development,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-career-toolkit-before-graduating@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261124T073000Z
+DTEND:20261124T090000Z
+SUMMARY:Career Toolkit: What I Wish I Knew Before Graduating
+DESCRIPTION:Graduates and industry professionals share honest advice on mov
+ ing from uni to work\, and how to make the most of your summer break.\n\nF
+ ree for ACS members · $15 for non-members\n\nhttps://www.acs.org.au/cpd-e
+ ducation/event-detail.html?eventId=701Om00000nhM7ZIAU
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00nhM7ZIAU
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:aisa-webinar-attackers-use-ai@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261125T010000Z
+DTEND:20261125T020000Z
+SUMMARY:AISA Webinar: When Attackers Use AI — How Defenders Can Respond
+DESCRIPTION:SentinelOne's Brett Williams maps how criminal groups use AI ac
+ ross the attack lifecycle\, and practical ways to govern AI use without sl
+ owing innovation.\n\nFree for AISA members\n\nhttps://www.aisa.org.au/Even
+ t.aspx?EventKey=OB281026
+LOCATION:Online
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
+CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-it-support@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261201T063000Z
+DTEND:20261201T073000Z
+SUMMARY:How to Get a Job in IT Support
+DESCRIPTION:Explore the range of careers in IT Support and hear first-hand 
+ how people found their way into the field.\n\nFree for ACS members · $20 
+ for non-members\n\nhttps://www.acs.org.au/cpd-education/event-detail.html?
+ eventId=701Om00000oQkAUIA0
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQkAUIA0
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-beyond-graduation@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261210T070000Z
+DTEND:20261210T080000Z
+SUMMARY:Beyond Graduation: Leveraging Your ACS Membership for Career Succes
+ s
+DESCRIPTION:ACS's Student and Graduate Success Manager\, Alannah Grech\, sh
+ ows how to use your membership to build skills\, grow your network and fin
+ d opportunities as you move from student to professional.\n\nFree\n\nhttps
+ ://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om00000nhlVhI
+ AI
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00nhlVhIAI
+CATEGORIES:careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-data@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20270223T063000Z
+DTEND:20270223T073000Z
+SUMMARY:How to Get a Job in Data: What Employers Want
+DESCRIPTION:Explore the range of careers in data and hear first-hand how pe
+ ople moved into the field\, and what employers look for.\n\nFree for ACS m
+ embers · $20 for non-members\n\nhttps://www.acs.org.au/cpd-education/even
+ t-detail.html?eventId=701Om00000oQCOyIAO
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQCOyIAO
+CATEGORIES:careers,data
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-get-a-job-in-gaming-ux@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20270504T073000Z
+DTEND:20270504T083000Z
+SUMMARY:How to Get a Job in Gaming & UX: From Passion to Career
+DESCRIPTION:Explore the range of careers in games and UX design and hear fi
+ rst-hand how people turned an interest into a job.\n\nFree for ACS members
+  · $20 for non-members\n\nhttps://www.acs.org.au/cpd-education/event-deta
+ il.html?eventId=701Om00000oQOnAIAW
+LOCATION:Online
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQOnAIAW
+CATEGORIES:careers,ux
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

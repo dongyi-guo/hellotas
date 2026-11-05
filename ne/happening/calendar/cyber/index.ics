@@ -1,0 +1,81 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening ne//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:तस्मानियामा स्वागत: ICT क
+ ार्यक्रमहरू · साइबर सुरक्षा
+X-WR-CALDESC:तस्मानिया र अनलाइनमा व
+ िद्यार्थीका लागि आगामी ICT का
+ र्यक्रमहरू\, तस्मानियामा स्
+ वागतबाट।
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:aisa-webinar-post-quantum-pki@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261028T010000Z
+DTEND:20261028T020000Z
+SUMMARY:AISA वेबिनार: पोस्ट-क्वान्ट
+ म क्रिप्टोग्राफी PKI का वास्त
+ विक निर्णयहरू
+DESCRIPTION:Keyfactor का Tomas Gustavsson र Sven Rajala ले PKI 
+ मा पोस्ट-क्वान्टम क्रिप्टो
+ ग्राफी लागू गर्दा गरिने वास
+ ्तविक निर्णयहरू — कुन एल्गो
+ रिदम छान्ने र हाइब्रिड अपना
+ उने कि नअपनाउने — बारे बताउन
+ ुहुन्छ।\n\nAISA सदस्यहरूका लागि 
+ निःशुल्क\n\nhttps://www.aisa.org.au/Event.aspx?EventKey=OB
+ 260826
+LOCATION:अनलाइन
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB260826
+CATEGORIES:cyber
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart: सरकारकै नक्कल गर्न
+ े?
+DESCRIPTION:होबार्टको सुरक्षा भेटघ
+ ाट: Ben ले हालैको एउटा सुरक्षा 
+ परीक्षणको अनुभव सुनाउनुहुन
+ ्छ\, जसमा सोसल इन्जिनियरिङ र 
+ इमेल स्पुफिङबारे कुरा हुन्
+ छ।\n\nआधिकारिक पृष्ठ हेर्नुह
+ ोस्\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458/
+LOCATION:Mathers House को तल्लो तला\, 108 Bathurst St\,
+  होबार्ट
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:aisa-webinar-attackers-use-ai@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261125T010000Z
+DTEND:20261125T020000Z
+SUMMARY:AISA वेबिनार: आक्रमणकारीले AI
+  प्रयोग गर्दा — रक्षकहरूले क
+ सरी जवाफ दिने
+DESCRIPTION:SentinelOne का Brett Williams ले आपराधिक 
+ समूहहरूले आक्रमणका हरेक चर
+ णमा AI कसरी प्रयोग गर्छन् र नव
+ प्रवर्तन नरोकी AI प्रयोग निय
+ न्त्रण गर्ने व्यावहारिक उप
+ ायहरू बताउनुहुन्छ।\n\nAISA सदस्
+ यहरूका लागि निःशुल्क\n\nhttps://www.ai
+ sa.org.au/Event.aspx?EventKey=OB281026
+LOCATION:अनलाइन
+URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
+CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

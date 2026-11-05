@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening ne//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:तस्मानियामा स्वागत: ICT क
+ ार्यक्रमहरू · UX
+X-WR-CALDESC:तस्मानिया र अनलाइनमा व
+ िद्यार्थीका लागि आगामी ICT का
+ र्यक्रमहरू\, तस्मानियामा स्
+ वागतबाट।
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:acs-get-a-job-in-gaming-ux@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20270504T073000Z
+DTEND:20270504T083000Z
+SUMMARY:गेमिङ र UX मा जागिर कसरी पा
+ उने: रुचिदेखि करियरसम्म
+DESCRIPTION:गेम र UX डिजाइनका विभिन्न
+  करियरहरू बुझ्नुहोस् र मानि
+ सहरूले रुचिलाई कसरी जागिरम
+ ा बदले भन्ने प्रत्यक्ष सुन्
+ नुहोस्।\n\nACS सदस्यलाई निःशुल
+ ्क · गैरसदस्यलाई $20\n\nhttps://www.acs.org.au/
+ cpd-education/event-detail.html?eventId=701Om00000oQOnAIAW
+LOCATION:अनलाइन
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00oQOnAIAW
+CATEGORIES:careers,ux
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

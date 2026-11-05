@@ -1,0 +1,86 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening ne//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:तस्मानियामा स्वागत: ICT क
+ ार्यक्रमहरू · समुदाय
+X-WR-CALDESC:तस्मानिया र अनलाइनमा व
+ िद्यार्थीका लागि आगामी ICT का
+ र्यक्रमहरू\, तस्मानियामा स्
+ वागतबाट।
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:digital-child-in-tasmania@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261104T060000Z
+DTEND:20261104T083000Z
+SUMMARY:तस्मानियामा डिजिटल बालब
+ ालिका
+DESCRIPTION:शिक्षक\, अनुसन्धानकर्ता
+ \, नीति निर्माता र युवाहरूसँ
+ ग तस्मानियाका बालबालिका र य
+ ुवाको डिजिटल समावेशीकरण\, सा
+ क्षरता\, सुरक्षा र कल्याणबार
+ े छलफल। खाजा उपलब्ध हुन्छ।\n\n
+ निःशुल्क · दर्ता अनिवार्य\n\nht
+ tps://www.utas.edu.au/events/2026/november/the-digital-child-in-tasmania
+LOCATION:The Forest\, Melville Street\, होबार्ट
+URL:https://www.utas.edu.au/events/2026/november/the-digital-child-in-tasma
+ nia
+CATEGORIES:community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:ict-awards-night-2026@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261109T063000Z
+DTEND:20261109T090000Z
+SUMMARY:ICT Awards Night 2026 (ICT पुरस्कार रात्र
+ ि)
+DESCRIPTION:School of ICT को पहिलो Awards Night ले यस
+  वर्षका ICT विद्यार्थीका उपलब
+ ्धि मनाउँछ: शैक्षिक\, अनुसन्
+ धान र सामुदायिक उत्कृष्टता 
+ पुरस्कार\, साथै ICT Student's Choice विद्
+ यार्थी र कर्मचारी पुरस्कार
+ । साँझमा 2026 का स्नातकहरू र उन
+ ीहरूको अर्को कदम पनि मनाइन्
+ छ\, र कर्मचारी तथा उद्योग साझ
+ ेदारसँग भेट्ने मौका हुन्छ।\n
+ \nविद्यार्थीका लागि निःशुल्
+ क · Humanitix मा दर्ता (Hobart वा Launceston टि
+ कट)\n\nhttps://events.humanitix.com/ict-awards-night?accesscode=STUDEN
+ T
+LOCATION:Hobart: Stanley Burbury Theatre\, Sandy Bay क्याम्प
+ स · Launceston: Rory Spence Theatre\, Inveresk क्याम्पस
+URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
+CATEGORIES:community,careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052814Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart: सरकारकै नक्कल गर्न
+ े?
+DESCRIPTION:होबार्टको सुरक्षा भेटघ
+ ाट: Ben ले हालैको एउटा सुरक्षा 
+ परीक्षणको अनुभव सुनाउनुहुन
+ ्छ\, जसमा सोसल इन्जिनियरिङ र 
+ इमेल स्पुफिङबारे कुरा हुन्
+ छ।\n\nआधिकारिक पृष्ठ हेर्नुह
+ ोस्\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458/
+LOCATION:Mathers House को तल्लो तला\, 108 Bathurst St\,
+  होबार्ट
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

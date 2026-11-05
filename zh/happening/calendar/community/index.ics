@@ -1,0 +1,65 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tasmania Welcome//Happening zh//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:塔斯马尼亚欢迎：ICT活动 · 社区
+X-WR-CALDESC:塔斯马尼亚及线上面向学生的ICT近期活动，来
+ 自塔斯马尼亚欢迎网站。
+X-WR-TIMEZONE:Australia/Hobart
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:digital-child-in-tasmania@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261104T060000Z
+DTEND:20261104T083000Z
+SUMMARY:塔斯马尼亚的数字儿童
+DESCRIPTION:与教育工作者、研究人员、政策制定者和年轻人
+ 一起，探讨塔斯马尼亚青少年的数字包容、数字素养、
+ 网络安全与身心健康。提供茶点。\n\n免费 · 须提前报名
+ \n\nhttps://www.utas.edu.au/events/2026/november/the-digital-child-in-tasm
+ ania
+LOCATION:The Forest（霍巴特Melville Street）
+URL:https://www.utas.edu.au/events/2026/november/the-digital-child-in-tasma
+ nia
+CATEGORIES:community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:ict-awards-night-2026@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261109T063000Z
+DTEND:20261109T090000Z
+SUMMARY:ICT Awards Night 2026（ICT 颁奖之夜）
+DESCRIPTION:School of ICT 首届颁奖之夜，表彰今年 ICT 学生的
+ 成就：学业、研究和社区卓越奖，以及由学生评选的 ICT 
+ Student's Choice 学生奖和教职员奖。当晚也会庆祝 2026 届毕
+ 业生迈向下一步，并可结识教职员和行业伙伴。\n\n学生
+ 免费 · 在 Humanitix 报名（选择 Hobart 或 Launceston 票）\n\nht
+ tps://events.humanitix.com/ict-awards-night?accesscode=STUDENT
+LOCATION:Hobart：Sandy Bay 校区 Stanley Burbury Theatre · Launceston：
+ Inveresk 校区 Rory Spence Theatre
+URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
+CATEGORIES:community,careers
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:sectalks-hobart-november-just-spoof-government@hellotas
+DTSTAMP:20261105T052813Z
+DTSTART:20261110T070000Z
+DTEND:20261110T090000Z
+SUMMARY:SecTalks Hobart：直接冒充政府？
+DESCRIPTION:霍巴特的网络安全聚会：Ben 分享最近的一次安
+ 全测试项目，主题是社会工程学和电子邮件伪造。\n\n详
+ 见官方页面\n\nhttps://www.meetup.com/sectalks-hobart/events/317249458
+ /
+LOCATION:霍巴特Bathurst Street 108号Mathers House地下层
+URL:https://www.meetup.com/sectalks-hobart/events/317249458/
+CATEGORIES:cyber,community
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
