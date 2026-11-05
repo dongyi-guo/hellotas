@@ -124,7 +124,7 @@ def stats(user: User = Depends(moderator), db=Depends(get_db)):
 def users(q: str = "", user: User = Depends(admin), db=Depends(get_db)):
     query = select(User).order_by(User.created_at.desc()).limit(50)
     if q:
-        query = query.where(User.email.contains(q.lower()))
+        query = query.where(User.email.contains(q.lower(), autoescape=True))
     return {"users": [{"id": u.id, "email": u.email, "display_name": u.display_name, "role": u.role}
                       for u in db.scalars(query)]}
 

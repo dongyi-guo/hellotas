@@ -37,6 +37,19 @@ def test_session_and_logout(client, app):
     assert client.get("/v1/me", headers=h).status_code == 401
 
 
+def test_default_names_do_not_give_the_address_away(client, app):
+    h = sign_in(client, app, "bob.rai@utas.edu.au")
+    assert client.get("/v1/me", headers=h).json()["display_name"] == "Bob"
+    h2 = sign_in(client, app, "u1234567@utas.edu.au")
+    assert client.get("/v1/me", headers=h2).json()["display_name"] == "UTAS student"
+
+
+def test_a_failed_sign_in_email_is_reported(client, app):
+    app.state.mailer.send = lambda msg: False  # the email provider is down
+    r = client.post("/v1/auth/request", json={"email": "a@utas.edu.au"})
+    assert r.status_code == 503 and "couldn't be sent" in r.json()["detail"]
+
+
 def test_admin_addresses_become_admins(client, app):
     h = sign_in(client, app, "admin@utas.edu.au")
     assert client.get("/v1/me", headers=h).json()["role"] == "admin"
@@ -121,7 +134,7 @@ def test_posts_wait_for_a_moderator(client, app):
     pid = queue["posts"][0]["id"]
     assert client.post(f"/v1/mod/posts/{pid}", json={"action": "approve"}, headers=mod).json()["status"] == "approved"
     public = client.get("/v1/posts?kind=wish").json()["posts"][0]
-    assert public["author"] == "s" and "author_email" not in public
+    assert public["author"] == "UTAS student" and "author_email" not in public  # never part of the address
     assert client.post(f"/v1/posts/{pid}/react", headers=student).json() == {"reactions": 1, "reacted": True}
     assert client.post(f"/v1/posts/{pid}/react", headers=student).json() == {"reactions": 0, "reacted": False}
     client.post(f"/v1/posts/{pid}/report", json={"reason": "duplicate"}, headers=mod)

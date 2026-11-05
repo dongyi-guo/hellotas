@@ -10,7 +10,7 @@ Without it, the site works exactly as before.
 
 - Python 3.11+, FastAPI, SQLAlchemy. Postgres in production, SQLite for development and tests.
 - Interactive API documentation at `/docs` on any running server.
-- 17 tests, run on both SQLite and Postgres in CI (`pytest server -q`).
+- 19 tests, run on both SQLite and Postgres in CI (`pytest server -q`).
 
 ## Run it on your computer
 
