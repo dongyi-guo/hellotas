@@ -1,0 +1,107 @@
+name: Event suggestion
+
+# Someone opens an issue with the "Suggest an event" form (.github/ISSUE_TEMPLATE/suggest-event.yml), or the
+# community API forwards a suggestion from the website as such an issue. The collector reads the link (or the
+# pasted details, for LinkedIn and other sites that forbid automated access), writes the entry and opens a pull
+# request; then it replies on the issue with what it found. Editing the issue runs it again.
+#
+# Uses the same optional ANTHROPIC_API_KEY secret and COLLECTOR_MODEL variable as collect-events.yml.
+
+on:
+  issues:
+    # Not "labeled": the form's label arrives as a second event and would run everything twice
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  suggest:
+    if: >-
+      github.event.issue.state == 'open' &&
+      (startsWith(github.event.issue.title, 'Event suggestion') ||
+       contains(github.event.issue.labels.*.name, 'event-suggestion'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: suggestion-${{ github.event.issue.number }}
+      cancel-in-progress: true
+    env:
+      NUMBER: ${{ github.event.issue.number }}
+      BRANCH: suggestion/issue-${{ github.event.issue.number }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: collector/pyproject.toml
+
+      - name: Install the collector
+        run: pip install ./collector
+
+      - name: Label the issue
+        run: |
+          gh label create event-suggestion --color 0E8A16 --description "Suggested event, handled by the collector" 2>/dev/null || true
+          gh issue edit "$NUMBER" --add-label event-suggestion
+
+      - name: Read the suggestion
+        id: collect
+        env:
+          # The issue text is data: it reaches the collector only through this variable
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          COLLECTOR_MODEL: ${{ vars.COLLECTOR_MODEL }}
+        run: hellotas-collect suggest --from-issue --report "$RUNNER_TEMP/report.md"
+
+      - name: Open a pull request
+        id: pr
+        if: steps.collect.outputs.added != '0'
+        run: |
+          git config user.name "hellotas-collector[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add data/happening static/images/happening collector/ledger.yaml
+          git commit -m "Add suggested event (#$NUMBER)"
+          git push --force -u origin "$BRANCH"
+          {
+            echo "Suggested in #$NUMBER. Check the entry, edit it in this branch if needed, then merge."
+            echo "Closing without merging rejects it (the collector remembers)."
+            echo
+            cat "$RUNNER_TEMP/report.md"
+            echo
+            echo "Closes #$NUMBER"
+          } > "$RUNNER_TEMP/body.md"
+          if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$BRANCH" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr create --head "$BRANCH" --base main --title "Add suggested event (#$NUMBER)" --body-file "$RUNNER_TEMP/body.md"
+          fi
+          echo "url=$(gh pr view "$BRANCH" --json url -q .url)" >> "$GITHUB_OUTPUT"
+
+      - name: Reply on the issue
+        if: success() || failure() # not when cancelled by a newer run for the same issue
+        env:
+          PR_URL: ${{ steps.pr.outputs.url }}
+        run: |
+          {
+            if [ -n "$PR_URL" ]; then
+              echo "Thanks! I've proposed this event in $PR_URL. A maintainer will check it before it goes on the site."
+            else
+              echo "Thanks for the suggestion. I couldn't add an event from it this time; the details are below."
+              echo "You can edit this issue (for example, link the event's registration page, or paste the event"
+              echo "details) and I'll try again."
+            fi
+            echo
+            [ -f "$RUNNER_TEMP/report.md" ] && cat "$RUNNER_TEMP/report.md"
+            echo
+            echo "---"
+            echo "_Automated reply from the event collector (collector/)._"
+          } > "$RUNNER_TEMP/comment.md"
+          gh issue comment "$NUMBER" --body-file "$RUNNER_TEMP/comment.md"
