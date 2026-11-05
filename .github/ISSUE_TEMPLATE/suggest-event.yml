@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping. Once you submit, the event collector reads the link, writes the entry in English, Chinese and Nepali, and opens a pull request for a maintainer to check. It replies here within a few minutes.
+        Thanks for helping. Once you submit, the event collector reads the link, writes the entry and opens a pull request for a maintainer to check. It replies here within a few minutes.
 
-        **LinkedIn, Facebook and Instagram** don't allow automated access, so the bot can't open those links. For those, paste the post's text in *Event details* (or, better, link the registration page the post points to).
+        **LinkedIn, Facebook and Instagram** don't allow automated access, so the bot can't open those links. Link the registration page the post points to instead (Humanitix, Eventbrite, Meetup, GDG). If there isn't one, paste the post's text in *Event details* and a maintainer will add the event by hand.
   - type: input
     id: link
     attributes:
@@ -21,7 +21,7 @@ body:
     id: details
     attributes:
       label: Event details
-      description: Optional, but needed when the link can't be opened. Title, date, start time, place, cost.
+      description: Optional. When the link can't be opened, a maintainer uses these to add the event by hand. Title, date, start time, place, cost.
       placeholder: "GDG Hobart: AI agents night, Thursday 3 December 2026, 5:30 pm, The Forest building, UTAS. Free."
   - type: textarea
     id: note

@@ -15,8 +15,14 @@ class Config:
     horizon_days: int = 240
     min_relevance: int = 60
     delay_seconds: float = 1.5
+    default_image: str = ""
     ai: dict = field(default_factory=dict)
     sources: list[dict] = field(default_factory=list)
+
+    @property
+    def ai_enabled(self) -> bool:
+        """The AI is used only when switched on in sources.yaml (ai.enabled) and a key is available."""
+        return bool(self.ai.get("enabled", False))
 
     def enabled_sources(self, only: list[str] | None = None) -> list[dict]:
         chosen = [s for s in self.sources if s.get("enabled", True)]
@@ -49,6 +55,7 @@ def load(path: Path) -> Config:
         horizon_days=int(data.get("horizon_days", 240)),
         min_relevance=int(data.get("min_relevance", 60)),
         delay_seconds=float(data.get("delay_seconds", 1.5)),
+        default_image=data.get("default_image") or "",
         ai=data.get("ai") or {},
         sources=sources,
     )

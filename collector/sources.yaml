@@ -27,14 +27,20 @@ min_relevance: 60
 # Seconds to wait between two requests to the same site
 delay_seconds: 1.5
 
+# Every new event needs a picture. When the organiser's own can't be downloaded, the collector copies the most recent
+# picture used for the same organiser; failing that, this one. The pull request says which events need a better one.
+default_image: "/images/home/step-1-forest-building.jpg"
+
 ai:
-  # Used only when ANTHROPIC_API_KEY is set. Override with the COLLECTOR_MODEL environment variable,
-  # e.g. COLLECTOR_MODEL=claude-haiku-5-5 for the cheapest option (about a fortieth of the cost).
+  # Off: the team isn't paying for an AI service. Relevance and the English text come from keyword rules
+  # (hellotas_collector/rules.py), and Chinese and Nepali can be added by hand in the pull request.
+  # To switch it on later: set enabled to true and add the ANTHROPIC_API_KEY repository secret. Claude would then
+  # judge relevance, write the entry in English, Chinese and Nepali, and read pages that have no event data.
+  enabled: false
+  # The settings below matter only when enabled. COLLECTOR_MODEL overrides the model, e.g. claude-haiku-5-5.
   model: "claude-opus-5-5"
-  # How hard the model thinks: triage (is this relevant?) and write-up (summary and translations)
   triage_effort: "low"
   write_effort: "medium"
-  # Curated events from data/happening/ shown to the model as examples of the site's tone and translations
   style_examples: 6
 
 sources:

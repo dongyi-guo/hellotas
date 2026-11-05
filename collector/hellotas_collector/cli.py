@@ -158,6 +158,25 @@ def cmd_check_site(args) -> int:
     return 1 if problems else 0
 
 
+def cmd_check_data(args) -> int:
+    """Every upcoming event (data/happening/) must have a picture, and the picture file must exist."""
+    from .store import yaml
+    root = Path(args.root).resolve() if args.root else find_root()
+    problems = []
+    files = sorted((root / "data" / "happening").glob("*.yaml"))
+    for path in files:
+        data = yaml().load(path.read_text(encoding="utf-8")) or {}
+        picture = str(data.get("image") or "")
+        if not picture:
+            problems.append(f"{path.relative_to(root)}: no image")
+        elif not (root / "static" / picture.lstrip("/")).is_file():
+            problems.append(f"{path.relative_to(root)}: image {picture} isn't in static/")
+    print(f"{len(files)} upcoming event(s) checked.")
+    for p in problems:
+        print("PROBLEM:", p)
+    return 1 if problems else 0
+
+
 def cmd_ledger_merge(args) -> int:
     """Add another ledger's entries to ours (used when a collector pull request is closed without merging, so its
     events count as rejected)."""
@@ -214,6 +233,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("check-site", help="validate the calendar and JSON feeds of a built site")
     p.add_argument("public", help="the folder hugo built into (usually public/)")
     p.set_defaults(func=cmd_check_site)
+
+    p = sub.add_parser("check-data", help="check that every upcoming event has a picture")
+    p.set_defaults(func=cmd_check_data)
 
     p = sub.add_parser("ledger-merge", help="remember the events of a closed, unmerged collector pull request")
     p.add_argument("other", help="the ledger.yaml from that pull request's branch")

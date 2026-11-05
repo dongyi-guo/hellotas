@@ -104,7 +104,7 @@ def forward(request: Request, s: Suggestion, who: str) -> None:
 
 @router.get("/stats")
 def stats(user: User = Depends(moderator), db=Depends(get_db)):
-    """The numbers that say whether the community features are used (docs/research/platform-v2.md)."""
+    """The numbers that say whether the community features are used."""
     def count(model, *where):
         return db.scalar(select(func.count()).select_from(model).where(*where)) or 0
     month = utcnow() - timedelta(days=30)
