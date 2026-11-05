@@ -33,6 +33,15 @@ def normalise_email(email: str) -> str:
     return email.strip().lower()
 
 
+def default_name(email: str) -> str:
+    """A starting display name that doesn't give the address away: the first word of the local part
+    ("bob" from bob.rai@...), or "UTAS student" when that looks like an ID. People change it on /account/."""
+    first = re.split(r"[._+-]", email.split("@", 1)[0])[0]
+    if len(first) < 2 or any(ch.isdigit() for ch in first):
+        return "UTAS student"
+    return first[:30].capitalize()
+
+
 def email_allowed(email: str, domains: list[str]) -> bool:
     if not EMAIL_RX.match(email):
         return False

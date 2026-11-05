@@ -34,16 +34,24 @@ class Mailer:
         self.s = settings
         self.outbox: list[Message] = []  # console backend only
 
-    def send(self, msg: Message) -> None:
+    def send(self, msg: Message) -> bool:
+        """True when the message was handed over. A failure is logged, never raised: one bad send must not undo
+        the request it belongs to (a buddy request is saved even if its email bounces)."""
         backend = self.s.email_backend
-        if backend == "smtp":
-            self._smtp(msg)
-        elif backend == "resend":
-            self._resend(msg)
-        else:
+        if backend not in ("smtp", "resend"):
             # Development: show the email where the developer will see it (sign-in links included)
             self.outbox.append(msg)
             print(f"\n----- EMAIL to {msg.to}: {msg.subject}\n{msg.text}-----\n", flush=True)
+            return True
+        try:
+            if backend == "smtp":
+                self._smtp(msg)
+            else:
+                self._resend(msg)
+        except (OSError, smtplib.SMTPException, requests.RequestException) as exc:
+            log.error("email to %s failed: %s", msg.to, exc)
+            return False
+        return True
 
     def _smtp(self, msg: Message) -> None:
         em = EmailMessage()

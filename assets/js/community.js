@@ -78,6 +78,9 @@
     } catch (e) { return iso; }
   }
 
+  // Links people posted: only ever http(s), whatever the server let through
+  function safeLink(url) { return /^https?:\/\//i.test(url || ''); }
+
   function message(el, text, kind) {
     el.textContent = text || '';
     el.className = 'cm-message' + (kind ? ' cm-message--' + kind : '');
@@ -525,7 +528,7 @@
     }
     return h('article', { class: 'cm-post' + (pending ? ' cm-post--pending' : '') }, [
       p.kind === 'opportunity' && p.meta.work_rights ? h('span', { class: 'cm-rights cm-rights--' + p.meta.work_rights }, S[WORK_RIGHTS[p.meta.work_rights]]) : null,
-      h('h3', { class: 'cm-post-title' }, p.link ? h('a', { href: p.link, target: '_blank', rel: 'noopener nofollow ugc' }, p.title + ' ↗') : p.title),
+      h('h3', { class: 'cm-post-title' }, safeLink(p.link) ? h('a', { href: p.link, target: '_blank', rel: 'noopener nofollow ugc' }, p.title + ' ↗') : p.title),
       p.body ? h('p', { class: 'cm-post-body' }, p.body) : null,
       h('p', { class: 'cm-muted cm-small' }, meta.join(' · ')),
       tools
@@ -644,7 +647,7 @@
         if (!q.suggestions.length) suggestions.appendChild(h('p', { class: 'cm-empty' }, S.cmModEmpty));
         q.suggestions.forEach(function (s) {
           suggestions.appendChild(h('div', { class: 'cm-intro' }, [
-            h('p', {}, h('a', { href: s.url, target: '_blank', rel: 'noopener nofollow' }, s.url)),
+            h('p', {}, safeLink(s.url) ? h('a', { href: s.url, target: '_blank', rel: 'noopener nofollow' }, s.url) : s.url),
             s.details ? h('p', { class: 'cm-post-body' }, s.details) : null,
             s.note ? h('p', { class: 'cm-muted' }, s.note) : null,
             h('div', { class: 'cm-actions' }, [

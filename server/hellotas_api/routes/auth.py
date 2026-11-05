@@ -11,8 +11,8 @@ from sqlalchemy import select
 from ..db import utcnow
 from ..mail import Message, text
 from ..models import LoginLink, Session, User
-from ..security import (client_key, create_session, current_user, email_allowed, get_db, hash_token,
-                        new_token, normalise_email)
+from ..security import (client_key, create_session, current_user, default_name, email_allowed, get_db,
+                        hash_token, new_token, normalise_email)
 from .common import lang_of, state
 from .me import user_out
 
@@ -46,8 +46,10 @@ def request_link(body: LinkRequest, request: Request, db=Depends(get_db)):
     prefix = "" if lang == "en" else f"{lang}/"
     # The token travels in the fragment (#), which browsers never send to servers or put in logs
     link = f"{s.site_url}{prefix}account/#signin={token}"
-    app.mailer.send(Message(to=email, subject=text(lang, "login_subject"),
-                            text=text(lang, "login", link=link, minutes=s.login_link_minutes)))
+    sent = app.mailer.send(Message(to=email, subject=text(lang, "login_subject"),
+                                   text=text(lang, "login", link=link, minutes=s.login_link_minutes)))
+    if not sent:
+        raise HTTPException(status_code=503, detail="The sign-in email couldn't be sent just now. Try again soon.")
     return {"sent": True}
 
 
@@ -61,7 +63,7 @@ def verify(body: Verify, request: Request, db=Depends(get_db)):
     link.used_at = utcnow()
     user = db.scalar(select(User).where(User.email == link.email))
     if user is None:
-        user = User(email=link.email, display_name=link.email.split("@")[0][:60], lang=link.lang)
+        user = User(email=link.email, display_name=default_name(link.email), lang=link.lang)
         db.add(user)
         db.flush()
     if user.email in s.admin_emails and user.role != "admin":

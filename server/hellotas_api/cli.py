@@ -32,6 +32,7 @@ def main(argv: list[str] | None = None) -> int:
     from .app import create_app
     from .models import User
     from .routes.digest import send_all
+    from .security import default_name
     app = create_app()
     db = app.state.sessionmaker()
     try:
@@ -41,7 +42,7 @@ def main(argv: list[str] | None = None) -> int:
             email = args.email.strip().lower()
             user = db.scalar(select(User).where(User.email == email))
             if user is None:
-                user = User(email=email, display_name=email.split("@")[0])
+                user = User(email=email, display_name=default_name(email))
                 db.add(user)
             user.role = "admin"
             db.commit()

@@ -41,7 +41,8 @@ class User(Base):
 
     @property
     def public_name(self) -> str:
-        return self.display_name or self.email.split("@")[0]
+        """Never the email address (or its first half, which is the address minus the domain)."""
+        return self.display_name or "UTAS student"
 
 
 class LoginLink(Base):
