@@ -1,0 +1,143 @@
+name: Collect events
+
+# Every morning the collector reads the sources in collector/sources.yaml and proposes new events.
+#
+# By default it keeps one pull request open (branch collector/new-events) and adds to it each day, so the team
+# reviews and merges when convenient. To publish straight to the site instead, set the repository variable
+# COLLECTOR_PUBLISH to "true" (Settings > Secrets and variables > Actions > Variables).
+#
+# Optional settings (same page):
+#   secret   ANTHROPIC_API_KEY  lets the AI judge relevance, write the summary and translate it into Chinese and
+#                               Nepali, and read pages without structured data. Without it, keyword rules are used
+#                               and new entries are English only.
+#   variable COLLECTOR_MODEL    model to use (default claude-opus-5-5; claude-haiku-5-5 is far cheaper)
+#
+# One-off setting: Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
+
+on:
+  schedule:
+    - cron: "17 19 * * *" # 6:17 am in Hobart during daylight saving (5:17 am in winter)
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to the site now instead of opening a pull request"
+        type: boolean
+        default: false
+      sources:
+        description: "Only these source ids, comma-separated (blank: all enabled sources)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write # to start the deploy after publishing directly
+
+concurrency:
+  group: collect-events
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BRANCH: collector/new-events
+      PUBLISH: ${{ inputs.publish == true || vars.COLLECTOR_PUBLISH == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: collector/pyproject.toml
+
+      - name: Install the collector
+        run: pip install ./collector
+
+      - name: Restore cached AI answers
+        uses: actions/cache/restore@v4
+        with:
+          path: collector/.cache
+          key: collector-cache-${{ github.run_id }}
+          restore-keys: collector-cache-
+
+      - name: Continue the open collector branch, if any
+        if: env.PUBLISH != 'true'
+        run: |
+          git config user.name "hellotas-collector[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            # Keep up with main; if that conflicts, start again from main (the ledger keeps rejections)
+            git merge --no-edit origin/main || { git merge --abort; git checkout -B "$BRANCH" origin/main; }
+          else
+            git checkout -B "$BRANCH"
+          fi
+
+      - name: Collect
+        id: collect
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          COLLECTOR_MODEL: ${{ vars.COLLECTOR_MODEL }}
+          SOURCES: ${{ inputs.sources }}
+        run: |
+          args=(run --report "$RUNNER_TEMP/report.md")
+          if [ -n "$SOURCES" ]; then args+=(--sources "$SOURCES"); fi
+          hellotas-collect "${args[@]}"
+
+      - name: Save AI answers for next time
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: collector/.cache
+          key: collector-cache-${{ github.run_id }}
+
+      - name: Commit
+        if: steps.collect.outputs.changed == 'true'
+        env:
+          ADDED: ${{ steps.collect.outputs.added }}
+          UPDATED: ${{ steps.collect.outputs.updated }}
+        run: |
+          git config user.name "hellotas-collector[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/happening static/images/happening collector/ledger.yaml
+          git commit -m "Collector: $ADDED new, $UPDATED updated event(s)" -m "$(sed -n '1,40p' "$RUNNER_TEMP/report.md")"
+
+      - name: Publish to the site
+        if: steps.collect.outputs.changed == 'true' && env.PUBLISH == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git push origin HEAD:main
+          # Pushes made by this workflow don't start other workflows, so start the deploy explicitly
+          gh workflow run hugo.yml --ref main
+
+      - name: Open or update the pull request
+        if: steps.collect.outputs.changed == 'true' && env.PUBLISH != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git push -u origin "$BRANCH"
+          {
+            echo "The event collector found these events. Review them, edit anything in this branch, then merge."
+            echo
+            echo "- **To drop an event:** delete its file in this pull request. The collector remembers it in"
+            echo "  \`collector/ledger.yaml\` and won't add it again."
+            echo "- **To drop all of them:** close this pull request. The collector remembers every event in it."
+            echo "- Files and pictures are in \`data/happening/\` and \`static/images/happening/\`."
+            echo
+            echo "### Events in this pull request"
+            echo
+            git diff --name-only --diff-filter=A origin/main...HEAD -- data/happening | sed 's/^/- `/; s/$/`/'
+            echo
+            cat "$RUNNER_TEMP/report.md"
+          } > "$RUNNER_TEMP/body.md"
+          if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$BRANCH" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr create --head "$BRANCH" --base main --title "New events from the collector" --body-file "$RUNNER_TEMP/body.md"
+          fi

@@ -1,0 +1,30 @@
+name: Suggest an event
+description: An ICT event in Tasmania (or online) that students should know about. A bot reads it and proposes it for the site.
+title: "Event suggestion: "
+labels: ["event-suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping. Once you submit, the event collector reads the link, writes the entry in English, Chinese and Nepali, and opens a pull request for a maintainer to check. It replies here within a few minutes.
+
+        **LinkedIn, Facebook and Instagram** don't allow automated access, so the bot can't open those links. For those, paste the post's text in *Event details* (or, better, link the registration page the post points to).
+  - type: input
+    id: link
+    attributes:
+      label: Event link
+      description: The event's own page. A registration page (Humanitix, Eventbrite, Meetup, GDG) works best.
+      placeholder: https://events.humanitix.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Event details
+      description: Optional, but needed when the link can't be opened. Title, date, start time, place, cost.
+      placeholder: "GDG Hobart: AI agents night, Thursday 3 December 2026, 5:30 pm, The Forest building, UTAS. Free."
+  - type: textarea
+    id: note
+    attributes:
+      label: Why it's useful
+      description: Optional. Anything the reviewer should know (who it suits, student discounts, ...).
