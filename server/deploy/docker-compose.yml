@@ -1,0 +1,69 @@
+# The whole community API on one server: Caddy (HTTPS with automatic certificates), the API, Postgres, and daily
+# database backups. See server/README.md, "Option B: one small server".
+#
+#   cp ../.env.example ../.env        (fill it in; DATABASE_URL is set below)
+#   export API_DOMAIN=api.example.org POSTGRES_PASSWORD=<a long random string>
+#   docker compose up -d --build
+services:
+  api:
+    build: ..
+    image: hellotas-api
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      DATABASE_URL: postgresql://hellotas:${POSTGRES_PASSWORD:-change-me}@db:5432/hellotas
+      TRUST_PROXY: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hellotas
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      POSTGRES_DB: hellotas
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hellotas"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # One compressed dump a day in the "backups" volume, keeping the newest 14 (deploy/backup.sh).
+  # Copy them off the server too: a backup on the same disk doesn't survive losing the server.
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - backups:/backups
+      - ./backup.sh:/backup.sh:ro
+    entrypoint: ["sh", "/backup.sh"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      API_DOMAIN: ${API_DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+
+volumes:
+  db:
+  backups:
+  caddy_data:
+  caddy_config:

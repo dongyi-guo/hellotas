@@ -26,4 +26,5 @@ node_modules/
 # Environment and log files
 .env
 .env.*
+!.env.example
 *.log
