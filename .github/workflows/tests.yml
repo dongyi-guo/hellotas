@@ -64,7 +64,8 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: collector/pyproject.toml
-      - name: Check the calendar and JSON feeds
+      - name: Check every upcoming event has a picture, and the calendar and JSON feeds
         run: |
           pip install ./collector
+          hellotas-collect check-data
           hellotas-collect check-site public

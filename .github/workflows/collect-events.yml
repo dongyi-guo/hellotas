@@ -6,11 +6,8 @@ name: Collect events
 # reviews and merges when convenient. To publish straight to the site instead, set the repository variable
 # COLLECTOR_PUBLISH to "true" (Settings > Secrets and variables > Actions > Variables).
 #
-# Optional settings (same page):
-#   secret   ANTHROPIC_API_KEY  lets the AI judge relevance, write the summary and translate it into Chinese and
-#                               Nepali, and read pages without structured data. Without it, keyword rules are used
-#                               and new entries are English only.
-#   variable COLLECTOR_MODEL    model to use (default claude-opus-5-5; claude-haiku-5-5 is far cheaper)
+# No AI is used: relevance and the English text come from keyword rules. An AI step exists for the future
+# (switch on ai.enabled in collector/sources.yaml and add the ANTHROPIC_API_KEY secret); until then the key is ignored.
 #
 # One-off setting: Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
 

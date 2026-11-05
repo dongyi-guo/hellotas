@@ -2,7 +2,7 @@
 
 The small server behind the site's community features: sign-in by email link, Interested / Going, event buddies,
 the Noticeboard (Wish Wall, achievements, opportunities), the saved arrival checklist, website event suggestions
-and the weekly digest. Why each exists: [docs/research/platform-v2.md](../docs/research/platform-v2.md).
+and the weekly digest.
 
 The site stays a static site on GitHub Pages. It calls this API from the browser, and only when
 `params.communityAPI` is set (the deploy workflow takes it from the repository variable `COMMUNITY_API_URL`).

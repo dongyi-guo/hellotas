@@ -20,7 +20,8 @@ This project puts it all in one place, so that:
 
 - **ICT Events page** for 2025 and 2026, with photos and details for each event.
 - **Happening**: upcoming events, found automatically every morning by the [event collector](collector/README.md)
-  from GDG Hobart, ACS, AISA, SecTalks Hobart, TasICT and Careerify, plus events people suggest.
+  from GDG Hobart, ACS, AISA, SecTalks Hobart, TasICT and Careerify, plus events people suggest. It uses keyword
+  rules, not AI.
 - **Calendar subscription**: `happening/index.ics` (all events, or one feed per topic), so new events appear in
   students' own calendars, and `happening/index.json` for other tools.
 - **New and pinned events** on the homepage.
@@ -36,10 +37,7 @@ This is an early version. Some events are examples, and the full list is still b
 |---|---|---|
 | The site (Hugo, GitHub Pages) | `content/`, `layouts/`, `data/` | this file |
 | Event collector (GitHub Actions) | `collector/` | [collector/README.md](collector/README.md) |
-| Community API (a small server) | `server/` | [server/README.md](server/README.md) |
-| Deploying all of it | | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) |
-| What is left to do | | [docs/NEXT-STEPS.md](docs/NEXT-STEPS.md) |
-| Why these features, and not a social network | | [docs/research/platform-v2.md](docs/research/platform-v2.md) |
+| Community API (optional; a small server that GitHub Pages can't host, not running yet) | `server/` | [server/README.md](server/README.md) |
 
 ## Coming next
 

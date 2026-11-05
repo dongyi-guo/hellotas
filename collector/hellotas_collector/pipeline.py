@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -74,7 +75,8 @@ class Collector:
         self.ledger = Ledger(root / "collector" / "ledger.yaml")
         self.ignore = IgnoreList(root / "collector" / "ignore.yaml")
         self.fetcher = fetcher or Fetcher(config.user_agent, delay=config.delay_seconds, public_only=public_only)
-        use_ai = credentials_present() if use_ai is None else use_ai
+        # None means "decide from the settings": on only if sources.yaml switches it on and a key is set
+        use_ai = (config.ai_enabled and credentials_present()) if use_ai is None else use_ai
         self.editor: Editor | None = None
         if use_ai:
             ai = config.ai
@@ -172,11 +174,15 @@ class Collector:
             fields["host"] = raw.host
         wanted = fields.get("slug") or slugify(_slug_basis(raw, fields))
         slug = self.site.free_slug(wanted, raw.start)
-        image, image_note = "", ""
-        if self.images and raw.images and not self.dry_run:
-            image, image_note = save_cover(self.fetcher, raw.images, self.site.static_dir, slug)
-            if image_note and not image:
-                self.result.notes.setdefault(raw.source, []).append(f"{slug}: no picture ({image_note})")
+        image, image_note, borrowed = "", "", ""
+        if self.images and not self.dry_run:
+            if raw.images:
+                image, image_note = save_cover(self.fetcher, raw.images, self.site.static_dir, slug)
+            if not image:  # every event on the site has a picture
+                image, borrowed = self.borrow_picture(raw, fields, slug)
+                self.result.notes.setdefault(raw.source, []).append(
+                    f"{slug}: the organiser's picture couldn't be downloaded"
+                    + (f" ({image_note})" if image_note else "") + f"; using {borrowed} for now")
         doc = build_entry(fields, raw, self.tz, image, self.now.date().isoformat())
         path = self.site.happening_dir / f"{slug}.yaml"
         source_name = (self.config.source(raw.source) or {}).get("name", raw.source)
@@ -194,9 +200,35 @@ class Collector:
                           start=raw.start)
         self.site.entries.append(new_entry)  # so a second source's copy of this event is caught as a duplicate
         proposal = Proposal(raw=raw, slug=slug, fields=fields, judgement=judgement, written_by=written_by,
-                            image_path=image, file_path=str(path.relative_to(self.root)))
+                            image_path=image, image_borrowed=borrowed, file_path=str(path.relative_to(self.root)))
         self.result.added.append(proposal)
         return proposal
+
+    def borrow_picture(self, raw: RawEvent, fields: dict, slug: str) -> tuple[str, str]:
+        """When the organiser's own picture can't be downloaded: a copy of the most recent picture used for the same
+        organiser (same source or host), or else the default_image in sources.yaml. Returns (site path, where from)."""
+        static = self.site.static_dir
+        host = (fields.get("host") or raw.host or "").strip().lower()
+        candidates = []
+        for e in self.site.entries:
+            picture = e.data.get("image")
+            if not picture or not (static / str(picture).lstrip("/")).is_file():
+                continue
+            same_source = e.data.get("source") == raw.source and raw.source not in ("suggestion",)
+            same_host = host and str(e.data.get("host") or "").strip().lower() == host
+            if same_source or same_host:
+                candidates.append((e.start.isoformat() if e.start else "", str(picture), e.slug))
+        if candidates:
+            _, picture, origin = max(candidates)
+            source_file, label = static / picture.lstrip("/"), f"the picture from {origin}"
+        elif self.config.default_image and (static / self.config.default_image.lstrip("/")).is_file():
+            source_file, label = static / self.config.default_image.lstrip("/"), "the site's default picture"
+        else:
+            return "", "nothing (no default_image found)"
+        target = static / "images" / "happening" / slug / f"{slug}-1{source_file.suffix.lower()}"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source_file, target)
+        return "/" + str(target.relative_to(static)).replace("\\", "/"), label
 
     # -- runs -------------------------------------------------------------------------------------------------
     def run(self, only: list[str] | None = None) -> RunResult:

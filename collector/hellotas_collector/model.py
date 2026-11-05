@@ -64,7 +64,8 @@ class Proposal:
     fields: dict
     judgement: Judgement
     written_by: str  # "ai" or "rules"
-    image_path: str = ""  # file written under static/, if any
+    image_path: str = ""  # file written under static/
+    image_borrowed: str = ""  # set when the organiser's picture couldn't be used, e.g. "the site's default picture"
     file_path: str = ""
 
 

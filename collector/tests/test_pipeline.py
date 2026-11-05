@@ -195,3 +195,55 @@ def test_suggested_humanitix_link_is_added_even_if_rules_unsure(site):
     assert len(result.added) == 1
     assert result.added[0].judgement.by == "person"
     assert "School of ICT" in markdown(result, "Event suggestion")
+
+
+# -- AI switched off, and pictures for every event ----------------------------------------------------------------
+
+def test_ai_stays_off_even_with_a_key(site, monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
+    config = load(site / "collector" / "sources.yaml")
+    assert config.ai_enabled is False
+    c = Collector(site, config, now=NOW, fetcher=FakeFetcher(_future_meetup(site)), images=False)
+    assert c.editor is None
+    result = c.run(["sectalks-hobart"])
+    assert result.added[0].written_by == "rules" and result.ai == {}
+
+
+def _picture(path, colour):
+    from PIL import Image
+    path.parent.mkdir(parents=True, exist_ok=True)
+    Image.new("RGB", (800, 450), colour).save(path, "JPEG")
+
+
+def test_default_picture_when_the_organisers_cannot_be_downloaded(site):
+    _picture(site / "static" / "images" / "home" / "step-1-forest-building.jpg", "green")
+    config = load(site / "collector" / "sources.yaml")
+    c = Collector(site, config, now=NOW, fetcher=FakeFetcher(_future_meetup(site)), use_ai=False)
+    result = c.run(["sectalks-hobart"])  # Meetup's image hosts aren't in the fake fetcher: downloads fail
+    p = result.added[0]
+    assert p.image_borrowed == "the site's default picture"
+    assert (site / "static" / p.image_path.lstrip("/")).is_file()
+    assert f'image: "{p.image_path}"' in (site / p.file_path).read_text(encoding="utf-8")
+    assert "replace it with the event's own" in markdown(result)
+
+
+def test_organisers_previous_picture_comes_first(site):
+    _picture(site / "static" / "images" / "home" / "step-1-forest-building.jpg", "green")
+    earlier = site / "static" / "images" / "happening" / "sectalks-october" / "sectalks-october-1.jpg"
+    _picture(earlier, "black")
+    (site / "data" / "happening" / "sectalks-october.yaml").write_text(
+        'title:\n  en: "SecTalks Hobart October"\nstart: "2026-10-13T18:00:00+11:00"\nend: "2026-10-13T20:00:00+11:00"\n'
+        'host: "SecTalks Hobart"\nimage: "/images/happening/sectalks-october/sectalks-october-1.jpg"\n'
+        'url: "https://www.meetup.com/sectalks-hobart/events/1/"\nsource: "sectalks-hobart"\n', encoding="utf-8")
+    config = load(site / "collector" / "sources.yaml")
+    result = Collector(site, config, now=NOW, fetcher=FakeFetcher(_future_meetup(site)), use_ai=False).run(
+        ["sectalks-hobart"])
+    p = result.added[0]
+    assert p.image_borrowed == "the picture from sectalks-october"
+    assert (site / "static" / p.image_path.lstrip("/")).read_bytes() == earlier.read_bytes()
+
+
+def test_check_data_finds_events_without_pictures(site, capsys):
+    from hellotas_collector.cli import main
+    assert main(["--root", str(site), "check-data"]) == 1  # the copied entries' picture files aren't in this site
+    assert "isn't in static/" in capsys.readouterr().out

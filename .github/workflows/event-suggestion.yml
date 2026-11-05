@@ -1,11 +1,9 @@
 name: Event suggestion
 
 # Someone opens an issue with the "Suggest an event" form (.github/ISSUE_TEMPLATE/suggest-event.yml), or the
-# community API forwards a suggestion from the website as such an issue. The collector reads the link (or the
-# pasted details, for LinkedIn and other sites that forbid automated access), writes the entry and opens a pull
-# request; then it replies on the issue with what it found. Editing the issue runs it again.
-#
-# Uses the same optional ANTHROPIC_API_KEY secret and COLLECTOR_MODEL variable as collect-events.yml.
+# community API forwards a suggestion from the website as such an issue. The collector reads the link, writes the
+# entry and opens a pull request; then it replies on the issue with what it found. Editing the issue runs it again.
+# Links it can't read (LinkedIn, pages without event data) get a reply saying so, and a maintainer adds them by hand.
 
 on:
   issues:
