@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hellotas-collector"
+version = "1.0.0"
+description = "Finds upcoming ICT events for Tasmania Welcome and writes them into data/happening/."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "requests>=2.32",
+  "beautifulsoup4>=4.12",
+  "lxml>=5.0",
+  "ruamel.yaml>=0.18",
+  "Pillow>=10.0",
+  "icalendar>=6.0",
+  "tzdata>=2024.1",
+  "anthropic>=2.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+hellotas-collect = "hellotas_collector.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hellotas_collector*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

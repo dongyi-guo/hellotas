@@ -1,0 +1,5 @@
+# Every event the collector has proposed, so it never proposes one twice.
+# If you delete an event's file (or close the collector's pull request), its line stays here and the
+# collector won't add it again. Delete the line to let it come back.
+events:
+  "meetup.com/sectalks-hobart/events/317249458": {slug: "sectalks-hobart-november-just-spoof-government", title: "SecTalks Hobart - November - Just spoof the government?", start: "2026-11-10", source: "sectalks-hobart", proposed: "2026-11-05"}

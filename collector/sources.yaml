@@ -1,0 +1,124 @@
+# Where the collector looks for events, and how it judges them.
+# Each run reads every enabled source, drops events that are past, already listed, rejected before or not
+# relevant, and writes the rest into data/happening/ (one YAML file each, same fields as the hand-written ones).
+#
+# Every source here was checked by hand in November 2026: its robots.txt allows the pages used, and the
+# collector identifies itself honestly (user_agent below), waits between requests and never works around a
+# block. A blocked source is reported in the run summary and skipped; it is not an error.
+#
+# Source kinds (code in hellotas_collector/sources/):
+#   jsonld   a listing page; follows links matching `follow` and reads the schema.org Event data on each event
+#            page (GDG/Bevy, Meetup, Humanitix and Eventbrite pages all carry it)
+#   acs      the Australian Computer Society's event list (the JSON file behind its events page)
+#   aisa     AISA branch pages (plain HTML, parsed directly)
+#   html     pages with no event data: follows the registration link (Humanitix, Eventbrite, ...) when there is
+#            one, otherwise asks the AI to read the page (needs ANTHROPIC_API_KEY)
+#   ical     an iCalendar (.ics) feed
+#
+# trust: high (local ICT community, almost everything fits), medium (national body, needs filtering) or low.
+
+user_agent: "hellotas-collector/1.0 (+https://github.com/dongyi-guo/hellotas)"
+timezone: "Australia/Hobart"
+# Ignore events further ahead than this
+horizon_days: 240
+# Relevance needed (0 to 100) to add an event found by a scheduled run. Suggestions from people are always
+# proposed, with the score shown for the reviewer.
+min_relevance: 60
+# Seconds to wait between two requests to the same site
+delay_seconds: 1.5
+
+ai:
+  # Used only when ANTHROPIC_API_KEY is set. Override with the COLLECTOR_MODEL environment variable,
+  # e.g. COLLECTOR_MODEL=claude-haiku-5-5 for the cheapest option (about a fortieth of the cost).
+  model: "claude-opus-5-5"
+  # How hard the model thinks: triage (is this relevant?) and write-up (summary and translations)
+  triage_effort: "low"
+  write_effort: "medium"
+  # Curated events from data/happening/ shown to the model as examples of the site's tone and translations
+  style_examples: 6
+
+sources:
+  - id: gdg-hobart
+    name: "GDG Hobart"
+    kind: jsonld
+    trust: high
+    listing: "https://gdg.community.dev/gdg-hobart/"
+    # gdg.community.dev/api/ is disallowed in robots.txt, so the collector reads the public event pages instead
+    follow: '^https://gdg\.community\.dev/events/details/google-gdg-hobart-presents-'
+    max_events: 12
+    defaults: { host: "GDG Hobart", topics: [development], region: "TAS" }
+    # Bevy's generic banners; the real event banner is usually the first picture in the description
+    image_exclude: ["DefaultEvent", "SocialSharingThumbnail", "GDG_Bevy_Default"]
+    page_images: '/v1/gcs/platform-data-goog/events/'
+
+  - id: acs
+    name: "Australian Computer Society"
+    kind: acs
+    trust: medium
+    listing: "https://www.acs.org.au/content/acs/cpd-education/event-listing/jcr:content/root/container/list_copy.event-list.json"
+    detail_url: "https://www.acs.org.au/cpd-education/event-detail.html"
+    # In-person events only in these states; online events from anywhere
+    states: ["TAS"]
+    exclude_types: ["Short Courses", "C-Suite Event"]
+    exclude_titles: '(?i)annual general meeting|\bAGM\b|keycode|control centre'
+    skip_member_only: true
+    defaults: { host: "ACS", topics: [careers] }
+    image_exclude: ["acs-event-default-image"]
+
+  - id: aisa
+    name: "Australian Information Security Association"
+    kind: aisa
+    trust: medium
+    branches:
+      Hobart: "https://www.aisa.org.au/Public/Branches/Hobart/Upcoming_Events.aspx"
+      Online: "https://www.aisa.org.au/Public/Branches/Online/Upcoming_Events.aspx"
+    defaults: { topics: [cyber] }
+
+  - id: sectalks-hobart
+    name: "SecTalks Hobart"
+    kind: jsonld
+    trust: high
+    listing: "https://www.meetup.com/sectalks-hobart/events/"
+    follow: '^https://www\.meetup\.com/sectalks-hobart/events/\d+/?$'
+    max_events: 6
+    defaults: { host: "SecTalks Hobart", topics: [cyber, community], region: "TAS", type: "meetup" }
+
+  - id: tasict
+    name: "TasICT"
+    kind: html
+    trust: high
+    listing: "https://www.tasict.com.au/about/events-2/"
+    follow: '^https://www\.tasict\.com\.au/event/'
+    max_events: 12
+    defaults: { host: "TasICT", topics: [community, careers], region: "TAS", type: "networking" }
+
+  - id: careerify
+    name: "Careerify (Tasmanian Government) ICT events"
+    kind: ical
+    trust: high
+    # Behind a firewall that refuses some cloud networks; the run summary says so when it does
+    url: "https://careerify.tas.gov.au/events/tag/ict-events/list/?ical=1"
+    defaults: { topics: [careers], region: "TAS" }
+
+  - id: eventbrite-hobart-tech
+    name: "Eventbrite: Hobart science and tech"
+    kind: jsonld
+    trust: low
+    # Off by default: most results are for children or general audiences, and Eventbrite's terms restrict
+    # automated access. Turn on only after reading them.
+    enabled: false
+    listing: "https://www.eventbrite.com.au/d/australia--hobart/science-and-tech--events/"
+    follow: '^https://www\.eventbrite\.com\.au/e/'
+    max_events: 10
+    defaults: { region: "TAS" }
+
+  - id: utas
+    name: "University of Tasmania events"
+    kind: jsonld
+    trust: high
+    # Off: utas.edu.au answers every automated request (even robots.txt) with a Cloudflare challenge.
+    # UTAS events come in through the "Suggest an event" form instead. Turn on if UTAS ever offers a feed.
+    enabled: false
+    listing: "https://www.utas.edu.au/events"
+    follow: '^https://www\.utas\.edu\.au/events/\d{4}/'
+    defaults: { host: "University of Tasmania", region: "TAS" }
