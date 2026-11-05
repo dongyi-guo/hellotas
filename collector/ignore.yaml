@@ -1,0 +1,5 @@
+# Events the collector must never add, whatever the sources say.
+# links: exact event links (www, tracking parameters and letter case are ignored when comparing).
+# patterns: regular expressions matched against the link, e.g. a whole organiser you don't want.
+links: []
+patterns: []
