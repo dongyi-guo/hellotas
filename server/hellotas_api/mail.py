@@ -41,8 +41,9 @@ class Mailer:
         elif backend == "resend":
             self._resend(msg)
         else:
+            # Development: show the email where the developer will see it (sign-in links included)
             self.outbox.append(msg)
-            log.info("EMAIL to %s: %s\n%s", msg.to, msg.subject, msg.text)
+            print(f"\n----- EMAIL to {msg.to}: {msg.subject}\n{msg.text}-----\n", flush=True)
 
     def _smtp(self, msg: Message) -> None:
         em = EmailMessage()

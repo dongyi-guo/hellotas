@@ -266,6 +266,25 @@
           {{- end }}
         </ul>
       </details>
+      {{- if site.Params.communityAPI }}
+      {{- /* The weekly digest (server/hellotas_api/routes/digest.py); assets/js/community.js shows and sends it */}}
+      <form class="hp-digest" data-cm-digest hidden>
+        <h3 class="hp-subscribe-title">{{ i18n "cmDigestTitle" }}</h3>
+        <p class="hp-subscribe-text">{{ i18n "cmDigestText" }}</p>
+        <div class="hp-digest-row">
+          <label class="sr-only" for="hp-digest-email">{{ i18n "cmDigestEmail" }}</label>
+          <input id="hp-digest-email" name="email" type="email" required autocomplete="email" placeholder="{{ i18n "cmDigestEmail" }}">
+          <button type="submit" class="btn-primary">{{ i18n "cmDigestSubmit" }}</button>
+        </div>
+        <fieldset class="hp-digest-topics">
+          <legend>{{ i18n "cmDigestTopics" }}</legend>
+          {{- range slice "cyber" "ai" "careers" "data" "development" "community" "ux" }}
+          <label><input type="checkbox" name="topic" value="{{ . }}"> {{ i18n (printf "happeningTopic%s" (strings.FirstUpper .)) }}</label>
+          {{- end }}
+        </fieldset>
+        <p class="cm-message" data-cm-digest-status role="status" hidden></p>
+      </form>
+      {{- end }}
     </div>
     <script>
       (function () {

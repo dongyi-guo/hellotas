@@ -16,6 +16,13 @@
         <a href="{{ with .Site.GetPage "/happening" }}{{ .RelPermalink }}{{ else }}{{ relURL "happening/" }}{{ end }}">{{ i18n "happening" }}</a>
         <a href="{{ with .Site.GetPage "/stories" }}{{ .RelPermalink }}{{ else }}{{ relURL "stories/" }}{{ end }}">{{ i18n "stories" }}</a>
         <a href="{{ with .Site.GetPage "/fun-fitness" }}{{ .RelPermalink }}{{ else }}{{ relURL "fun-fitness/" }}{{ end }}">{{ i18n "funFitness" }}</a>
+        {{- if site.Params.communityAPI }}
+        <a href="{{ "noticeboard/" | relLangURL }}">{{ i18n "noticeboard" }}</a>
+        <a href="{{ "suggest/" | relLangURL }}">{{ i18n "suggestEvent" }}</a>
+        <a href="{{ "account/" | relLangURL }}" data-cm-account-label>{{ i18n "cmSignIn" }}</a>
+        {{- else }}
+        <a href="{{ site.Params.repoURL }}/issues/new?template=suggest-event.yml" target="_blank" rel="noopener">{{ i18n "suggestEvent" }} ↗</a>
+        {{- end }}
       </div>
       <div class="footer-col">
         {{ $page := . }}

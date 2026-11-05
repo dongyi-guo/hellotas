@@ -76,6 +76,21 @@
   </section>
   {{- end }}
 
+  {{- /* Community features (server/): only when the API is configured */ -}}
+  {{- if site.Params.communityAPI }}
+  <section class="home-community" aria-labelledby="home-community-title">
+    <div class="container">
+      <h2 class="home-section-title" id="home-community-title">{{ i18n "homeCommunityTitle" }}</h2>
+      <ul class="home-community-list">
+        <li><a class="home-community-card" href="{{ "happening/" | relLangURL }}"><strong>{{ i18n "cmBuddyTitle" }}</strong><span>{{ i18n "homeCommunityBuddyText" }}</span></a></li>
+        <li><a class="home-community-card" href="{{ "noticeboard/" | relLangURL }}"><strong>{{ i18n "noticeboard" }}</strong><span>{{ i18n "homeCommunityBoardText" }}</span></a></li>
+        <li><a class="home-community-card" href="{{ "suggest/" | relLangURL }}"><strong>{{ i18n "suggestEvent" }}</strong><span>{{ i18n "homeCommunitySuggestText" }}</span></a></li>
+        <li><a class="home-community-card" href="{{ "account/" | relLangURL }}"><strong data-cm-account-label>{{ i18n "cmSignIn" }}</strong><span>{{ i18n "homeCommunityAccountText" }}</span></a></li>
+      </ul>
+    </div>
+  </section>
+  {{- end }}
+
   <div class="container">
     <aside class="home-trust-strip">
       <p>{{ i18n "homeTrustStrip" | safeHTML }}</p>
