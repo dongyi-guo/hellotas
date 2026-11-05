@@ -100,7 +100,7 @@ def read_with_ai(text: str, url: str, source: str, ctx: Context, cfg: dict | Non
         ctx.note(f"{url}: no upcoming date mentioned, not read")
         return []
     if ctx.read_page is None:
-        ctx.note(f"{url}: no structured event data; set ANTHROPIC_API_KEY to let the AI read pages like this")
+        ctx.note(f"{url}: this page has no event data the collector can read; add it by hand if it belongs on the site")
         return []
     events = ctx.read_page(text, url, source)
     for ev in events:
@@ -116,7 +116,7 @@ def resolve_url(url: str, ctx: Context, source: str = "suggestion", pasted_text:
         if not pasted_text.strip():
             raise FetchError(
                 f"{urlsplit(url).hostname} doesn't allow automated access, so the collector can't open this link. "
-                "Paste the post's text into the form (or link the event's registration page instead).")
+                "Link the event's registration page instead, or a maintainer can add it by hand from the details.")
         return read_with_ai(pasted_text, url, source, ctx)
     try:
         page = ctx.fetcher.get(url)

@@ -46,7 +46,8 @@ def markdown(result: RunResult, heading: str = "Event collector run") -> str:
             note = p.raw.extra.get("suggester_note")
             out.append(f"- **{_md(p.fields['title']['en'])}**: {_md(p.judgement.reason)}"
                        + (f" Suggester's note: {_md(note)}" if note else "")
-                       + ("" if p.image_path or result.dry_run else " No cover picture was found."))
+                       + (f" **Picture: {p.image_borrowed} for now; replace it with the event's own.**"
+                          if p.image_borrowed else ""))
         out += ["", "</details>", ""]
 
     if result.updated:
@@ -87,6 +88,6 @@ def markdown(result: RunResult, heading: str = "Event collector run") -> str:
         out.append(f"AI: {ai['model']}, {ai['calls']} call(s), {ai['cache_hits']} answered from cache, "
                    f"{ai['input_tokens']:,} tokens in, {ai['output_tokens']:,} out{cost}.")
     else:
-        out.append("AI: off (no ANTHROPIC_API_KEY). Relevance and text came from the keyword rules, "
-                   "in English only; the site shows English on the Chinese and Nepali pages for these events.")
+        out.append("AI: off. Relevance and text came from the keyword rules, in English. The Chinese and Nepali pages "
+                   "show the English text for these events until someone adds translations in this pull request.")
     return "\n".join(out) + "\n"

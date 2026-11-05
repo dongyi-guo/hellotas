@@ -17,7 +17,7 @@ ROLES = ("member", "moderator", "admin")
 MARKS = ("interested", "going")
 POST_KINDS = ("wish", "achievement", "opportunity")
 POST_STATUSES = ("pending", "approved", "rejected", "hidden")
-# Who can apply for an opportunity, given Australian visa conditions (docs/research/platform-v2.md)
+# Who can apply for an opportunity, given Australian visa conditions (student visas: 48 hours a fortnight in term)
 WORK_RIGHTS = ("anyone", "student_visa_ok", "full_work_rights", "citizen_or_pr")
 OPPORTUNITY_TYPES = ("internship", "graduate", "casual", "volunteer", "other")
 REACTIONS = {"wish": "metoo", "achievement": "congrats", "opportunity": "useful"}
