@@ -2,4 +2,5 @@
 # If you delete an event's file (or close the collector's pull request), its line stays here and the
 # collector won't add it again. Delete the line to let it come back.
 events:
+  "acs.org.au/cpd-education/event-detail.html?eventid=701Om00000sj2IEIAY": {slug: "acs-industry-insights-beyond-ai-hype-building", title: "Industry Insights: Beyond the AI Hype - Building the AI-ready enterprise", start: "2027-02-25", source: "acs", proposed: "2026-11-06"}
   "meetup.com/sectalks-hobart/events/317249458": {slug: "sectalks-hobart-november-just-spoof-government", title: "SecTalks Hobart - November - Just spoof the government?", start: "2026-11-10", source: "sectalks-hobart", proposed: "2026-11-05"}
