@@ -1,0 +1,18 @@
+# Added by the event collector from Australian Computer Society on 2026-11-06.
+# Edit anything. The collector only ever changes start and end, when the organiser does.
+title:
+  en: "Industry Insights: Beyond the AI Hype - Building the AI-ready enterprise"
+start: "2027-02-25T17:30:00+11:00"
+end: "2027-02-25T18:30:00+11:00"
+type: "webinar"
+format: "online"
+topics: [ai, careers, data]
+host: "ACS"
+cost:
+  en: "Free for ACS members · $25 for non-members"
+summary:
+  en: "Join us for the first edition of the 2027 Industry Insights series featuring a captivating fireside chat with Richard Kendall, Chief Data & AI Officer of AGL."
+image: "/images/happening/acs-industry-insights-beyond-ai-hype-building/acs-industry-insights-beyond-ai-hype-building-1.jpg"
+url: "https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om00000sj2IEIAY"
+source: "acs"
+added: "2026-11-06"
