@@ -9,7 +9,8 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from . import rules
-from .ai import AIUnavailable, Editor, credentials_present
+from .ai import AIUnavailable, Editor
+from .providers import credentials_present, make_provider, provider_name
 from .config import Config
 from .fetch import Blocked, Fetcher, FetchError
 from .images import save_cover
@@ -75,16 +76,17 @@ class Collector:
         self.ledger = Ledger(root / "collector" / "ledger.yaml")
         self.ignore = IgnoreList(root / "collector" / "ignore.yaml")
         self.fetcher = fetcher or Fetcher(config.user_agent, delay=config.delay_seconds, public_only=public_only)
-        # None means "decide from the settings": on only if sources.yaml switches it on and a key is set
-        use_ai = (config.ai_enabled and credentials_present()) if use_ai is None else use_ai
+        # None means "decide from the settings": on only if sources.yaml switches it on and the provider's key is set
+        if use_ai is None:
+            use_ai = config.ai_enabled and credentials_present(provider_name(config.ai))
         self.editor: Editor | None = None
         if use_ai:
             ai = config.ai
             self.editor = Editor(
-                model=ai.get("model", "claude-opus-5-5"), triage_effort=ai.get("triage_effort", "low"),
+                make_provider(ai, client=client), triage_effort=ai.get("triage_effort", "low"),
                 write_effort=ai.get("write_effort", "medium"),
                 examples=style_examples(self.site, int(ai.get("style_examples", 6))),
-                cache_path=root / "collector" / ".cache" / "ai-cache.json", client=client, tz=self.tz, now=self.now)
+                cache_path=root / "collector" / ".cache" / "ai-cache.json", tz=self.tz, now=self.now)
         self.result = RunResult(dry_run=dry_run)
 
     # -- helpers ----------------------------------------------------------------------------------------------
@@ -283,7 +285,8 @@ class Collector:
             self.ledger.save()
         if self.editor is not None:
             self.editor.save()
-            self.result.ai = {"model": self.editor.model, "calls": self.editor.calls,
+            self.result.ai = {"provider": self.editor.provider.name, "model": self.editor.model,
+                              "calls": self.editor.calls,
                               "cache_hits": self.editor.cache_hits, "input_tokens": self.editor.input_tokens,
                               "output_tokens": self.editor.output_tokens}
         return self.result

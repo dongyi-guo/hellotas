@@ -6,7 +6,8 @@ from collections import Counter
 
 from .pipeline import RunResult
 
-# US dollars per million tokens (input, output), for the cost line only
+# US dollars per million tokens (input, output), for the cost line only. Other models: see the provider's
+# billing page; the token counts are in the summary.
 PRICES = {
     "claude-opus-5-5": (4.0, 20.0), "claude-opus-5": (5.0, 25.0), "claude-sonnet-5-5": (2.0, 10.0),
     "claude-haiku-5-5": (0.10, 0.50), "claude-fable-5-1": (10.0, 50.0),
@@ -85,7 +86,8 @@ def markdown(result: RunResult, heading: str = "Event collector run") -> str:
         if price:
             usd = ai["input_tokens"] / 1e6 * price[0] + ai["output_tokens"] / 1e6 * price[1]
             cost = f", about US${usd:.2f}"
-        out.append(f"AI: {ai['model']}, {ai['calls']} call(s), {ai['cache_hits']} answered from cache, "
+        out.append(f"AI: {ai.get('provider', 'anthropic')}, {ai['model']}, {ai['calls']} call(s), "
+                   f"{ai['cache_hits']} answered from cache, "
                    f"{ai['input_tokens']:,} tokens in, {ai['output_tokens']:,} out{cost}.")
     else:
         out.append("AI: off. Relevance and text came from the keyword rules, in English. The Chinese and Nepali pages "

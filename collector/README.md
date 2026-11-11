@@ -20,12 +20,10 @@ It runs by itself every morning (GitHub Actions), and whenever someone suggests 
      data/happening/<slug>.yaml + picture + ledger line ──► pull request (or straight to the site)
 ```
 
-**No AI is used.** The team isn't paying for an AI service, so the AI step is switched off
-(`ai.enabled: false` in `sources.yaml`) and an API key is ignored even if one is added. Entries are written in
-English; add Chinese and Nepali in the pull request if you like (until then those pages show the English text).
-The AI step is still in the code for the future: switched on, Claude would judge relevance, write the entry in all
-three languages, and read pages that have no event data. To switch it on, set `ai.enabled: true` and add the
-`ANTHROPIC_API_KEY` repository secret.
+**No AI is used for now.** The team isn't paying for an AI service, so the AI step is switched off
+(`ai.enabled: false` in `sources.yaml`) and any API key is ignored. Entries are written in English; add Chinese and
+Nepali in the pull request if you like (until then those pages show the English text). The AI step stays in the code,
+ready for when someone can fund it: see [Switching the AI on](#switching-the-ai-on).
 
 ## What it reads
 
@@ -102,6 +100,55 @@ The collector keeps one pull request open, **New events from the collector**, an
 Pull requests opened by Actions don't start other workflows (a GitHub rule), so the Tests workflow doesn't run on
 them automatically; run it from the Actions tab if you want it.
 
+## Switching the AI on
+
+Optional. Switched on, an AI model judges each event's relevance (instead of the keyword rules), writes the entry in
+English, Chinese and Nepali in the style of the team's hand-written entries, and reads organiser pages that have no
+event data. Everything it writes still arrives as a pull request for review. If the service fails, runs out of credit
+or declines an event, the collector uses the keyword rules for that event and says so in the pull request.
+
+It works with these services:
+
+| `provider` | Service | Repository secret | Where to get a key |
+|---|---|---|---|
+| `anthropic` | Claude (Anthropic) | `ANTHROPIC_API_KEY` | console.anthropic.com |
+| `openai` | ChatGPT models (OpenAI API) | `OPENAI_API_KEY` | platform.openai.com |
+| `gemini` | Google Gemini | `GEMINI_API_KEY` | aistudio.google.com |
+| `openai-compatible` | any service with an OpenAI-style API: OpenRouter, DeepSeek, Groq, Mistral and others | `AI_API_KEY` | the service's own site |
+
+A ChatGPT Plus or Claude Pro subscription doesn't include API access: the API is billed separately, by use. Some
+providers offer a free tier with lower limits; read its terms first, including how free-tier data may be used.
+
+**Steps:**
+
+1. **Get an API key** from the service and, if it is paid, set a monthly spending limit in its billing settings.
+2. **Add the key as a repository secret**: Settings > Secrets and variables > Actions > Secrets > *New repository
+   secret*, named as in the table.
+3. **Edit the `ai:` block in `collector/sources.yaml`**:
+   ```yaml
+   ai:
+     enabled: true
+     provider: "openai"          # anthropic, openai, gemini or openai-compatible
+   ```
+   For `openai-compatible`, also set the service's address and model, for example:
+   ```yaml
+     provider: "openai-compatible"
+     models:
+       openai-compatible: "deepseek-chat"
+     base_url: "https://api.deepseek.com"
+   ```
+4. **Check the model name** under `models:` against the provider's current model list; providers rename and retire
+   models. The repository variables `COLLECTOR_MODEL` and `COLLECTOR_AI_PROVIDER` override the file, which is handy
+   for trying a model without a commit.
+5. **Run it once by hand**: Actions > Collect events > Run workflow. The pull request's last line shows the provider,
+   the model, the number of calls and the tokens used, so you can see what a run costs.
+
+With `openai`, if the model rejects the reasoning setting (models without reasoning, such as `gpt-4.1`), set
+`send_effort: false`. To switch the AI off again, set `enabled: false`; the key can stay.
+
+**What a run uses:** two calls per new event (relevance, then the write-up) and one per page without event data.
+Answers are cached, so an unchanged event is never paid for twice. Most days find zero to three new events.
+
 ## Running it on your computer
 
 ```bash
@@ -145,4 +192,4 @@ Check its robots.txt first (the collector will refuse otherwise), then run
 | `sources.yaml` | the sources and settings (including `default_image` and the switched-off `ai` block) |
 | `ledger.yaml` | every event ever proposed (written by the collector; edit only to let an event back in) |
 | `ignore.yaml` | links and patterns never to add |
-| `hellotas_collector/` | the code: `sources/` (one file per kind), `rules.py`, `store.py`, `pipeline.py`, and `ai.py` (unused while the AI is off) |
+| `hellotas_collector/` | the code: `sources/` (one file per kind), `rules.py`, `store.py`, `pipeline.py`, and the optional AI step: `ai.py` (the prompts) and `providers.py` (one class per AI service) |

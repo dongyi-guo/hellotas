@@ -54,7 +54,13 @@ jobs:
         env:
           # The issue text is data: it reaches the collector only through this variable
           ISSUE_BODY: ${{ github.event.issue.body }}
+          # The optional AI step (off until ai.enabled is true in collector/sources.yaml); only the chosen
+          # provider's key is used, and a missing key just means the keyword rules do the work
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          COLLECTOR_AI_PROVIDER: ${{ vars.COLLECTOR_AI_PROVIDER }}
           COLLECTOR_MODEL: ${{ vars.COLLECTOR_MODEL }}
         run: hellotas-collect suggest --from-issue --report "$RUNNER_TEMP/report.md"
 

@@ -21,7 +21,8 @@ This project puts it all in one place, so that:
 - **ICT Events page** for 2025 and 2026, with photos and details for each event.
 - **Happening**: upcoming events, found automatically every morning by the [event collector](collector/README.md)
   from GDG Hobart, ACS, AISA, SecTalks Hobart, TasICT and Careerify, plus events people suggest. It uses keyword
-  rules, not AI.
+  rules, not AI; an optional AI step (Claude, ChatGPT models, Gemini and others) can be switched on later with an
+  API key, as the collector guide explains.
 - **Calendar subscription**: `happening/index.ics` (all events, or one feed per topic), so new events appear in
   students' own calendars, and `happening/index.json` for other tools.
 - **New and pinned events** on the homepage.

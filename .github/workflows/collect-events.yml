@@ -6,8 +6,8 @@ name: Collect events
 # reviews and merges when convenient. To publish straight to the site instead, set the repository variable
 # COLLECTOR_PUBLISH to "true" (Settings > Secrets and variables > Actions > Variables).
 #
-# No AI is used: relevance and the English text come from keyword rules. An AI step exists for the future
-# (switch on ai.enabled in collector/sources.yaml and add the ANTHROPIC_API_KEY secret); until then the key is ignored.
+# No AI is used: relevance and the English text come from keyword rules. An optional AI step (Claude, ChatGPT models,
+# Gemini or any OpenAI-compatible service) can be switched on later: see "Switching the AI on" in collector/README.md.
 #
 # One-off setting: Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
 
@@ -78,7 +78,13 @@ jobs:
       - name: Collect
         id: collect
         env:
+          # The optional AI step (off until ai.enabled is true in collector/sources.yaml); only the chosen
+          # provider's key is used, and a missing key just means the keyword rules do the work
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          COLLECTOR_AI_PROVIDER: ${{ vars.COLLECTOR_AI_PROVIDER }}
           COLLECTOR_MODEL: ${{ vars.COLLECTOR_MODEL }}
           SOURCES: ${{ inputs.sources }}
         run: |

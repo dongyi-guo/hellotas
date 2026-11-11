@@ -1,33 +1,29 @@
-"""Claude as the collector's editor: judging relevance, writing the entry in three languages, and reading pages
-that have no structured data.
+"""The optional AI step: judging relevance, writing the entry in three languages, and reading pages that have no
+structured data.
 
-Used only when an Anthropic credential is available (ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN). Every answer is
-cached by a hash of its exact input, so a page that hasn't changed is never paid for twice.
+Off unless switched on in sources.yaml (ai.enabled) and the chosen provider's key is set; see providers.py for the
+services it can use. Every answer is cached by a hash of its exact input, so a page that hasn't changed is never
+paid for twice.
 
-Text from event pages is untrusted. The model is told to treat it as data, its answers are forced into a JSON
-schema, and everything it writes reaches the site only through the normal review (a pull request) unless the
-maintainers switch on direct publishing.
+Text from event pages is untrusted. The model is told to treat it as data, its answers must be JSON in a fixed
+shape and are checked before use, and everything it writes reaches the site only through the normal review (a pull
+request) unless the maintainers switch on direct publishing.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-import os
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-import anthropic
-
 from .extract import parse_when
 from .model import FORMATS, LANGS, TOPICS, TYPES, Judgement, RawEvent
+from .providers import AIUnavailable, Provider, credentials_present  # noqa: F401 (re-exported)
 from .text import clean, clean_title, no_em_dash
 
 PROMPT_VERSION = "2026-11-05.1"
-# Models that support server-side refusal fallbacks (fallbacks: "default"); Haiku has none
-_FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-fable-5-1", "claude-fable-5", "claude-sonnet-5-5"}
-_FALLBACK_BETA = "server-side-fallback-2026-07-01"
 
 ABOUT_SITE = """\
 You help run Tasmania Welcome (hellotas), a volunteer website for ICT students at the University of Tasmania
@@ -126,14 +122,6 @@ READ_SCHEMA = _object({
 })
 
 
-class AIUnavailable(Exception):
-    """The AI couldn't answer (no credential, API error, refusal or unusable output); use the rules instead."""
-
-
-def credentials_present() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"))
-
-
 def facts_for_model(ev: RawEvent, tz: ZoneInfo) -> dict:
     def when(dt):
         return dt.astimezone(tz).isoformat() if dt else ""
@@ -149,16 +137,16 @@ def facts_for_model(ev: RawEvent, tz: ZoneInfo) -> dict:
 
 
 class Editor:
-    """Wraps the Claude calls the collector makes. One instance per run."""
+    """Makes the AI calls the collector needs, through whichever provider is configured. One instance per run."""
 
-    def __init__(self, model: str, triage_effort: str = "low", write_effort: str = "medium",
-                 examples: list[dict] | None = None, cache_path: Path | None = None, client=None,
+    def __init__(self, provider: Provider, triage_effort: str = "low", write_effort: str = "medium",
+                 examples: list[dict] | None = None, cache_path: Path | None = None,
                  tz: ZoneInfo | None = None, now: datetime | None = None):
-        self.model = os.environ.get("COLLECTOR_MODEL") or model
+        self.provider = provider
+        self.model = provider.model
         self.triage_effort = triage_effort
         self.write_effort = write_effort
         self.examples = examples or []
-        self.client = client or anthropic.Anthropic(max_retries=3, timeout=120.0)
         self.tz = tz or ZoneInfo("Australia/Hobart")
         self.now = now or datetime.now(self.tz)
         self.cache_path = cache_path
@@ -180,50 +168,19 @@ class Editor:
             self.cache_path.write_text(json.dumps(self.cache, ensure_ascii=False, indent=0), encoding="utf-8")
 
     def _ask(self, task: str, system: str, user: str, schema: dict, effort: str, max_tokens: int) -> dict:
-        key = hashlib.sha256(json.dumps([PROMPT_VERSION, self.model, task, system, user, effort],
+        key = hashlib.sha256(json.dumps([PROMPT_VERSION, self.provider.name, self.model, task, system, user, effort],
                                         ensure_ascii=False).encode()).hexdigest()
         if key in self.cache:
             self.cache_hits += 1
             return self.cache[key]
-        params = dict(
-            model=self.model,
-            max_tokens=max_tokens,
-            # The stable part of the prompt first, so repeated calls in a run reuse the prompt cache
-            system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-            messages=[{"role": "user", "content": user}],
-            output_config={"effort": effort, "format": {"type": "json_schema", "schema": schema}},
-        )
-        if self.model in _FALLBACK_MODELS:
-            # If a safety classifier declines, the API retries on Anthropic's recommended fallback model
-            params.update(betas=[_FALLBACK_BETA], fallbacks="default")
         try:
-            response = self.client.beta.messages.create(**params)
-        except anthropic.AuthenticationError as exc:
-            raise AIUnavailable(f"Anthropic credential rejected: {exc.message}") from exc
-        except anthropic.BadRequestError as exc:
-            raise AIUnavailable(f"request rejected: {exc.message}") from exc
-        except anthropic.RateLimitError as exc:
-            raise AIUnavailable("rate limited by the Anthropic API") from exc
-        except anthropic.APIStatusError as exc:
-            raise AIUnavailable(f"Anthropic API error {exc.status_code}") from exc
-        except anthropic.APIConnectionError as exc:
-            raise AIUnavailable("couldn't reach the Anthropic API") from exc
-        self.calls += 1
-        usage = getattr(response, "usage", None)
-        if usage is not None:
-            self.input_tokens += int(getattr(usage, "input_tokens", 0) or 0)
-            self.output_tokens += int(getattr(usage, "output_tokens", 0) or 0)
-        if response.stop_reason == "refusal":
-            raise AIUnavailable("the model declined this request")
-        if response.stop_reason == "max_tokens":
-            raise AIUnavailable("the answer was cut off (max_tokens)")
-        text = next((b.text for b in response.content if getattr(b, "type", "") == "text"), "")
-        try:
-            data = json.loads(text)
-        except json.JSONDecodeError as exc:
-            raise AIUnavailable("the answer wasn't valid JSON") from exc
-        self.cache[key] = data
-        return data
+            answer = self.provider.ask(task, system, user, schema, effort, max_tokens)
+        finally:
+            self.calls += 1
+        self.input_tokens += answer.input_tokens
+        self.output_tokens += answer.output_tokens
+        self.cache[key] = answer.data
+        return answer.data
 
     # -- tasks ------------------------------------------------------------------------------------------------
     def triage(self, ev: RawEvent) -> Judgement:

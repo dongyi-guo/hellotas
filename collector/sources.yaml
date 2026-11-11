@@ -12,7 +12,7 @@
 #   acs      the Australian Computer Society's event list (the JSON file behind its events page)
 #   aisa     AISA branch pages (plain HTML, parsed directly)
 #   html     pages with no event data: follows the registration link (Humanitix, Eventbrite, ...) when there is
-#            one, otherwise asks the AI to read the page (needs ANTHROPIC_API_KEY)
+#            one, otherwise asks the AI to read the page (only when the AI is switched on, see ai: below)
 #   ical     an iCalendar (.ics) feed
 #
 # trust: high (local ICT community, almost everything fits), medium (national body, needs filtering) or low.
@@ -32,15 +32,36 @@ delay_seconds: 1.5
 default_image: "/images/home/step-1-forest-building.jpg"
 
 ai:
-  # Off: the team isn't paying for an AI service. Relevance and the English text come from keyword rules
-  # (hellotas_collector/rules.py), and Chinese and Nepali can be added by hand in the pull request.
-  # To switch it on later: set enabled to true and add the ANTHROPIC_API_KEY repository secret. Claude would then
-  # judge relevance, write the entry in English, Chinese and Nepali, and read pages that have no event data.
+  # Optional, and off: nobody is paying for an AI service yet. Until it is switched on, relevance and the English text
+  # come from keyword rules (hellotas_collector/rules.py), and Chinese and Nepali can be added by hand in the pull
+  # request. Switched on, the AI judges relevance, writes each entry in English, Chinese and Nepali, and reads pages
+  # that have no event data. It needs two things; the run summary says when one is missing:
+  #   1. enabled: true (below)
+  #   2. the chosen provider's key as a repository secret (Settings > Secrets and variables > Actions):
+  #        anthropic          (Claude)                       ANTHROPIC_API_KEY
+  #        openai             (ChatGPT models)               OPENAI_API_KEY
+  #        gemini             (Google Gemini)                GEMINI_API_KEY
+  #        openai-compatible  (OpenRouter, DeepSeek, Groq,   AI_API_KEY, plus base_url below
+  #                            Mistral and others)
+  # A key on its own does nothing while enabled is false.
   enabled: false
-  # The settings below matter only when enabled. COLLECTOR_MODEL overrides the model, e.g. claude-haiku-5-5.
-  model: "claude-opus-5-5"
+  provider: "anthropic"
+  # The model for each provider. Providers rename and retire models: check the provider's model list and change the
+  # name here if needed. The COLLECTOR_MODEL repository variable overrides it without editing this file.
+  models:
+    anthropic: "claude-opus-5-5"
+    openai: "gpt-5-mini"
+    gemini: "gemini-2.5-flash"
+    openai-compatible: ""        # e.g. "deepseek-chat" (DeepSeek) or "openai/gpt-5-mini" (OpenRouter)
+  # openai-compatible only: the service's API address, e.g. https://openrouter.ai/api/v1, https://api.deepseek.com,
+  # https://api.groq.com/openai/v1 or https://api.mistral.ai/v1
+  base_url: ""
+  # How hard the model thinks: low for judging relevance, medium for writing. Used by anthropic and openai; with
+  # openai, set send_effort to false if the model rejects it (models without reasoning, such as gpt-4.1).
   triage_effort: "low"
   write_effort: "medium"
+  send_effort: true
+  # How many hand-written entries the AI copies the tone and translations from
   style_examples: 6
 
 sources:
