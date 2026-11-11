@@ -167,7 +167,24 @@
       {{ end }}
     </div>
   </section>
+  
+  {{/* Stories moved from the Stories page for ICT Showcase Semester 2 */}}
+  {{ if eq .RelPermalink "/hellotas/events/2026/ict-showcase-semester-2/" }}
+    {{ $storyIDs := slice "ashik-cyberquiz-2026" "hosna-showcase-award-2026" "rifat-tasmanian-leaders-2026" "pial-olinda-ai-2026" "john-island-intelligence-2026" "chris-ict-showcase-2026" "yu-ict-expo-2025" }}
+    <section class="container event-section" id="showcase-stories">
+      <h2 class="section-heading">ICT Showcase Stories</h2>
+      <div class="section-divider"></div>
 
+      <div class="stories-grid">
+        {{ range hugo.Data.stories.items }}
+          {{ if in $storyIDs .id }}
+            {{ partial "story-card.html" (dict "item" . "heading" "h3") }}
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+  
   {{ $booth := slice }}
   {{ with .Params.image }}{{ $booth = $booth | append . }}{{ end }}
   {{ with .Params.gallery }}{{ $booth = $booth | append . }}{{ end }}

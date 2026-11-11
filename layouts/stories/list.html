@@ -18,31 +18,12 @@
     {{ end }}
     <span class="year-stats" data-stories-count aria-live="polite"></span>
   </div>
-
-  <div class="stories-grid">
-    {{ range hugo.Data.stories.items }}
-    {{ $name := .name }}
-    {{ with .localName }}{{ with index . $lang }}{{ $name = . }}{{ end }}{{ end }}
-    <article class="story-card" data-year="{{ .year }}">
-      <div class="story-image">
-        <img src="{{ .image | relURL }}" alt="{{ $name }}" loading="lazy" width="400" height="275"{{ with .imagePosition }} style="object-position: {{ . | safeCSS }}"{{ end }}>
-      </div>
-      <div class="story-body">
-        <div class="story-tags">
-          <span class="tag tag-normal">{{ .year }}</span>
-          <span class="tag tag-free">{{ i18n .tagKey }}</span>
-        </div>
-        <h2>{{ $name }}</h2>
-        <p class="story-role">{{ index .title $lang | default .title.en }}</p>
-        <blockquote class="story-quote">“{{ .quote }}”</blockquote>
-        <div class="story-foot">
-          <a class="story-link" href="{{ .url }}" target="_blank" rel="noopener">{{ i18n "storiesReadFull" }}</a>
-          <span class="story-source">{{ if eq .source "linkedin" }}LinkedIn{{ else }}{{ i18n "storiesSourceUtas" }}{{ end }}</span>
-        </div>
-      </div>
-    </article>
-    {{ end }}
-  </div>
+  
+<div class="stories-grid">
+  {{ range hugo.Data.stories.items }}
+    {{ partial "story-card.html" (dict "item" . "heading" "h2") }}
+  {{ end }}
+</div>
 
   <p class="stories-credit">{{ i18n "storiesCredit" }}</p>
 </section>

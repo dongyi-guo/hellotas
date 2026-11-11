@@ -28,6 +28,13 @@
   {{ end }}
 
   <div class="place-card-meta">
+    {{ if $p.eventsWidget }}
+    <div class="place-map utas-events-preview">
+      <h4>{{ i18n "utasEventsTitle" }}</h4>
+      <p>{{ i18n "utasEventsSnapshotNote" }}</p>
+      <a class="utas-events-cta" href="https://tusa.org.au/events/" target="_blank" rel="noopener">{{ i18n "utasEventsCta" }}</a>
+    </div>
+    {{ end }}
     {{ with $p.map }}
     <div class="place-map">
       {{ $iframe := printf `<iframe title="%s: %s" src="https://maps.google.com/maps?q=%s&z=%d&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>` (i18n "placeMapTitle") (i18n $p.titleKey) (.query | urlquery) (.zoom | default 15) }}

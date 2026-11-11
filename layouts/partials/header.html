@@ -1,15 +1,22 @@
 <header class="site-header">
   <nav class="nav">
-    <a href="{{ .Site.Home.RelPermalink }}" class="logo"><img src="{{ "images/brand/logo.svg" | relURL }}" alt="{{ i18n "siteName" }}" width="330" height="84"></a>
+    <a href="{{ .Site.Home.RelPermalink }}" class="logo">
+      <img src="{{ "images/brand/logo.svg" | relURL }}" alt="ICT Futures in Tasmania" width="397" height="84">
+    </a>
     {{- /* Menu links, defined once: shown inline on wide screens and in the menu panel on narrower ones */ -}}
-    {{- /* Site structure from issue #33, plus Happening (issue #7): Kickstart, Community and Volunteering are journey
-         steps 1–3, Industry Events is step 4. Each item: label key and page path. */ -}}
-    {{- $links := slice (dict "key" "home" "url" .Site.Home.RelPermalink "current" .IsHome) -}}
-    {{- range slice (slice "kickstart" "/journey/step-1") (slice "community" "/journey/step-2") (slice "volunteering" "/journey/step-3") (slice "industryEvents" "/events") (slice "stories" "/stories") (slice "funFitness" "/fun-fitness") (slice "happening" "/happening") -}}
+    {{- /* Issue #73 menu: Home, UTAS, Local Community, ICT Industry, Fun Time, Happening.
+         Local Community still points at the homepage feature section. ICT Industry now opens
+         the /events/ archive (the previous homepage #ict-industry anchor looked like a missing
+         Events page). Kickstart and Stories removed from nav (content pages kept). */ -}}
+    {{- $home := .Site.Home.RelPermalink -}}
+    {{- $links := slice (dict "key" "home" "url" $home "current" .IsHome) -}}
+    {{- $links = $links | append (dict "key" "utas" "url" ("utas/" | relLangURL) "current" (eq .Section "utas")) -}}
+    {{- $links = $links | append (dict "key" "localCommunity" "url" (printf "%s#tasmania-community" $home) "current" false) -}}
+    {{- $links = $links | append (dict "key" "ictIndustry" "url" ("events/" | relLangURL) "current" (eq .Section "events")) -}}
+    {{- range slice (slice "funTime" "/fun-fitness") (slice "happening" "/happening") -}}
       {{- $key := index . 0 -}}{{- $path := index . 1 -}}
       {{- $url := relURL (printf "%s/" (strings.TrimPrefix "/" $path)) -}}
       {{- with site.GetPage $path }}{{ $url = .RelPermalink }}{{ end -}}
-      {{- /* Current when this page is that page or below it (an event's own page highlights Industry Events) */ -}}
       {{- $links = $links | append (dict "key" $key "url" $url "current" (strings.HasPrefix $.RelPermalink $url)) -}}
     {{- end }}
     {{- /* The community pages (Noticeboard, account) need the community API. They go in the ☰ menu only: the inline
@@ -133,8 +140,6 @@
     {{- if site.Params.communityAPI }}
     <a href="{{ "account/" | relLangURL }}" class="nav-account-link" data-cm-account-label{{ if strings.HasPrefix .RelPermalink ("account/" | relLangURL) }} aria-current="page"{{ end }}>{{ i18n "cmSignIn" }}</a>
     {{- end }}
-  </div>
-    </div>
   </div>
   {{- /* Opened by a channel icon whose account isn't set up yet (data/channels.yaml); filled in by carousel.js */}}
   <dialog class="channel-dialog" aria-labelledby="channel-dialog-title">

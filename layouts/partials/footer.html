@@ -1,21 +1,21 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><img src="{{ "images/brand/logo.svg" | relURL }}" alt="{{ i18n "siteName" }}" width="330" height="84"></div>
-      <p>{{ i18n "footerTagline" }}</p>
+      <a href="{{ .Site.Home.RelPermalink }}" class="logo">
+        <img src="{{ "images/brand/logo.svg" | relURL }}" alt="ICT Futures in Tasmania" width="397" height="84">
+      </a>
     </div>
     <div class="footer-links">
       <div class="footer-col">
-        <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "home" }}</a>
-        <a href="{{ with .Site.GetPage "/journey/step-1" }}{{ .RelPermalink }}{{ else }}{{ relURL "journey/step-1/" }}{{ end }}">{{ i18n "kickstart" }}</a>
-        <a href="{{ with .Site.GetPage "/journey/step-2" }}{{ .RelPermalink }}{{ else }}{{ relURL "journey/step-2/" }}{{ end }}">{{ i18n "community" }}</a>
-        <a href="{{ with .Site.GetPage "/journey/step-3" }}{{ .RelPermalink }}{{ else }}{{ relURL "journey/step-3/" }}{{ end }}">{{ i18n "volunteering" }}</a>
+        {{- $home := .Site.Home.RelPermalink -}}
+        <a href="{{ $home }}">{{ i18n "home" }}</a>
+        <a href="{{ "utas/" | relLangURL }}">{{ i18n "utas" }}</a>
+        <a href="{{ printf "%s#tasmania-community" $home }}">{{ i18n "localCommunity" }}</a>
+        <a href="{{ printf "%s#ict-industry" $home }}">{{ i18n "ictIndustry" }}</a>
       </div>
       <div class="footer-col">
-        <a href="{{ with .Site.GetPage "/events" }}{{ .RelPermalink }}{{ else }}{{ relURL "events/" }}{{ end }}">{{ i18n "industryEvents" }}</a>
+        <a href="{{ with .Site.GetPage "/fun-fitness" }}{{ .RelPermalink }}{{ else }}{{ relURL "fun-fitness/" }}{{ end }}">{{ i18n "funTime" }}</a>
         <a href="{{ with .Site.GetPage "/happening" }}{{ .RelPermalink }}{{ else }}{{ relURL "happening/" }}{{ end }}">{{ i18n "happening" }}</a>
-        <a href="{{ with .Site.GetPage "/stories" }}{{ .RelPermalink }}{{ else }}{{ relURL "stories/" }}{{ end }}">{{ i18n "stories" }}</a>
-        <a href="{{ with .Site.GetPage "/fun-fitness" }}{{ .RelPermalink }}{{ else }}{{ relURL "fun-fitness/" }}{{ end }}">{{ i18n "funFitness" }}</a>
         {{- if site.Params.communityAPI }}
         <a href="{{ "noticeboard/" | relLangURL }}">{{ i18n "noticeboard" }}</a>
         <a href="{{ "suggest/" | relLangURL }}">{{ i18n "suggestEvent" }}</a>

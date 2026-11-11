@@ -42,7 +42,8 @@ items:
     source: utas
     url: https://www.utas.edu.au/about/news-and-stories/articles/2026/rising-star-win-caps-standout-night-at-tasict-awards
 
-  - year: 2026
+  - id: ashik-cyberquiz-2026
+    year: 2026
     name: MD Ashik Mahmud
     title: { en: "Master of IT student at UTAS", zh: "UTAS 信息技术硕士生" }
     tagKey: storyTagCyber
@@ -52,7 +53,8 @@ items:
     source: linkedin
     url: https://www.linkedin.com/posts/ashnrb_utas-universityoftasmania-schoolofict-ugcPost-7514208499711614976-d0bM/
 
-  - year: 2026
+  - id: hosna-showcase-award-2026
+    year: 2026
     name: Hosna Ara Begum
     title: { en: "Power BI & Data Analytics Consultant · Master of IT, UTAS", zh: "Power BI 与数据分析顾问 · UTAS 信息技术硕士" }
     tagKey: storyTagData
@@ -61,7 +63,8 @@ items:
     source: linkedin
     url: https://www.linkedin.com/posts/habegum_long-tiring-hardworking-of-6-persons-for-ugcPost-7513684086582878209-dObr/
 
-  - year: 2026
+  - id: rifat-tasmanian-leaders-2026
+    year: 2026
     name: MD Rifat Bin Yusuf
     title: { en: "Master of IT student at UTAS", zh: "UTAS 信息技术硕士生" }
     tagKey: storyTagSoftware
@@ -71,7 +74,8 @@ items:
     source: linkedin
     url: https://www.linkedin.com/posts/rifatyusuf_utas-ictexpo-tasmanianleaders-ugcPost-7514123551268974592-4axb/
 
-  - year: 2026
+  - id: pial-olinda-ai-2026
+    year: 2026
     name: Pial Hossain
     title: { en: "Student at University of Tasmania", zh: "塔斯马尼亚大学学生" }
     tagKey: storyTagAiDev
@@ -80,7 +84,8 @@ items:
     source: linkedin
     url: https://www.linkedin.com/posts/pial-hossain-5a05162b8_olindaai-utas-ictshowcase-ugcPost-7513241527721246720-XTt4/
 
-  - year: 2026
+  - id: john-island-intelligence-2026
+    year: 2026
     name: John Streat
     title: { en: "Final-year Bachelor of ICT (Data Science and AI) student", zh: "ICT 本科（数据科学与人工智能）毕业年级学生" }
     tagKey: storyTagDataAi
@@ -89,7 +94,8 @@ items:
     source: linkedin
     url: https://www.linkedin.com/posts/john-streat-7b35a12b8_universityoftasmania-sportstech-dataarchitecture-ugcPost-7514242664318373888-ft_L/
 
-  - year: 2026
+  - id: chris-ict-showcase-2026
+    year: 2026
     name: Chris Jackson
     title: { en: "State Sales Manager at Data#3", zh: "Data#3 州销售经理" }
     tagKey: storyTagIndustry
@@ -116,7 +122,8 @@ items:
     source: utas
     url: https://www.utas.edu.au/about/news-and-stories/articles/2025/from-facial-recognition-to-gen-ai-my-journey-in-building-tech-that-matters
 
-  - year: 2025
+  - id: yu-ict-expo-2025
+    year: 2025
     name: Yu Wang
     title: { en: "Master of IT and Systems student · now ICT Graduate at TasWater", zh: "信息技术与系统硕士生 · 现任 TasWater ICT 毕业生岗位" }
     tagKey: storyTagMobile

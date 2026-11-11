@@ -16,7 +16,18 @@ steps:
     anchor: step-4
     ctaPath: events/
 
-# Homepage graduate-stories section removed (issue #55); Stories page still uses data/stories.yaml.
+# Homepage "Stories: From Who Walked The Path" follows the current Figma
+# homepage frame: six UTAS News cards, in this order. Each name references
+# an existing data/stories.yaml entry (photo and wording reused as-is).
+# Do not add a seventh card here. ICT Showcase stories and the full Stories
+# listing stay on their own pages and still use the complete yaml.
+stories:
+  - name: Luoyan Wei
+  - name: Rakhitha Dassanayake
+  - name: Bronson Billing
+  - name: Zoe Zhao
+  - name: Josh Cooper
+  - name: Tristan Richards
 
 # Photo credits shown in the "Sources & Acknowledgements" block (issue #20).
 # url is optional; items without a url render as plain text.

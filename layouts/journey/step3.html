@@ -12,7 +12,7 @@
 
   <div class="container">
     <div class="journey-main">
-      {{ range hugo.Data.journey.step3.sections }}
+      {{ range hugo.Data.community.sections }}
       <section class="journey-voice-section">
         <h2 class="journey-basics-title">{{ i18n .titleKey }}</h2>
         <div class="section-divider"></div>
@@ -23,6 +23,13 @@
         </div>
       </section>
       {{ end }}
+
+      <section class="journey-voice-section" id="tasmania-ict-industry">
+        <h2 class="journey-basics-title">{{ i18n "journeyStep3SectionIndustryTitle" }}</h2>
+        <div class="section-divider"></div>
+        <p class="journey-checklist-lead">{{ i18n "journeyStep3IndustryText" }}</p>
+        <a href="{{ "happening/" | relLangURL }}" class="btn-primary">{{ i18n "journeyStep3IndustryCta" }}</a>
+      </section>
 
       <section class="journey-life">
         <h2 class="journey-basics-title">{{ i18n "journeyStep3GalleryTitle" }}</h2>

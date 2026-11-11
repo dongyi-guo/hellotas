@@ -1,0 +1,40 @@
+{{- /* Shared story card. Expects .item from data/stories.yaml and optional .heading ("h2" or "h3"). */ -}}
+{{- $item := .item -}}
+{{- $lang := site.Language.Lang -}}
+{{- $heading := .heading | default "h2" -}}
+{{- $name := $item.name -}}
+{{- with $item.localName -}}
+  {{- with index . $lang -}}
+    {{- $name = . -}}
+  {{- end -}}
+{{- end -}}
+<article class="story-card" data-year="{{ $item.year }}">
+  <div class="story-image">
+    <img
+      src="{{ $item.image | relURL }}"
+      alt="{{ $name }}"
+      loading="lazy"
+      width="400"
+      height="275"
+      {{ with $item.imagePosition }}style="object-position: {{ . | safeCSS }}"{{ end }}>
+  </div>
+  <div class="story-body">
+    <div class="story-tags">
+      <span class="tag tag-normal">{{ $item.year }}</span>
+      <span class="tag tag-free">{{ i18n $item.tagKey }}</span>
+    </div>
+    {{ if eq $heading "h3" }}
+    <h3>{{ $name }}</h3>
+    {{ else }}
+    <h2>{{ $name }}</h2>
+    {{ end }}
+    <p class="story-role">{{ index $item.title $lang | default $item.title.en }}</p>
+    <blockquote class="story-quote">“{{ $item.quote }}”</blockquote>
+    <div class="story-foot">
+      <a class="story-link" href="{{ $item.url }}" target="_blank" rel="noopener">{{ i18n "storiesReadFull" }}</a>
+      <span class="story-source">
+        {{- if eq $item.source "linkedin" }}LinkedIn{{ else }}{{ i18n "storiesSourceUtas" }}{{ end -}}
+      </span>
+    </div>
+  </div>
+</article>

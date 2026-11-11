@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="page-journey-step page-utas">
+  <section class="hero-section"><div class="container">
+    <h1>{{ i18n "utasTitle" }}</h1>
+    <p class="hero-sub">{{ i18n "utasLead" }}</p>
+  </div></section>
+  {{ partial "passon-bar.html" (dict "page" . "message" (i18n "journeyStep3ShareLabel")) }}
+  <div class="container"><div class="journey-main">
+    <div class="place-list">
+    {{ $places := slice }}
+    {{ range hugo.Data.community.sections }}{{ range .places }}{{ $places = $places | append . }}{{ end }}{{ end }}
+    {{ range slice "tusa-clubs" "rubric" "utas-cybersecurity-club" "utas-programming-club" "utas-motorsport" "tusa-food-hub" "language-centre" }}
+      {{ $id := . }}
+      {{ range where $places "id" $id }}
+        {{ $place := . }}
+        {{ if eq $id "tusa-clubs" }}
+          {{ $place = merge $place (dict "eventsWidget" true "photos" (slice (dict "src" "images/journey/step-2/step-2-people-tusa.jpg" "altKey" "journeyStep2PeopleTusaImageAlt"))) }}
+        {{ else if eq $id "rubric" }}
+          {{ $place = merge $place (dict "photos" (slice (dict "src" "images/utas/rubric-official.png" "altKey" "utasRubricScreenshot"))) }}
+        {{ end }}
+        {{ partial "place-card.html" $place }}
+      {{ end }}
+    {{ end }}
+    </div>
+      <section class="journey-life">
+        <h2 class="journey-basics-title">{{ i18n "journeyStep3GalleryTitle" }}</h2>
+        <p class="journey-checklist-lead">{{ i18n "journeyStep3GalleryLead" }}</p>
+        <div class="life-gallery" data-lightbox>
+          {{ range hugo.Data.journey.step3.gallery }}
+          <figure>
+            <button type="button" class="place-photo" data-caption="{{ i18n .captionKey }}" aria-label="{{ i18n "placePhotoEnlarge" }}: {{ i18n .captionKey }}">
+              <img src="{{ .src | relURL }}" alt="{{ i18n .captionKey }}" loading="lazy" width="480" height="360">
+            </button>
+            <figcaption>{{ i18n .captionKey }}</figcaption>
+          </figure>
+          {{ end }}
+        </div>
+      </section>
+
+  </div></div>
+</div>
+{{ end }}

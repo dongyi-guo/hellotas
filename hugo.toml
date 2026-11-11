@@ -14,25 +14,25 @@ defaultContentLanguageInSubdir = false
   defaultTheme = "light"
 
 [params.homeInfoParams]
-  Title = "Tasmania Welcome"
+  Title = "ICT Futures in Tasmania"
   Content = "From Step 1 to the person you want to become."
 
 [languages.en]
   locale = "en-us"
   label = "English"
-  title = "Tasmania Welcome"
+  title = "ICT Futures in Tasmania"
   weight = 1
 
 [languages.zh]
   locale = "zh-cn"
   label = "简体中文"
-  title = "塔斯马尼亚欢迎"
+  title = "塔斯马尼亚 ICT Futures"
   weight = 2
 
 [languages.ne]
   locale = "ne-np"
   label = "नेपाली"
-  title = "तस्मानियामा स्वागत"
+  title = "ICT Futures in Tasmania"
   weight = 3
 
 # The journey steps live under /journey/ (Kickstart, Community, Volunteering), but the section has no page of its own:
