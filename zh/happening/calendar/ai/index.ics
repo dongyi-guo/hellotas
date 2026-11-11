@@ -11,7 +11,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:ai-in-your-job-search-webinar@hellotas
-DTSTAMP:20261111T082754Z
+DTSTAMP:20261111T083059Z
 DTSTART:20261029T010000Z
 DTEND:20261029T020000Z
 SUMMARY:求职中如何合乎道德、高效地使用AI
@@ -29,7 +29,7 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:telstra-iot-fest-2026@hellotas
-DTSTAMP:20261111T082754Z
+DTSTAMP:20261111T083059Z
 DTSTART;VALUE=DATE:20261109
 DTEND;VALUE=DATE:20261204
 SUMMARY:Telstra IoT Fest 2026 黑客松
@@ -46,7 +46,7 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:gdg-hobart-devfest-2026@hellotas
-DTSTAMP:20261111T082754Z
+DTSTAMP:20261111T083059Z
 DTSTART:20261119T061500Z
 DTEND:20261119T074500Z
 SUMMARY:GDG Hobart DevFest 2026：AI驱动开发与数字分析
@@ -64,7 +64,7 @@ TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
 UID:aisa-webinar-attackers-use-ai@hellotas
-DTSTAMP:20261111T082754Z
+DTSTAMP:20261111T083059Z
 DTSTART:20261125T010000Z
 DTEND:20261125T020000Z
 SUMMARY:AISA网络研讨会：当攻击者使用AI——防御者如何应
@@ -76,6 +76,25 @@ DESCRIPTION:SentinelOne的Brett Williams剖析犯罪团伙如何在攻击
 LOCATION:线上
 URL:https://www.aisa.org.au/Event.aspx?EventKey=OB281026
 CATEGORIES:cyber,ai
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+UID:acs-industry-insights-beyond-ai-hype-building@hellotas
+DTSTAMP:20261111T083059Z
+DTSTART:20270225T063000Z
+DTEND:20270225T073000Z
+SUMMARY:Industry Insights: Beyond the AI Hype - Building the AI-ready enter
+ prise
+DESCRIPTION:Join us for the first edition of the 2027 Industry Insights ser
+ ies featuring a captivating fireside chat with Richard Kendall\, Chief Dat
+ a & AI Officer of AGL.\n\nFree for ACS members · $25 for non-members\n\nh
+ ttps://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om00000sj
+ 2IEIAY
+LOCATION:线上
+URL:https://www.acs.org.au/cpd-education/event-detail.html?eventId=701Om000
+ 00sj2IEIAY
+CATEGORIES:ai,careers,data
 STATUS:CONFIRMED
 TRANSP:OPAQUE
 END:VEVENT
