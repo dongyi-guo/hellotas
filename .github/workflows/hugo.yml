@@ -32,7 +32,7 @@ jobs:
         env:
           # The community API's address (server/), e.g. https://api.example.org. Unset: those features stay hidden.
           HUGO_PARAMS_COMMUNITYAPI: ${{ vars.COMMUNITY_API_URL }}
-        run: hugo --minify --baseURL "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+        run: hugo --minify --baseURL "${{ vars.CUSTOM_DOMAIN && format('https://{0}/', vars.CUSTOM_DOMAIN) || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}"
 
 
       - name: Keep the events list from the last deploy
