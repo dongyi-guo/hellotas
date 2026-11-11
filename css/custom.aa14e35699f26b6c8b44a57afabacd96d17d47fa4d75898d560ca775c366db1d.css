@@ -65,11 +65,12 @@ img { max-width: 100%; display: block; }
 .nav {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
-  height: 72px;
+  padding: 12px 40px;
+  min-height: 88px;
+  height: auto;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 24px;
 }
 
 .logo {
@@ -86,9 +87,11 @@ img { max-width: 100%; display: block; }
 
 .nav-links {
   display: flex;
-  gap: 20px;
-  font-size: 15px;
-  color: var(--text-dark);
+  align-items: center;
+  gap: 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
   flex: 1;
   min-width: 0;
 }
@@ -109,6 +112,11 @@ img { max-width: 100%; display: block; }
   flex: none;
   overflow: visible;
 }
+
+/* Homepage/header Happening mark: Figma shows a simple red live dot, not the pulsing rings. */
+.nav-live .live-ring { display: none; }
+.nav-live .live-icon { width: 10px; height: 10px; }
+.nav-live .live-dot { fill: var(--brand); }
 
 .live-dot { fill: var(--brand); }
 
@@ -158,9 +166,9 @@ img { max-width: 100%; display: block; }
 
 .lang-picker summary,
 .channel-more {
-  height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  height: 40px;
+  border: 1px solid #E2E8F0;
+  border-radius: 999px;
   background: #FFFFFF;
 }
 
@@ -450,8 +458,9 @@ html:has(.channel-dialog[open]) { overflow: hidden; }
 
 /* The pill's padding is cancelled by the negative margin, so the inline row keeps its width */
 .nav-links a {
-  padding: 7px 8px;
-  margin: 0 -8px;
+  padding: 8px 16px;
+  margin: 0;
+  border-radius: 999px;
 }
 
 @media (hover: hover) {
@@ -464,10 +473,10 @@ html:has(.channel-dialog[open]) { overflow: hidden; }
 
 .nav-links a[aria-current="page"],
 .mobile-menu a[aria-current="page"] {
-  background: linear-gradient(120deg, var(--brand) 0%, var(--brand-dark) 100%);
+  background: var(--brand);
   color: #FFFFFF;
   font-weight: 600;
-  box-shadow: 0 6px 16px rgba(200, 16, 46, 0.25);
+  box-shadow: none;
 }
 
 /* Wide screens: one red pill behind the menu words, placed and slid by the script in header.html.
@@ -480,9 +489,9 @@ html:has(.channel-dialog[open]) { overflow: hidden; }
   top: 0;
   left: 0;
   z-index: 0;
-  border-radius: 12px;
-  background: linear-gradient(120deg, var(--brand) 0%, var(--brand-dark) 100%);
-  box-shadow: 0 6px 16px rgba(200, 16, 46, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: var(--brand);
+  box-shadow: none;
   pointer-events: none;
 }
 
@@ -2054,20 +2063,8 @@ img.author-avatar {
   flex-wrap: wrap;
 }
 
-.footer-logo {
-  margin-bottom: 14px;
-}
-
-.footer-logo img {
-  display: block;
-  height: 48px;
-  width: auto;
-}
-
-.footer-brand p {
-  font-size: 14px;
-  color: var(--text-mid);
-  max-width: 380px;
+.site-footer .logo {
+  margin: 0 0 8px;
 }
 
 .footer-links {
@@ -2105,30 +2102,48 @@ img.author-avatar {
 
 .home-hero {
   background: #FFFFFF;
-  padding: 56px 0 64px;
+  padding: 48px 0 56px;
 }
 
 .home-hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
   align-items: center;
 }
 
+.home-hero-inner--solo {
+  grid-template-columns: 1fr;
+  max-width: 920px;
+}
+
+.home-hero-inner--solo .home-hero-sub {
+  max-width: 760px;
+  font-size: 20px;
+  margin-bottom: 28px;
+}
+
 .home-hero-copy h1 {
-  font-size: 46px;
+  font-size: 52px;
   font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.12;
+  letter-spacing: -1.2px;
+  line-height: 1.08;
   margin-bottom: 20px;
   color: var(--text-dark);
+}
+
+.home-hero-highlight {
+  display: block;
+  color: var(--brand);
+  white-space: nowrap;
 }
 
 .home-hero-sub {
   font-size: 18px;
   color: #475569;
-  margin-bottom: 12px;
+  margin-bottom: 28px;
   max-width: 520px;
+  line-height: 1.55;
 }
 
 .home-hero-note {
@@ -2144,32 +2159,38 @@ img.author-avatar {
 }
 
 .home-hero-media {
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
   background: var(--brand-light);
-  min-height: 320px;
+  aspect-ratio: 3 / 2;
+  min-height: 0;
 }
 
 .home-hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  min-height: 320px;
+  object-position: center 42%;
 }
 
 .home-trust-strip {
-  background: var(--tint-surface);
+  background: #FFF1F3;
   border-radius: 16px;
-  padding: 22px 28px;
+  padding: 18px 28px;
   margin: 8px 0 56px;
-  box-shadow: var(--tint-shadow);
-  font-size: 15px;
-  color: var(--text-dark);
+  box-shadow: none;
+  font-size: 16px;
+  color: #475569;
   line-height: 1.55;
 }
 
 .home-trust-strip strong {
   color: var(--brand);
+}
+
+.home-trust-strip a {
+  color: var(--brand);
+  font-weight: 700;
 }
 
 .home-section-title {
@@ -2253,43 +2274,190 @@ img.author-avatar {
   margin-bottom: 16px;
 }
 
-.home-career-path {
-  padding: 56px 0 72px;
+.home-communities {
+  background: #FFFFFF;
+  padding: 8px 0 0;
+}
+
+.home-feature {
+  padding: 56px 0;
+}
+
+.home-feature:nth-child(odd) {
   background: #FFFFFF;
 }
 
-.home-career-grid {
+.home-feature:nth-child(even) {
+  background: #FAFAFA;
+}
+
+.home-feature-inner {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 8px;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
 }
 
-.home-career-card {
-  background: var(--tint-surface);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: var(--tint-shadow);
-}
-
-.home-career-card h3 {
-  font-size: 20px;
+.home-feature-copy h2 {
+  font-size: 48px;
   font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+
+.home-feature-copy p {
+  font-size: 20px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  max-width: 540px;
+}
+
+.home-feature-copy p a,
+.home-feature-copy p strong {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.home-feature-copy p a:hover {
   color: var(--brand);
+  text-decoration: underline;
+}
+
+.home-feature-link {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 8px 0 22px;
+}
+
+.home-feature-link:hover {
+  color: var(--brand);
+}
+
+.home-feature-orgs,
+.home-feature-orgs a {
+  color: var(--text-dark);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home-feature-orgs a:hover {
+  color: var(--brand);
+}
+
+.home-feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.home-feature-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  padding: 16px 28px;
+  background: var(--brand);
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.home-feature-cta:hover { background: var(--brand-dark); }
+
+.home-feature-media {
+  border-radius: 20px;
+  overflow: hidden;
+  background: #E8F0E8;
+  min-height: 280px;
+  /* Figma homepage feature frames are ~466x416 (≈1.12), not 4:3. */
+  aspect-ratio: 466 / 416;
+}
+
+.home-feature--flip .home-feature-media {
+  background: #F3E6D4;
+}
+
+.home-feature#ict-industry .home-feature-media {
+  background: #E4EAF4;
+}
+
+.home-feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 280px;
+}
+
+/* Per-block crop of the existing source photos (do not replace assets).
+   Positions come from matching the Figma feature-frame crops. */
+.home-feature#utas-campus .home-feature-media img {
+  /* Portrait booth: keep the people and the tablecloth wordmark/crest. */
+  object-position: 50% 38.5%;
+}
+
+.home-feature#tasmania-community .home-feature-media img {
+  /* Source is 4:3; a 1.12 frame alone still shows too much of the room. */
+  object-position: 55.4% 50%;
+  transform: scale(1.22);
+  transform-origin: 50.1% 57.8%;
+}
+
+.home-feature#ict-industry .home-feature-media img {
+  object-position: 50% 50%;
+}
+
+/* Homepage stories (Figma frame: six UTAS News cards from data/stories.yaml via homepage.stories) */
+.home-stories {
+  background: var(--brand-light);
+  padding: 64px 0 72px;
+}
+
+.home-stories #home-stories-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
   margin-bottom: 12px;
-  line-height: 1.3;
 }
 
-.home-career-card p {
+.home-stories-sub {
+  font-size: 16px;
+  color: var(--text-mid);
+  max-width: 720px;
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+
+.home-stories-motto {
   font-size: 15px;
-  color: #334155;
-  line-height: 1.65;
-  margin: 0;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--brand);
+  margin: 0 0 32px;
 }
 
-/* The fifth card spans the whole row; same filled pink and shadow as the others */
-.home-career-card--spotlight {
-  grid-column: 1 / -1;
+@media (max-width: 900px) {
+  .home-stories { padding: 48px 0 56px; }
+  .home-stories #home-stories-title { font-size: 32px; }
+}
+
+@media (max-width: 560px) {
+  .home-stories #home-stories-title { font-size: 28px; }
 }
 
 /* Stories page (issue #36) */
@@ -2355,7 +2523,8 @@ img.author-avatar {
   margin-bottom: 12px;
 }
 
-.story-body h2 {
+.story-body h2,
+.story-body h3 {
   font-size: 19px;
   font-weight: 800;
   color: var(--text-dark);
@@ -2515,6 +2684,7 @@ img.author-avatar {
 }
 
 @media (max-width: 1000px) {
+  .home-hero-highlight { white-space: normal; }
   .home-hero-inner {
     grid-template-columns: 1fr;
   }
@@ -2527,14 +2697,21 @@ img.author-avatar {
   .home-step-body {
     grid-template-columns: minmax(120px, 160px) 1fr;
   }
-  .home-career-grid {
+  .home-feature-inner {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .home-feature--flip .home-feature-media {
+    order: -1;
+  }
+  .home-feature-copy h2 {
+    font-size: 32px;
   }
 }
 
 @media (max-width: 768px) {
   .home-hero-copy h1 {
-    font-size: 32px;
+    font-size: 36px;
   }
   .home-section-title {
     font-size: 28px;
@@ -3483,6 +3660,10 @@ html:has(.lightbox[open]) { overflow: hidden; }
 }
 
 .hp-btn-outline:hover { background: var(--brand-light); }
+
+/* Link from Happening (live calendar) to the /events/ archive. */
+.hp-archive-cta { margin-top: 16px; }
+.hero-section .hp-archive-cta .hp-btn-outline { display: inline-flex; }
 .hp-btn-outline[hidden] { display: none; }
 
 /* When an event starts (assets/js/happening.js): a flip-clock countdown, "Happening Now" with the live dot,
@@ -4817,3 +4998,28 @@ button[aria-busy="true"] { opacity: 0.6; cursor: progress; }
 .home-community-card span { color: var(--text-mid); font-size: 14px; }
 .home-community-card:hover { box-shadow: var(--tint-shadow-hover); }
 .home-community-card:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+@media (max-width: 520px) {
+  .home-feature-media,
+  .home-feature-media img {
+    min-height: 0;
+    min-width: 0;
+  }
+}
+
+.utas-events-preview p { font-size: 14px; color: var(--text-mid); margin: 12px 0 16px; max-width: 42em; }
+.utas-events-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  background: var(--brand);
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.utas-events-cta:hover { background: var(--brand-dark); color: #FFFFFF; }
+
