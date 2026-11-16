@@ -20,15 +20,54 @@ sections:
           tags:
             - { key: tagStudentLed, class: tag-type }
           textKey: journeyStep3TusaText
-          photos:
-            - { src: images/utas/tusa-mini-cs-day.jpg, altKey: utasTusaPhoto1Alt }
-            - { src: images/utas/tusa-oweek-sandy-bay.jpg, altKey: utasTusaPhoto2Alt }
-            - { src: images/utas/tusa-clubs-stalls.jpg, altKey: utasTusaPhoto3Alt }
-            - { src: images/utas/tusa-banner-cs-day.jpg, altKey: utasTusaPhoto4Alt }
-            - { src: images/utas/tusa-banner-mini-cs-day.jpg, altKey: utasTusaPhoto5Alt }
-            - { src: images/utas/tusa-banner-riawunna.jpg, altKey: utasTusaPhoto6Alt }
-            - { src: images/utas/tusa-banner-grounded.jpg, altKey: utasTusaPhoto7Alt }
-            - { src: images/utas/tusa-banner-awards-night.jpg, altKey: utasTusaPhoto8Alt }
+          # Four TUSA events from 2026 as samples, each with its photos (layouts/partials/tusa-showcase.html).
+          #   date     the day it was held (the tab shows the month)
+          #   photos   a folder under static/images; every .jpg in it is shown, in file-name order
+          #   credit   who took the photos; gallery links to their full album
+          showcase:
+            - id: cs-day
+              date: "2026-02-25"
+              titleKey: tusaCsDayTitle
+              tabKey: tusaCsDayTab
+              textKey: tusaCsDayText
+              whenKey: tusaCsDayWhen
+              whereKey: tusaCsDayWhere
+              whoKey: tusaCsDayWho
+              photos: images/utas/tusa/cs-day
+              credit: Toby Rudov Media
+              gallery: "https://galleries.tobyrudovmedia.com/clubsandsocietiesday2026/"
+            - id: grounded
+              date: "2026-06-09"
+              titleKey: tusaGroundedTitle
+              tabKey: tusaGroundedTab
+              textKey: tusaGroundedText
+              whenKey: tusaGroundedWhen
+              whereKey: tusaGroundedWhere
+              whoKey: tusaGroundedWho
+              photos: images/utas/tusa/grounded
+              credit: Toby Rudov Media
+              gallery: "https://galleries.tobyrudovmedia.com/grounded/"
+            - id: mini-cs-day
+              date: "2026-07-09"
+              titleKey: tusaMiniCsTitle
+              tabKey: tusaMiniCsTab
+              textKey: tusaMiniCsText
+              whenKey: tusaMiniCsWhen
+              whereKey: tusaMiniCsWhere
+              whoKey: tusaMiniCsWho
+              photos: images/utas/tusa/mini-cs-day
+              credit: TUSA
+            - id: riawunna
+              date: "2026-10-08"
+              titleKey: tusaRiawunnaTitle
+              tabKey: tusaRiawunnaTab
+              textKey: tusaRiawunnaText
+              whenKey: tusaRiawunnaWhen
+              whereKey: tusaRiawunnaWhere
+              whoKey: tusaRiawunnaWho
+              photos: images/utas/tusa/riawunna
+              credit: Toby Rudov Media
+              gallery: "https://galleries.tobyrudovmedia.com/35yearsofriawunna/"
           calendar: tusa
           details:
             - { labelKey: journeyStep2WhenLabel, valueKey: utasTusaWhen }

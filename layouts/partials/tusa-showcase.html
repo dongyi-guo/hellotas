@@ -1,0 +1,83 @@
+{{- /* TUSA Clubs & Societies tile (UTAS page): four TUSA events from 2026 as samples of what the year looks like.
+     Context: the place's showcase list from data/community.yaml.
+     Each event gets a tab (cover photo, name, month) and a panel: what it was, when / where / who, and a strip of
+     its photos that scrolls sideways (initRail) and opens in the photo viewer ([data-lightbox], one viewer per event).
+     The photos are every .jpg in the event's folder under static/images, in file-name order; Hugo makes WebP copies
+     at the size the strip shows them (partials/img.html), and the viewer opens the 1400px original.
+     Without JavaScript the tabs stay hidden and every event is shown, one after another; initShowcase in
+     carousel.js turns them into tabs. */ -}}
+{{- $months := split (i18n "happeningMonthsShort") "," -}}
+{{- $events := slice -}}
+{{- range . -}}
+  {{- $photos := sort (resources.Match (printf "%s/*.jpg" .photos)) "Name" -}}
+  {{- if not $photos }}{{ errorf "tusa-showcase: no photos in %s" .photos }}{{ end -}}
+  {{- $events = $events | append (dict "e" . "photos" $photos) -}}
+{{- end }}
+<section class="tusa-show" data-showcase aria-labelledby="tusa-show-title">
+  <div class="tusa-show-head">
+    <h4 id="tusa-show-title">{{ i18n "tusaShowTitle" }}</h4>
+    <p>{{ i18n "tusaShowLead" }}</p>
+  </div>
+
+  <div class="tusa-tabs" role="tablist" aria-label="{{ i18n "tusaShowTabsLabel" }}" hidden>
+    {{- range $i, $ev := $events }}
+    {{- $e := $ev.e }}
+    {{- $t := time $e.date }}
+    {{- $cover := partial "img.html" (dict "src" (index $ev.photos 0).Name "width" 160) }}
+    <button type="button" class="tusa-tab" role="tab" id="tusa-tab-{{ $e.id }}" aria-controls="tusa-panel-{{ $e.id }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"{{ if ne $i 0 }} tabindex="-1"{{ end }}>
+      <img class="tusa-tab-cover" src="{{ $cover.src }}"{{ with $cover.srcset }} srcset="{{ . }}"{{ end }} alt="" width="64" height="64" decoding="async">
+      <span class="tusa-tab-text">
+        <span class="tusa-tab-name">{{ i18n $e.tabKey }}</span>
+        <span class="tusa-tab-date">{{ replace (replace (i18n "tusaShowTabDate") "{month}" (index $months (sub (int $t.Month) 1))) "{year}" (string $t.Year) }}</span>
+      </span>
+    </button>
+    {{- end }}
+  </div>
+
+  {{- range $i, $ev := $events }}
+  {{- $e := $ev.e }}
+  {{- $n := len $ev.photos }}
+  {{- $title := i18n $e.titleKey }}
+  <div class="tusa-panel" id="tusa-panel-{{ $e.id }}" role="tabpanel" aria-labelledby="tusa-tab-{{ $e.id }}" tabindex="0">
+    <div class="tusa-panel-info">
+      <div class="tusa-panel-intro">
+        <h5>{{ $title }}</h5>
+        <p>{{ i18n $e.textKey }}</p>
+      </div>
+      <dl class="tusa-facts">
+        <div><dt>{{ i18n "journeyStep2WhenLabel" | replaceRE `[:：]\s*$` "" }}</dt><dd>{{ i18n $e.whenKey }}</dd></div>
+        <div><dt>{{ i18n "journeyStep2WhereLabel" | replaceRE `[:：]\s*$` "" }}</dt><dd>{{ i18n $e.whereKey }}</dd></div>
+        <div><dt>{{ i18n "journeyStep3WhoLabel" | replaceRE `[:：]\s*$` "" }}</dt><dd>{{ i18n $e.whoKey }}</dd></div>
+      </dl>
+    </div>
+
+    <div class="tusa-reel" data-rail>
+      <div class="rail-nav" hidden>
+        <button type="button" class="rail-btn rail-prev" aria-label="{{ i18n "railPrev" }}"><span aria-hidden="true">‹</span></button>
+        <button type="button" class="rail-btn rail-next" aria-label="{{ i18n "railNext" }}"><span aria-hidden="true">›</span></button>
+      </div>
+      <ul class="rail-track tusa-reel-track" data-lightbox aria-label="{{ $title }}: {{ replace (i18n "tusaShowPhotos") "{n}" (string $n) }}">
+        {{- range $j, $ph := $ev.photos }}
+        {{- /* Shown 300px tall, so each photo is fetched at the width that height gives it */}}
+        {{- $w := int (math.Round (div (mul 300.0 $ph.Width) $ph.Height)) }}
+        {{- $img := partial "img.html" (dict "src" $ph.Name "width" $w) }}
+        {{- $alt := replace (replace (replace (i18n "tusaShowPhotoAlt") "{event}" $title) "{i}" (string (add $j 1))) "{n}" (string $n) }}
+        <li>
+          <button type="button" class="tusa-photo" data-caption="{{ $title }}"{{ with $e.gallery }} data-source="{{ . }}"{{ end }} aria-label="{{ i18n "placePhotoEnlarge" }}: {{ $alt }}">
+            <img src="{{ $img.src }}"{{ with $img.srcset }} srcset="{{ . }}"{{ end }} data-full="{{ $img.full }}" alt="{{ $alt }}" width="{{ $img.width }}" height="{{ $img.height }}" loading="lazy" decoding="async">
+          </button>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+
+    <p class="tusa-credit">
+      <span>{{ replace (i18n "tusaShowPhotos") "{n}" (string $n) }}</span>
+      <span>{{ replace (i18n "tusaShowCredit") "{name}" $e.credit }}</span>
+      {{- with $e.gallery }}
+      <a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "tusaShowGallery" }} ↗</a>
+      {{- end }}
+    </p>
+  </div>
+  {{- end }}
+</section>

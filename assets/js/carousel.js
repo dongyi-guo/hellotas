@@ -1,4 +1,4 @@
-// Site scripts: mobile menu, image carousels, LinkedIn reader view, events filter and search, event sub-bar, copy-link buttons,
+// Site scripts: mobile menu, image carousels, the TUSA event tabs, LinkedIn reader view, events filter and search, event sub-bar, copy-link buttons,
 // the photo viewer, sliding toggle pills and animated in-page changes.
 // Sliding is plain CSS scroll-snap, so swiping and scrolling still work if this file fails to load.
 (function () {
@@ -889,7 +889,50 @@
     update();
   }
 
+  // TUSA tile on the UTAS page (partials/tusa-showcase.html): the event tabs show one event at a time; ←/→, Home
+  // and End move between them. Without this script the tabs stay hidden and every event shows, one after another.
+  function initShowcase(root) {
+    var list = root.querySelector('[role="tablist"]');
+    if (!list) return;
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (tab) { return document.getElementById(tab.getAttribute('aria-controls')); });
+    var index = 0;
+
+    function select(i) {
+      tabs.forEach(function (tab, j) {
+        var on = j === i;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      window.dispatchEvent(new Event('resize')); // the strip that just appeared measures itself (initRail)
+    }
+
+    function show(i, focus) {
+      i = (i + tabs.length) % tabs.length;
+      if (i === index) return;
+      index = i;
+      if (focus) tabs[i].focus();
+      transition(function () { select(i); });
+    }
+
+    tabs.forEach(function (tab, j) {
+      tab.addEventListener('click', function () { show(j); });
+      tab.addEventListener('keydown', function (e) {
+        var to = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 }[e.key];
+        if (to === undefined) return;
+        e.preventDefault();
+        show(to, true);
+      });
+    });
+
+    list.hidden = false;
+    root.classList.add('is-ready');
+    select(0);
+  }
+
   document.querySelectorAll('.nav-toggle').forEach(initMobileMenu);
+  document.querySelectorAll('[data-showcase]').forEach(initShowcase);
   document.querySelectorAll('[data-rail]').forEach(initRail);
   document.querySelectorAll('[data-deck-static]').forEach(function (el) {
     new Deck(el, { prev: el.dataset.labelPrev, next: el.dataset.labelNext, pause: el.dataset.labelPause, play: el.dataset.labelPlay }).refresh();

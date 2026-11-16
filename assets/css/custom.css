@@ -4639,6 +4639,99 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .place-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 }
 
+/* ===== TUSA tile on the UTAS page: four sample events, each with a strip of photos (partials/tusa-showcase.html) ===== */
+.tusa-show { margin: 0 0 28px; padding: 24px; border-radius: 18px; background: var(--tint-surface); box-shadow: var(--tint-shadow-sm); }
+.tusa-show-head h4 { font-size: 1.15rem; font-weight: 800; color: var(--text-dark); }
+.tusa-show-head p { margin-top: 4px; color: var(--text-mid); font-size: 14px; }
+
+.tusa-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.tusa-tabs[hidden] { display: none; }
+.tusa-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 8px 14px 8px 8px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--tint-shadow-sm);
+  font: inherit;
+  text-align: left;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.tusa-tab-cover { flex: none; width: 56px; height: 56px; border-radius: 10px; object-fit: cover; background: #E2E8F0; }
+.tusa-tab-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tusa-tab-name { font-size: 15px; font-weight: 800; line-height: 1.25; }
+.tusa-tab-date { font-size: 13px; color: var(--text-mid); }
+.tusa-tab[aria-selected="true"] { background: var(--brand); color: #FFFFFF; box-shadow: 0 6px 16px rgba(200, 16, 46, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+.tusa-tab[aria-selected="true"] .tusa-tab-date { color: rgba(255, 255, 255, 0.88); }
+.tusa-tab:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+@media (hover: hover) {
+  .tusa-tab[aria-selected="false"]:hover { transform: translateY(-1px); box-shadow: var(--tint-shadow); }
+}
+
+.tusa-panel { margin-top: 22px; }
+.tusa-panel[hidden] { display: none; }
+.tusa-panel:focus-visible { outline: 3px solid var(--brand); outline-offset: 6px; border-radius: 12px; }
+/* Without the script every event shows; a line between them */
+.tusa-show:not(.is-ready) .tusa-panel + .tusa-panel { padding-top: 22px; border-top: 1px solid rgba(200, 16, 46, 0.14); }
+.tusa-panel-info { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.tusa-panel-intro h5 { font-size: 1.25rem; font-weight: 800; line-height: 1.3; color: var(--text-dark); }
+.tusa-panel-intro p { margin-top: 8px; color: var(--text-mid); line-height: 1.6; }
+.tusa-facts { display: grid; gap: 10px; padding: 14px 16px; border-radius: 14px; background: var(--card); box-shadow: var(--tint-shadow-sm); }
+.tusa-facts dt { font-size: 12px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--brand); }
+.tusa-facts dd { margin: 2px 0 0; font-size: 14px; line-height: 1.45; color: var(--text-dark); }
+
+.tusa-reel { position: relative; margin-top: 18px; }
+.tusa-reel-track {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.tusa-reel-track::-webkit-scrollbar { display: none; }
+.tusa-reel-track li { flex: none; height: 300px; scroll-snap-align: start; }
+.tusa-photo { display: block; height: 100%; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: #E2E8F0; cursor: zoom-in; }
+.tusa-photo img { display: block; height: 100%; width: auto; transition: transform 0.3s ease; }
+.tusa-photo:hover img, .tusa-photo:focus-visible img { transform: scale(1.04); }
+.tusa-photo:focus-visible { outline: 3px solid var(--brand); outline-offset: -3px; }
+.tusa-reel .rail-nav { display: contents; }
+.tusa-reel .rail-nav[hidden] { display: none; }
+.tusa-reel .rail-btn { position: absolute; top: 50%; z-index: 2; margin-top: -20px; }
+.tusa-reel .rail-prev { left: 10px; }
+.tusa-reel .rail-next { right: 10px; }
+.tusa-reel .rail-btn:disabled { opacity: 0; pointer-events: none; }
+
+.tusa-credit { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin-top: 12px; font-size: 13px; color: var(--text-mid); }
+.tusa-credit span + span::before { content: "·"; margin-right: 8px; color: var(--text-light); }
+.tusa-credit span + span { margin-left: -8px; }
+.tusa-credit a { margin-left: auto; font-weight: 700; color: var(--brand); text-decoration: none; }
+.tusa-credit a:hover, .tusa-credit a:focus-visible { text-decoration: underline; }
+
+@media (max-width: 900px) {
+  .tusa-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tusa-panel-info { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (max-width: 560px) {
+  .tusa-show { padding: 16px; margin-left: -4px; margin-right: -4px; }
+  .tusa-tabs { gap: 8px; }
+  /* Phones: each tab is a small card, photo on top */
+  .tusa-tab { flex-direction: column; align-items: stretch; gap: 6px; padding: 6px 6px 8px; text-align: center; }
+  .tusa-tab-cover { width: 100%; height: 64px; border-radius: 9px; }
+  .tusa-tab-name { font-size: 14px; }
+  .tusa-tab-date { font-size: 12px; white-space: nowrap; }
+  .tusa-reel-track li { height: 220px; }
+  .tusa-reel .rail-nav { display: none; }
+}
+
 /* ===== Fun & Fitness (layouts/fun-fitness/list.html, layouts/partials/fun-fitness-card.html) ===== */
 .ff-page { padding-bottom: 80px; }
 .ff-section + .ff-section { margin-top: 64px; }

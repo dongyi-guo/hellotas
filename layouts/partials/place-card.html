@@ -5,13 +5,16 @@
      groups{labelKey, list[{titleKey, items[{name,href,venue,at}]}]} (optional fold-out list, e.g. every club in a network).
      map.pins: true swaps the Google map for one with a pin per group item that has at: [lat, lng] (assets/js/pin-map.js)
      calendar: tusa puts a two-week calendar of data/tusa_events.yaml where the map goes (initEventCalendar in carousel.js);
-     feature{src, altKey, href, labelKey} puts one large picture there instead, with a link under it */}}
+     feature{src, altKey, href, labelKey} puts one large picture there instead, with a link under it;
+     showcase: sample events with their photos, in place of the photo row (partials/tusa-showcase.html) */}}
 {{ $p := . }}
 <article class="place-card" id="{{ $p.id }}">
   <div class="place-card-head">
     <h3>{{ i18n $p.titleKey }}</h3>
   </div>
   <p class="place-card-text">{{ i18n $p.textKey }}</p>
+
+  {{ with $p.showcase }}{{ partial "tusa-showcase.html" . }}{{ end }}
 
   {{ with $p.photos }}
   <ul class="place-gallery" aria-label="{{ i18n "placePhotosLabel" }}" data-lightbox>
