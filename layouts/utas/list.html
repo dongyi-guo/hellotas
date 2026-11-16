@@ -16,22 +16,6 @@
       {{ end }}
     {{ end }}
     </div>
-      <section class="journey-life">
-        <h2 class="journey-basics-title">{{ i18n "journeyStep3GalleryTitle" }}</h2>
-        <p class="journey-checklist-lead">{{ i18n "journeyStep3GalleryLead" }}</p>
-        <div class="life-gallery" data-lightbox>
-          {{ range hugo.Data.journey.step3.gallery }}
-          <figure>
-            <button type="button" class="place-photo" data-caption="{{ i18n .captionKey }}" aria-label="{{ i18n "placePhotoEnlarge" }}: {{ i18n .captionKey }}">
-              {{- $img := partial "img.html" (dict "src" .src "width" 480) }}
-              <img src="{{ $img.src }}"{{ with $img.srcset }} srcset="{{ . }}"{{ end }} data-full="{{ $img.full }}" alt="{{ i18n .captionKey }}" loading="lazy" decoding="async" width="480" height="360">
-            </button>
-            <figcaption>{{ i18n .captionKey }}</figcaption>
-          </figure>
-          {{ end }}
-        </div>
-      </section>
-
   </div></div>
 </div>
 {{ end }}

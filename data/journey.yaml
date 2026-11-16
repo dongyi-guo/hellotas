@@ -156,13 +156,3 @@ step2:
     titleKey: journeyStep2NextTitle
     textKey: journeyStep2NextText
     ctaKey: journeyStep2NextCta
-  gallery:
-    - { src: images/journey/step-3/step-3-motorsport-on-track.jpg, captionKey: journeyStep3Gallery1 }
-    - { src: images/journey/step-3/step-3-motorsport-av-setup.jpg, captionKey: journeyStep3Gallery2 }
-    - { src: images/journey/step-3/step-3-cyber-3.jpg, captionKey: journeyStep3Gallery3 }
-    - { src: images/journey/step-3/step-3-food-hub.jpg, captionKey: journeyStep3Gallery4 }
-    - { src: images/journey/step-3/step-3-programming-pcjam25-2.jpg, captionKey: journeyStep3Gallery5 }
-    - { src: images/journey/step-3/step-3-gcc-volunteers.jpg, captionKey: journeyStep3Gallery7 }
-    - { src: images/events/2026/gdg-hobart-ai-security/linkedin-gdg-hobart-6.jpg, captionKey: journeyStep3Gallery8 }
-    - { src: images/journey/step-3/step-3-motorsport-team-with-e44.jpg, captionKey: journeyStep3Gallery6 }
-    - { src: images/journey/step-3/step-3-food-hub-baskets.jpg, captionKey: journeyStep3Gallery9 }

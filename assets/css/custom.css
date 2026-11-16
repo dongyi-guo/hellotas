@@ -2921,6 +2921,10 @@ img.author-avatar {
   padding-bottom: 96px;
 }
 
+/* UTAS and Tasmania Community: the cards use the page's full width, lined up with the share bar above */
+.page-utas .journey-main,
+#step-3 .journey-main { max-width: none; }
+
 .journey-priorities {
   display: grid;
   gap: 24px;
@@ -4612,11 +4616,6 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .place-service-text { margin: 0; color: var(--text-mid); font-size: .95rem; line-height: 1.45; }
 .place-service-text .place-paywhat { color: var(--brand); font-weight: 800; }
 .journey-main > section + .journey-next { margin-top: 56px; }
-.life-gallery .place-photo { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
-.life-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
-.life-gallery figure { margin: 0; position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #E2E8F0; }
-.life-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.life-gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; color: #fff; font-weight: 600; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
 /* Fold-out list under a place card (every Rotary club in Tasmania) */
 .place-groups { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
 .place-groups summary { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; color: var(--brand); list-style: none; }
@@ -4633,13 +4632,11 @@ html:has(.lightbox[open]) { overflow: hidden; }
   .place-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .place-groups-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .place-card-meta { grid-template-columns: 1fr; }
-  .life-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   .place-card { padding: 20px; }
   .place-groups-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .place-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .life-gallery { grid-template-columns: 1fr; }
 }
 
 /* ===== Fun & Fitness (layouts/fun-fitness/list.html, layouts/partials/fun-fitness-card.html) ===== */
