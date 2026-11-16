@@ -11,7 +11,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:digital-child-in-tasmania@hellotas
-DTSTAMP:20261116T145300Z
+DTSTAMP:20261116T170324Z
 DTSTART:20261104T060000Z
 DTEND:20261104T083000Z
 SUMMARY:The Digital Child in Tasmania
@@ -28,28 +28,8 @@ STATUS:CONFIRMED
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
-UID:ict-awards-night-2026@hellotas
-DTSTAMP:20261116T145300Z
-DTSTART:20261109T063000Z
-DTEND:20261109T090000Z
-SUMMARY:ICT Awards Night 2026
-DESCRIPTION:The School of ICT's first Awards Night celebrates this year's I
- CT students\, with awards for academic\, research and community excellence
-  and the ICT Student's Choice student and staff awards. It also marks the 
- 2026 graduates and their next steps\, with a chance to meet staff and indu
- stry partners.\n\nFree for students · register on Humanitix (Hobart or La
- unceston ticket)\n\nhttps://events.humanitix.com/ict-awards-night?accessco
- de=STUDENT
-LOCATION:Hobart: Stanley Burbury Theatre\, Sandy Bay campus · Launceston: 
- Rory Spence Theatre\, Inveresk campus
-URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
-CATEGORIES:community,careers
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
 UID:sectalks-hobart-november-just-spoof-government@hellotas
-DTSTAMP:20261116T145300Z
+DTSTAMP:20261116T170324Z
 DTSTART:20261110T070000Z
 DTEND:20261110T090000Z
 SUMMARY:SecTalks Hobart: Just spoof the government?

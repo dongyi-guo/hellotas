@@ -14,7 +14,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:digital-child-in-tasmania@hellotas
-DTSTAMP:20261116T145300Z
+DTSTAMP:20261116T170324Z
 DTSTART:20261104T060000Z
 DTEND:20261104T083000Z
 SUMMARY:तस्मानियामा डिजिटल बालब
@@ -35,36 +35,8 @@ STATUS:CONFIRMED
 TRANSP:OPAQUE
 END:VEVENT
 BEGIN:VEVENT
-UID:ict-awards-night-2026@hellotas
-DTSTAMP:20261116T145300Z
-DTSTART:20261109T063000Z
-DTEND:20261109T090000Z
-SUMMARY:ICT Awards Night 2026 (ICT पुरस्कार रात्र
- ि)
-DESCRIPTION:School of ICT को पहिलो Awards Night ले यस
-  वर्षका ICT विद्यार्थीका उपलब
- ्धि मनाउँछ: शैक्षिक\, अनुसन्
- धान र सामुदायिक उत्कृष्टता 
- पुरस्कार\, साथै ICT Student's Choice विद्
- यार्थी र कर्मचारी पुरस्कार
- । साँझमा 2026 का स्नातकहरू र उन
- ीहरूको अर्को कदम पनि मनाइन्
- छ\, र कर्मचारी तथा उद्योग साझ
- ेदारसँग भेट्ने मौका हुन्छ।\n
- \nविद्यार्थीका लागि निःशुल्
- क · Humanitix मा दर्ता (Hobart वा Launceston टि
- कट)\n\nhttps://events.humanitix.com/ict-awards-night?accesscode=STUDEN
- T
-LOCATION:Hobart: Stanley Burbury Theatre\, Sandy Bay क्याम्प
- स · Launceston: Rory Spence Theatre\, Inveresk क्याम्पस
-URL:https://events.humanitix.com/ict-awards-night?accesscode=STUDENT
-CATEGORIES:community,careers
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-END:VEVENT
-BEGIN:VEVENT
 UID:sectalks-hobart-november-just-spoof-government@hellotas
-DTSTAMP:20261116T145300Z
+DTSTAMP:20261116T170324Z
 DTSTART:20261110T070000Z
 DTEND:20261110T090000Z
 SUMMARY:SecTalks Hobart: सरकारकै नक्कल गर्न
