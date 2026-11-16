@@ -1,6 +1,6 @@
 {{/* Reusable "place / club" card (Journey Step 2 & 3).
      Context: one item from data/journey.yaml with
-     titleKey, tags[{key,class}], textKey, photos[{src,altKey}],
+     textKey, photos[{src,altKey}],
      map{query,labelKey,zoom,pins}, details[{labelKey,valueKey,href}],
      groups{labelKey, list[{titleKey, items[{name,href,venue,at}]}]} (optional fold-out list, e.g. every club in a network).
      map.pins: true swaps the Google map for one with a pin per group item that has at: [lat, lng] (assets/js/pin-map.js)
@@ -10,9 +10,6 @@
 <article class="place-card" id="{{ $p.id }}">
   <div class="place-card-head">
     <h3>{{ i18n $p.titleKey }}</h3>
-    <div class="place-card-tags">
-      {{ range $p.tags }}<span class="tag {{ .class | default "tag-type" }}">{{ i18n .key }}</span>{{ end }}
-    </div>
   </div>
   <p class="place-card-text">{{ i18n $p.textKey }}</p>
 
