@@ -170,6 +170,11 @@ visitOriginalPost: "Visit original post"
 postPrev: "Previous post"
 postNext: "Next post"
 postSummaryLabel: "About this post"
+postsByPerson:
+  one: "1 post"
+  other: "{{ .Count }} posts"
+personPrev: "Previous person"
+personNext: "Next person"
 linkedInPostsCount:
   one: "1 LinkedIn post from the event"
   other: "{{ .Count }} LinkedIn posts from the event"

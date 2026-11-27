@@ -1,0 +1,19 @@
+{{- /*
+  The people behind an event's LinkedIn posts, each with all of their posts, in the order they first appear.
+  Context: the event's linkedin_posts. Returns a slice of dicts:
+    name    the person's name
+    avatar  their profile picture (the first one given), or ""
+    posts   their posts, in the order listed
+  Used by the LinkedIn section of the event page (one face per person) and the face piles that link to it.
+*/ -}}
+{{- $posts := . -}}
+{{- $names := slice -}}
+{{- range $posts }}{{ if not (in $names .name) }}{{ $names = $names | append .name }}{{ end }}{{ end -}}
+{{- $people := slice -}}
+{{- range $names -}}
+  {{- $mine := where $posts "name" . -}}
+  {{- $avatar := "" -}}
+  {{- range $mine }}{{ if and (not $avatar) .avatar }}{{ $avatar = .avatar }}{{ end }}{{ end -}}
+  {{- $people = $people | append (dict "name" . "avatar" $avatar "posts" $mine) -}}
+{{- end -}}
+{{- return $people -}}

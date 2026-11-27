@@ -1,0 +1,25 @@
+{{- /*
+  One person's LinkedIn posts about an event. Call with a dict:
+    person  one entry from partials/linkedin-authors.html
+    page    the event page
+    flip    true to put the photos on the right
+  One post is shown on its own. Several are a carousel ([data-series]): initSeries in carousel.js shows one at
+  a time and adds ‹ ›, dots, "1 / 3" and the auto-advance ring next to the author's name. Without JavaScript
+  every post shows, one after another.
+*/ -}}
+{{- $person := .person -}}
+{{- $n := len $person.posts -}}
+{{- /* Every post shows the person's profile picture, even the ones listed without it */ -}}
+{{- $posts := slice -}}
+{{- range $person.posts }}{{ $posts = $posts | append (cond (and (not .avatar) $person.avatar) (merge . (dict "avatar" $person.avatar)) .) }}{{ end -}}
+{{- if eq $n 1 -}}
+{{ partial "linkedin-post.html" (dict "post" (index $posts 0) "page" .page "flip" .flip) }}
+{{- else -}}
+<div class="lp-series" data-series data-autoplay="9000" role="region" aria-roledescription="carousel" aria-label="{{ $person.name }}: {{ i18n "postsByPerson" $n }}" data-label-prev="{{ i18n "postPrev" }}" data-label-next="{{ i18n "postNext" }}" data-label-pause="{{ i18n "carouselPause" }}" data-label-play="{{ i18n "carouselPlay" }}">
+  {{- range $i, $post := $posts }}
+  <div class="lp-series-item" role="group" aria-roledescription="slide" aria-label="{{ add $i 1 }} / {{ $n }}">
+    {{ partial "linkedin-post.html" (dict "post" $post "page" $.page "flip" $.flip) }}
+  </div>
+  {{- end }}
+</div>
+{{- end -}}

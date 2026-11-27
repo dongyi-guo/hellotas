@@ -54,7 +54,7 @@
             {{ with .Params.linkedin_posts }}
             <a class="voice-peek events-pick-peek" href="{{ $event.RelPermalink }}#linkedin">
               <span class="voice-peek-faces" aria-hidden="true">
-                {{ range first 4 . }}{{ $post := . }}{{ with .avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" loading="lazy" width="32" height="32">{{ else }}<span class="author-initials">{{ partial "initials.html" $post.name }}</span>{{ end }}{{ end }}
+                {{ range first 4 (partial "linkedin-authors.html" .) }}{{ $person := . }}{{ with .avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" loading="lazy" width="32" height="32">{{ else }}<span class="author-initials">{{ partial "initials.html" $person.name }}</span>{{ end }}{{ end }}
               </span>
               <span class="voice-peek-text">{{ i18n "linkedInPostsCount" (len .) }}</span>
             </a>
@@ -149,9 +149,10 @@
         {{ with $event.Params.linkedin_posts }}
         <a class="voice-peek" href="{{ $event.RelPermalink }}#linkedin">
           <span class="voice-peek-faces" aria-hidden="true">
-            {{ range first 4 . }}
-            {{ $post := . }}
-            {{ with .avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" loading="lazy" width="32" height="32">{{ else }}<span class="author-initials">{{ partial "initials.html" $post.name }}</span>{{ end }}
+            {{/* One face per person, however many times they posted */}}
+            {{ range first 4 (partial "linkedin-authors.html" .) }}
+            {{ $person := . }}
+            {{ with .avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" loading="lazy" width="32" height="32">{{ else }}<span class="author-initials">{{ partial "initials.html" $person.name }}</span>{{ end }}
             {{ end }}
           </span>
           <span class="voice-peek-text">{{ i18n "linkedInPostsCount" (len .) }}</span>

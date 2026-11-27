@@ -170,6 +170,11 @@ visitOriginalPost: "मूल पोस्ट हेर्नुहोस्"
 postPrev: "अघिल्लो पोस्ट"
 postNext: "अर्को पोस्ट"
 postSummaryLabel: "यो पोस्टबारे"
+postsByPerson:
+  one: "1 पोस्ट"
+  other: "{{ .Count }} पोस्टहरू"
+personPrev: "अघिल्लो व्यक्ति"
+personNext: "अर्को व्यक्ति"
 linkedInPostsCount:
   one: "कार्यक्रमको 1 LinkedIn पोस्ट"
   other: "कार्यक्रमका {{ .Count }} LinkedIn पोस्टहरू"

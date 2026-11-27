@@ -1,4 +1,4 @@
-// Site scripts: mobile menu, image carousels, the TUSA event tabs, LinkedIn reader view, events filter and search, event sub-bar, copy-link buttons,
+// Site scripts: mobile menu, image carousels, the TUSA event tabs, LinkedIn reader view and post series, events filter and search, event sub-bar, copy-link buttons,
 // the photo viewer, sliding toggle pills and animated in-page changes.
 // Sliding is plain CSS scroll-snap, so swiping and scrolling still work if this file fails to load.
 (function () {
@@ -261,7 +261,7 @@
     }
   }
 
-  // LinkedIn reader view (4+ posts): author tabs show one full post at a time.
+  // LinkedIn reader view (4+ people): one face per person, showing their post (or their posts, initSeries).
   // Without this script every post stays visible, stacked.
   function initReader(reader) {
     var tabs = reader.querySelectorAll('.lp-tab');
@@ -305,6 +305,80 @@
 
     reader.classList.add('is-ready');
     show(0);
+  }
+
+  // Someone's posts about an event, when they posted more than once ([data-series], partials/linkedin-person.html).
+  // The posts sit on top of each other (CSS grid), so the card keeps the height of the longest one and nothing
+  // below jumps when it changes; the shown one fades in. Next to the author's name go ‹ ›, one dot per post,
+  // "1 / 3" and the auto-advance ring, which moves on every data-autoplay ms and loops round. The ring holds
+  // while the pointer is over the posts (someone reading), while the posts are hidden (another person is
+  // selected in the reader) or scrolled off screen, and starts paused for people who prefer reduced motion.
+  // Without this script every post stays visible, one after another.
+  function initSeries(series) {
+    var items = Array.prototype.slice.call(series.children).filter(function (el) { return el.classList.contains('lp-series-item'); });
+    if (items.length < 2) return;
+    var nav = document.createElement('div');
+    nav.className = 'lp-series-nav';
+    nav.innerHTML = '<button type="button" class="lp-series-btn" data-series-prev>‹</button>' +
+      '<span class="lp-series-dots"></span>' +
+      '<button type="button" class="lp-series-btn" data-series-next>›</button>' +
+      '<span class="lp-series-count" aria-hidden="true"></span>';
+    nav.querySelector('[data-series-prev]').setAttribute('aria-label', series.dataset.labelPrev);
+    nav.querySelector('[data-series-next]').setAttribute('aria-label', series.dataset.labelNext);
+    var dots = nav.querySelector('.lp-series-dots');
+    var counter = nav.querySelector('.lp-series-count');
+    items.forEach(function (_, j) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'lp-series-dot';
+      dot.setAttribute('aria-label', (j + 1) + ' / ' + items.length);
+      dot.addEventListener('click', function () { show(j); });
+      dots.appendChild(dot);
+    });
+    var index = 0;
+    var auto = null;
+
+    function show(i) {
+      index = (i + items.length) % items.length;
+      items.forEach(function (item, j) {
+        var on = j === index;
+        item.classList.toggle('is-current', on);
+        item.inert = !on;
+        if (on) item.removeAttribute('aria-hidden'); else item.setAttribute('aria-hidden', 'true');
+      });
+      Array.prototype.forEach.call(dots.children, function (dot, j) {
+        if (j === index) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+      });
+      counter.textContent = (index + 1) + ' / ' + items.length;
+      var author = items[index].querySelector('.lp-author');
+      if (author && nav.parentNode !== author) author.appendChild(nav);
+      if (auto) auto.reset(); // a new post gets a full turn of the ring
+    }
+
+    nav.querySelector('[data-series-prev]').addEventListener('click', function () { show(index - 1); });
+    nav.querySelector('[data-series-next]').addEventListener('click', function () { show(index + 1); });
+
+    var holding = false;
+    var onScreen = true;
+    series.addEventListener('pointerenter', function () { holding = true; });
+    series.addEventListener('pointerleave', function () { holding = false; });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; }).observe(series);
+    }
+    if (series.dataset.autoplay) {
+      var ring = ringButton(series.dataset.labelPause, series.dataset.labelPlay, 'lp-series-ring');
+      nav.appendChild(ring);
+      auto = autoAdvance(ring, {
+        delay: Number(series.dataset.autoplay),
+        next: function () { show(index + 1); },
+        held: function () { return holding || !onScreen || series.offsetParent === null; }
+      });
+    }
+
+    // Settle on the first post without fading the others out on page load
+    series.classList.add('is-ready', 'is-instant');
+    show(0);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { series.classList.remove('is-instant'); }); });
   }
 
   // Photo viewer: clicking a photo inside any [data-lightbox] group shows it large.
@@ -944,6 +1018,7 @@
   document.querySelectorAll('[data-copy]').forEach(initCopy);
   document.querySelectorAll('[data-event-filter]').forEach(initEventFilter);
   document.querySelectorAll('[data-subbar]').forEach(initSubbar);
+  document.querySelectorAll('[data-series]').forEach(initSeries);
   document.querySelectorAll('[data-reader]').forEach(initReader);
   initLightbox();
   // After the deferred page scripts (happening.js builds its calendar toggle) have run

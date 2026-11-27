@@ -2072,10 +2072,62 @@ img.author-avatar {
 
 .lp-author {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   margin-bottom: 18px;
 }
+
+/* ---- Someone's several posts about one event (partials/linkedin-person.html, initSeries in carousel.js) ----
+   The posts share one grid cell, so the card is as tall as the longest post and the page below never jumps;
+   the shown post fades in. Without JS they stack. */
+.lp-series:not(.is-ready) > .lp-series-item + .lp-series-item { margin-top: 28px; }
+.lp-series.is-ready { display: grid; }
+.lp-series.is-ready > .lp-series-item {
+  grid-area: 1 / 1;
+  min-width: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+.lp-series.is-ready > .lp-series-item.is-current { visibility: visible; opacity: 1; transition: opacity 0.35s ease; }
+.lp-series.is-ready > .lp-series-item > .lp { height: 100%; }
+.lp-series.is-instant > .lp-series-item { transition: none; }
+
+/* ‹ dots › 1 / 3 and the ring, next to the author's name */
+.lp-series-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.lp-series-btn {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--brand);
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: var(--brand);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lp-series-btn:hover { background: var(--brand); color: #FFFFFF; }
+.lp-series-dots { display: flex; gap: 5px; }
+.lp-series-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: #F4B6C0;
+  cursor: pointer;
+  transition: width 0.2s, background 0.2s;
+}
+.lp-series-dot[aria-current="true"] { width: 18px; background: var(--brand); }
+.lp-series-count { min-width: 36px; font-size: 12px; font-weight: 700; color: var(--text-mid); text-align: center; font-variant-numeric: tabular-nums; }
+.lp-series-ring { width: 34px; height: 34px; }
 
 .lp-text {
   max-width: 65ch;
@@ -2134,8 +2186,8 @@ img.author-avatar {
   gap: 10px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 4px;
-  margin: -4px;
+  padding: 6px;
+  margin: -6px;
 }
 
 .lp-tablist::-webkit-scrollbar { display: none; }
@@ -2152,11 +2204,14 @@ img.author-avatar {
   border-radius: 50%;
   background: var(--card);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  overflow: hidden;
-  opacity: 0.55;
+  position: relative;
   cursor: pointer;
-  transition: opacity 0.2s, border-color 0.2s;
+  transition: border-color 0.2s;
 }
+
+/* The face fades when not selected; the post-count badge stays readable */
+.lp-tab > img,
+.lp-tab > .author-initials { opacity: 0.55; transition: opacity 0.2s; }
 
 .lp-tab img {
   display: block;
@@ -2166,11 +2221,30 @@ img.author-avatar {
   object-fit: cover;
 }
 
-.lp-tab:hover { opacity: 0.85; }
+.lp-tab:hover > img,
+.lp-tab:hover > .author-initials { opacity: 0.85; }
 
-.lp-tab[aria-selected="true"] {
-  opacity: 1;
-  border-color: var(--brand);
+.lp-tab[aria-selected="true"] { border-color: var(--brand); }
+.lp-tab[aria-selected="true"] > img,
+.lp-tab[aria-selected="true"] > .author-initials { opacity: 1; }
+
+/* How many posts this person wrote about the event, on the bottom-right of their face */
+.lp-tab-badge {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--brand);
+  box-shadow: 0 0 0 2px #FFFFFF;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .lp-nav {

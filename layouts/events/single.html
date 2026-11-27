@@ -119,35 +119,40 @@
       <p class="section-sub">{{ .Params.linkedin_sub | default (i18n "whatStudentsSaidSubtitle") }}</p>
 
       {{ with .Params.linkedin_posts }}
-      {{ $posts := . }}
-      {{ if le (len $posts) 3 }}
-      {{/* 1-3 posts: wide posts stacked, photos alternating sides */}}
+      {{/* One entry per person: someone who posted more than once gets one face, with their posts in a carousel */}}
+      {{ $people := partial "linkedin-authors.html" . }}
+      {{ $repeat := false }}{{ range $people }}{{ if gt (len .posts) 1 }}{{ $repeat = true }}{{ end }}{{ end }}
+      {{ if or (eq (len $people) 1) (and (le (len $people) 3) (not $repeat)) }}
+      {{/* One person, or 2-3 people with one post each: wide posts stacked, photos alternating sides */}}
       <div class="lp-stack">
-        {{ range $i, $post := $posts }}
-        {{ partial "linkedin-post.html" (dict "post" $post "page" $ "flip" (ne (mod $i 2) 0)) }}
+        {{ range $i, $person := $people }}
+        {{ partial "linkedin-person.html" (dict "person" $person "page" $ "flip" (ne (mod $i 2) 0)) }}
         {{ end }}
       </div>
       {{ else }}
-      {{/* 4+ posts: reader view, one post at a time; without JS every post shows stacked */}}
+      {{/* 4+ people, or 2-3 when someone posted more than once: reader view, one face per person (with a badge
+           saying how many posts), one person at a time; without JS every post shows stacked */}}
       <div class="lp-reader" data-reader>
         <div class="lp-tabs">
           <div class="lp-tablist" role="tablist" aria-label="{{ $.Params.linkedin_heading | default (i18n "whatStudentsSaid") }}">
-            {{ range $i, $post := $posts }}
-            <button type="button" class="lp-tab" role="tab" id="lp-tab-{{ $i }}" aria-controls="lp-post-{{ $i }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"{{ if ne $i 0 }} tabindex="-1"{{ end }} title="{{ $post.name }}">
-              {{ with $post.avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" width="40" height="40">{{ else }}<span class="author-initials" aria-hidden="true">{{ partial "initials.html" $post.name }}</span>{{ end }}
-              <span class="sr-only">{{ $post.name }}</span>
+            {{ range $i, $person := $people }}
+            {{ $n := len $person.posts }}
+            <button type="button" class="lp-tab" role="tab" id="lp-tab-{{ $i }}" aria-controls="lp-post-{{ $i }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"{{ if ne $i 0 }} tabindex="-1"{{ end }} title="{{ $person.name }}{{ if gt $n 1 }} · {{ i18n "postsByPerson" $n }}{{ end }}">
+              {{ with $person.avatar }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="" width="40" height="40">{{ else }}<span class="author-initials" aria-hidden="true">{{ partial "initials.html" $person.name }}</span>{{ end }}
+              {{ if gt $n 1 }}<span class="lp-tab-badge" aria-hidden="true">{{ $n }}</span>{{ end }}
+              <span class="sr-only">{{ $person.name }}{{ if gt $n 1 }}, {{ i18n "postsByPerson" $n }}{{ end }}</span>
             </button>
             {{ end }}
           </div>
           <div class="lp-nav">
-            <button type="button" class="lp-prev" aria-label="{{ i18n "postPrev" }}">‹</button>
-            <span class="lp-count"><span class="lp-current">1</span> / {{ len $posts }}</span>
-            <button type="button" class="lp-next" aria-label="{{ i18n "postNext" }}">›</button>
+            <button type="button" class="lp-prev" aria-label="{{ i18n "personPrev" }}">‹</button>
+            <span class="lp-count"><span class="lp-current">1</span> / {{ len $people }}</span>
+            <button type="button" class="lp-next" aria-label="{{ i18n "personNext" }}">›</button>
           </div>
         </div>
-        {{ range $i, $post := $posts }}
+        {{ range $i, $person := $people }}
         <div class="lp-panel" role="tabpanel" id="lp-post-{{ $i }}" aria-labelledby="lp-tab-{{ $i }}">
-          {{ partial "linkedin-post.html" (dict "post" $post "page" $) }}
+          {{ partial "linkedin-person.html" (dict "person" $person "page" $) }}
         </div>
         {{ end }}
       </div>

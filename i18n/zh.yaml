@@ -170,6 +170,11 @@ visitOriginalPost: "查看原帖"
 postPrev: "上一篇"
 postNext: "下一篇"
 postSummaryLabel: "关于这篇帖子"
+postsByPerson:
+  one: "1 篇帖子"
+  other: "{{ .Count }} 篇帖子"
+personPrev: "上一位"
+personNext: "下一位"
 linkedInPostsCount:
   one: "活动相关的 1 篇 LinkedIn 帖子"
   other: "活动相关的 {{ .Count }} 篇 LinkedIn 帖子"

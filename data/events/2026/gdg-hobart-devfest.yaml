@@ -1,0 +1,74 @@
+title:
+  en: "GDG Hobart DevFest 2026: AI-Powered Development & Digital Analytics"
+  zh: "GDG Hobart DevFest 2026：AI驱动开发与数字分析"
+  ne: "GDG Hobart DevFest 2026: AI-संचालित विकास र डिजिटल एनालिटिक्स"
+start: "2026-11-19T17:15:00+11:00"
+end: "2026-11-19T18:45:00+11:00"
+type: "workshop"
+topics: [ai, networking]
+location:
+  en: "Room 132, Centenary Building, UTAS Sandy Bay"
+  zh: "UTAS Sandy Bay校区Centenary Building 132室"
+  ne: "कोठा 132, Centenary Building, UTAS स्यान्डी बे"
+cost:
+  en: "Free"
+  zh: "免费"
+  ne: "निःशुल्क"
+eligibility:
+  en: "Open to students, developers and tech enthusiasts"
+  zh: "面向学生、开发者和科技爱好者"
+  ne: "विद्यार्थी, डेभलपर र प्रविधिप्रेमीहरूका लागि खुला"
+summary:
+  en: "GDG Hobart's second DevFest session of 2026 at UTAS: a hands-on workshop on Gemini in Android Studio with Kartik Arora (Bilue), then a Looker Studio dashboards masterclass with Cynthia Wilanda (MyState)."
+  zh: "GDG Hobart 2026 年在 UTAS 的第二场 DevFest：先由 Kartik Arora（Bilue）带来 Android Studio 中 Gemini 的实操工作坊，再由 Cynthia Wilanda（MyState）讲解如何用 Looker Studio 制作仪表板。"
+  ne: "UTAS मा GDG Hobart को 2026 को दोस्रो DevFest सत्र: Kartik Arora (Bilue) सँग Android Studio मा Gemini को व्यावहारिक कार्यशाला, त्यसपछि Cynthia Wilanda (MyState) सँग Looker Studio ड्यासबोर्ड मास्टरक्लास।"
+image: "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-1.jpg"
+gallery:
+  - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-3.jpg"
+  - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-5.jpg"
+  - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-6.jpg"
+about:
+  en:
+    - "GDG Hobart held DevFest 2026: Explore AI-Powered Development & Digital Analytics on Thursday 19 November 2026, from 5:15 PM to 6:45 PM, in Room 132 of the Centenary Building on the University of Tasmania's Sandy Bay campus. It was GDG Hobart's second DevFest session of the year, and with a 62-seat room, RSVPs were capped at 60."
+    - "In the first part, Kartik Arora, Lead Engineer at Bilue, ran a hands-on workshop on building Android apps faster with Gemini in Android Studio. Working on a real multi-module project, attendees used Agent Mode to scaffold new features, turned wireframes into Jetpack Compose screens, and tried the Android CLI and automated testing."
+    - "In the second part, Cynthia Wilanda, Digital Analytics and Conversion Lead at MyState Limited, showed how to bring data from Google Analytics, Google Play Console and other Google tools into Looker Studio, and turn scattered metrics into clear dashboards for product decisions."
+    - "The evening finished with refreshments and time to talk with the speakers, other students and local developers. GDG Hobart thanked UTAS for the venue and its volunteers for running check-in and helping during the workshop."
+    - "For UTAS ICT students, it was a practical look at how AI tools are used in real mobile development, and at the analytics skills that product and data roles ask for."
+  zh:
+    - "GDG Hobart 于 2026 年 11 月 19 日（星期四）下午 5:15 至 6:45，在 University of Tasmania Sandy Bay 校区 Centenary Building 132 室举办了 DevFest 2026：Explore AI-Powered Development & Digital Analytics。这是 GDG Hobart 今年的第二场 DevFest，场地可容纳 62 人，报名人数上限为 60 人。"
+    - "第一部分由 Bilue 首席工程师 Kartik Arora 主持实操工作坊，介绍如何借助 Android Studio 中的 Gemini 更快地开发 Android 应用。参与者在一个真实的多模块项目中，用 Agent Mode 搭建新功能、把线框图转成 Jetpack Compose 界面，并尝试了 Android CLI 和自动化测试。"
+    - "第二部分由 MyState Limited 数字分析与转化负责人 Cynthia Wilanda 主讲，演示如何把 Google Analytics、Google Play Console 等 Google 工具的数据汇入 Looker Studio，把分散的指标变成清晰的仪表板，帮助做出产品决策。"
+    - "活动最后有茶点，大家可以和讲者、其他学生以及本地开发者交流。GDG Hobart 感谢 UTAS 提供场地，也感谢志愿者负责签到并在工作坊中协助。"
+    - "对 UTAS ICT 学生来说，这次活动让他们实际了解 AI 工具如何用于真实的移动开发，以及产品和数据岗位需要的数据分析技能。"
+  ne:
+    - "GDG Hobart ले बिहीबार 19 नोभेम्बर 2026, साँझ 5:15 देखि 6:45 सम्म University of Tasmania को स्यान्डी बे क्याम्पसको Centenary Building को कोठा 132 मा DevFest 2026: Explore AI-Powered Development & Digital Analytics आयोजना गर्‍यो। यो वर्षको GDG Hobart को दोस्रो DevFest सत्र थियो, र 62 सिटको कोठा भएकाले RSVP 60 मा सीमित गरिएको थियो।"
+    - "पहिलो भागमा Bilue का Lead Engineer Kartik Arora ले Android Studio मा Gemini प्रयोग गरेर Android एप छिटो बनाउने व्यावहारिक कार्यशाला चलाउनुभयो। सहभागीहरूले वास्तविक multi-module परियोजनामा Agent Mode ले नयाँ फिचर बनाए, wireframe लाई Jetpack Compose स्क्रिनमा बदले, र Android CLI तथा स्वचालित परीक्षण प्रयोग गरे।"
+    - "दोस्रो भागमा MyState Limited का Digital Analytics and Conversion Lead Cynthia Wilanda ले Google Analytics, Google Play Console र अन्य Google उपकरणको डेटा Looker Studio मा ल्याएर छरिएका मेट्रिकलाई उत्पादनसम्बन्धी निर्णयका लागि स्पष्ट ड्यासबोर्डमा कसरी बदल्ने भनेर देखाउनुभयो।"
+    - "साँझ खाजा र वक्ता, अन्य विद्यार्थी तथा स्थानीय डेभलपरहरूसँग कुराकानीसँगै सकियो। GDG Hobart ले स्थलका लागि UTAS लाई र चेक-इन तथा कार्यशालामा सघाउने स्वयंसेवकहरूलाई धन्यवाद दियो।"
+    - "UTAS ICT विद्यार्थीहरूका लागि यो वास्तविक मोबाइल विकासमा AI उपकरण कसरी प्रयोग हुन्छन् र उत्पादन तथा डेटा भूमिकाहरूमा चाहिने एनालिटिक्स सीपबारे व्यावहारिक जानकारी थियो।"
+references:
+  - title: "GDG Hobart – Official Event Listing"
+    url: "https://gdg.community.dev/events/details/google-gdg-hobart-presents-devfest-2026-explore-ai-powered-development-amp-digital-analytics/"
+  - title: "LinkedIn – GDG Hobart, DevFest 2026 Event Recap"
+    url: "https://www.linkedin.com/posts/gdghobart-devfest2026-googledevelopergroups-ugcPost-7529178573643919361-p7s5/"
+linkedin_posts:
+  - name: "GDG Hobart"
+    role: "Google Developer Group, Hobart"
+    avatar: "/images/events/2026/gdg-hobart-ai-agents/linkedin-gdg-hobart-avatar.jpg"
+    images:
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-1.jpg"
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-2.jpg"
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-3.jpg"
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-4.jpg"
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-5.jpg"
+      - "/images/events/2026/gdg-hobart-devfest/linkedin-gdg-hobart-6.jpg"
+    content:
+      en: "The engagement in the room, the quality of questions, and the hands-on energy made tonight a genuinely great session!"
+      zh: "现场的投入、高质量的提问和动手实践的热情，让今晚成为一场真正精彩的活动！"
+      ne: "कोठाभरिको सहभागिता, प्रश्नहरूको गुणस्तर र व्यावहारिक ऊर्जाले आजको साँझलाई साँच्चै उत्कृष्ट सत्र बनायो!"
+    summary:
+      en: "GDG Hobart's recap of the night: Kartik Arora's hands-on workshop on building Android apps faster with Gemini in Android Studio, and Cynthia Wilanda's masterclass on turning Google Analytics and Play Console data into Looker Studio dashboards. It thanks UTAS for the space, the organising team and volunteers, and the attendees for their questions."
+      zh: "GDG Hobart 对当晚的回顾：Kartik Arora 带来用 Android Studio 中的 Gemini 更快开发 Android 应用的实操工作坊，Cynthia Wilanda 讲解如何把 Google Analytics 和 Play Console 数据做成 Looker Studio 仪表板。帖子感谢 UTAS 提供场地，感谢组织团队和志愿者，也感谢参与者的提问。"
+      ne: "रातबारे GDG Hobart को समीक्षा: Android Studio मा Gemini प्रयोग गरेर Android एप छिटो बनाउने Kartik Arora को व्यावहारिक कार्यशाला, र Google Analytics तथा Play Console को डेटालाई Looker Studio ड्यासबोर्डमा बदल्ने Cynthia Wilanda को मास्टरक्लास। पोस्टले ठाउँका लागि UTAS, आयोजक टोली र स्वयंसेवक, र प्रश्न सोध्ने सहभागीहरूलाई धन्यवाद दिन्छ।"
+    url: "https://www.linkedin.com/posts/gdghobart-devfest2026-googledevelopergroups-ugcPost-7529178573643919361-p7s5/"
+weight: 0
