@@ -349,9 +349,9 @@ journeyStep2NextText: "等你开口更有自信了，就该去认识 ICT 行业�
 journeyStep2NextCta: "下一步：志愿服务 →"
 
 # Homepage — hero
-homeHeroTitle: "开启你在"
-homeHeroTitleHighlight: "塔斯马尼亚的新篇章。"
-homeHeroSubtitle: "面向所有 UTAS 学生的平台，展示真实活动、经历与精彩瞬间，帮你找到社区，并在塔斯马尼亚建立热爱的生活。"
+homeHeroTitle: "你在塔斯马尼亚的 ICT 社区"
+homeHeroTitleHighlight: "从这里开始。"
+homeHeroSubtitle: "真实的活动，真实的经历，真实的人。面向所有 UTAS ICT 学生的社区，助你在塔斯马尼亚建立联系、共同成长、蓬勃发展。"
 homeHeroNote: "由塔斯马尼亚国际ICT学生打造，为国际ICT学生服务。"
 homeHeroCtaStart: "开始你的旅程"
 homeHeroCtaExplore: "探索社区"
